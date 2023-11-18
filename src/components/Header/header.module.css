@@ -1,0 +1,156 @@
+/* header.module.css */
+
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: white;
+    color: black;
+}
+
+.logo img {
+    display: flex;
+    max-width: 150px;
+    margin-left: 50px;
+}
+
+
+/* header.module.css */
+
+
+/* ... (existing styles) */
+
+.searchBar {
+    display: flex;
+    align-items: center;
+}
+
+form {
+    display: flex;
+    align-items: center;
+    margin: 0px;
+    border: 1px solid black;
+    border-radius: 15px;
+    padding: 4px;
+}
+
+input[type="text"] {
+    font-size: 14px;
+    border: none;
+    margin: 0px;
+    height: 20px;
+    width: 300px;
+    border: none;
+    box-shadow: none;
+}
+
+input[type="text"]:focus {
+    outline: none;
+    box-shadow: none;
+}
+
+.searchButton {
+    cursor: pointer;
+    margin: 0px;
+    border: none;
+    background-color: white;
+}
+
+svg {
+    fill: black;
+    margin: 0px;
+}
+
+.links {
+    display: flex;
+    gap: 20px;
+    background-color: #D10A0A;
+    height: 40px;
+    align-items: center;
+}
+
+.link:first-child {
+    margin-left: 35px;
+}
+
+.link {
+    text-decoration: none;
+    color: white;
+    font-weight: bold;
+    font-size: 16px;
+    margin: 0px 5px 0px 5px;
+    padding: 5px 10px 5px 10px;
+    border: 2px solid transparent;
+    transition: border 0.3s;
+}
+
+.link:hover {
+    border: 2px solid #ffc107;
+    border-radius: 5px;
+    color: white;
+    /* Make the border fully opaque on hover */
+}
+
+.rightSection {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.selector select {
+    padding: 8px;
+    font-size: 14px;
+}
+
+.icon {
+    margin-left: 15px;
+    text-decoration: none;
+    color: white;
+    display: flex;
+    align-items: center;
+}
+
+.line {
+    border: 1px solid black;
+    width: 0.5px;
+    /* Set the width to create a vertical line */
+    height: 30px;
+    /* Set the height as needed */
+    margin: 0 10px;
+    background-color: black;
+}
+
+.currencySelector {
+    border: none;
+    padding: 8px;
+    margin-right: 20px;
+    margin-left: -10px;
+}
+
+.profileIcon:hover {
+    transform: scale(1.1) rotateY(180deg);
+}
+
+
+/* Extension effect for the wishlist icon on hover */
+
+.wishlistIcon:hover {
+    transform: scale(1.2);
+}
+
+
+/* Rotate 180 degrees for the cart icon on hover, then back to default */
+
+.cartIcon:hover {
+    transform: scale(1) rotateY(180deg);
+}
+
+@media screen and (max-width: 768px) {
+    .navigation {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+    .links {
+        margin-top: 10px;
+    }
+}
