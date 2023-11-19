@@ -1,0 +1,47 @@
+.link-container {
+    margin-bottom: 20px;
+}
+
+.link {
+    cursor: pointer;
+    margin-right: 10px;
+    text-decoration: underline;
+}
+
+.row {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 20px;
+}
+
+.label {
+    flex: 1;
+    margin-right: 10px;
+}
+
+.select,
+.range-container {
+    flex: 2;
+}
+
+.button {
+    padding: 10px;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.form {
+    width: 600px;
+    /* Set your preferred fixed width */
+    height: 300px;
+    /* Set your preferred fixed height */
+    background: rgba(0, 0, 0, 0.5);
+    /* Semi-transparent background for better readability */
+    padding: 20px;
+    display: flex;
+    vertical-align: middle;
+    border-radius: 10px;
+}

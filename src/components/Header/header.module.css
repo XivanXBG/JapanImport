@@ -14,12 +14,6 @@
     margin-left: 50px;
 }
 
-
-/* header.module.css */
-
-
-/* ... (existing styles) */
-
 .searchBar {
     display: flex;
     align-items: center;
@@ -31,7 +25,7 @@ form {
     margin: 0px;
     border: 1px solid black;
     border-radius: 15px;
-    padding: 4px;
+    padding: 2px;
 }
 
 input[type="text"] {
@@ -64,7 +58,7 @@ svg {
 .links {
     display: flex;
     gap: 20px;
-    background-color: #D10A0A;
+    background: radial-gradient(circle, rgba(198, 1, 1, 1) 0%, rgba(138, 0, 0, 1) 100%);
     height: 40px;
     align-items: center;
 }
@@ -78,15 +72,15 @@ svg {
     color: white;
     font-weight: bold;
     font-size: 16px;
-    margin: 0px 5px 0px 5px;
-    padding: 5px 10px 5px 10px;
+    margin: 0px 8px 0px 8px;
+    padding: 6px 10px 6px 10px;
     border: 2px solid transparent;
     transition: border 0.3s;
 }
 
 .link:hover {
-    border: 2px solid #ffc107;
     border-radius: 5px;
+    border: 1px solid white;
     color: white;
     /* Make the border fully opaque on hover */
 }

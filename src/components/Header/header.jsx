@@ -52,7 +52,7 @@ export default function Header() {
             </div>
             <nav className={styles.navigation}>
                 <div className={styles.links}>
-                    <Link className={styles.link} to="/home">Home</Link>
+                    <Link className={styles.link} to="/">Home</Link>
                     <Link className={styles.link} to="/cars">Cars</Link>
                     <Link className={styles.link} to="/reviews">Reviews</Link>
                     <Link className={styles.link} to="/create">Create</Link>
