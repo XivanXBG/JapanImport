@@ -12,7 +12,7 @@ export default function Header() {
             <div className={styles.header}>
                 <div className={styles.logo}><Link to='/'><img src="/images/logo.svg" alt="" /></Link></div>
                 <div className={styles.searchBar}>
-                    <form action="#">
+                    <form className={styles.formSearch} action="#">
                         <input type="text" placeholder="Search..." />
                         <button className={styles.searchButton} type="submit">
                             <svg

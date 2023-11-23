@@ -1,47 +1,110 @@
-.link-container {
-    margin-bottom: 20px;
-}
-
-.link {
-    cursor: pointer;
-    margin-right: 10px;
-    text-decoration: underline;
+.form {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    /* Two columns, equal width */
+    gap: 15px;
+    /* Adjust the gap between columns as needed */
+    max-width: 600px;
+    /* Adjust the width as needed */
+    margin: auto;
+    background-color: rgba(0, 0, 0, 0.8);
+    /* White with 50% opacity */
+    padding: 20px;
+    border: 1px solid black;
+    border-bottom-left-radius: 15px;
+    border-bottom-right-radius: 15px;
+    border-top-right-radius: 15px;
+    width: 600px;
+    height: 200px;
 }
 
 .row {
     display: flex;
-    justify-content: space-between;
-    margin-bottom: 20px;
+    flex-direction: column;
+}
+
+.input-container {
+    margin-bottom: 50px;
+    /* Adjust the spacing between input containers */
+}
+
+.input-container:last-child {
+    margin-bottom: 0px
+    /* Adjust the spacing between input containers */
 }
 
 .label {
-    flex: 1;
-    margin-right: 10px;
+    margin-bottom: 5px;
+    /* Adjust the spacing between label and input */
 }
 
 .select,
 .range-container {
-    flex: 2;
+    width: 100%;
 }
 
 .button {
-    padding: 10px;
-    background-color: #4CAF50;
+    grid-column: span 2;
+    /* Make the button span both columns */
+    margin-top: 15px;
+    background-color: rgba(0, 0, 0, 0.5);
+    border: white 1px solid;
+    border-radius: 8px;
     color: white;
-    border: none;
-    border-radius: 5px;
+    padding: 3px;
+    width: 80px;
+    /* Adjust the spacing above the button as needed */
+}
+
+.button:hover {
+    transform: scale(1.1);
     cursor: pointer;
 }
 
-.form {
-    width: 600px;
-    /* Set your preferred fixed width */
-    height: 300px;
-    /* Set your preferred fixed height */
-    background: rgba(0, 0, 0, 0.5);
-    /* Semi-transparent background for better readability */
-    padding: 20px;
+.link-container {
     display: flex;
-    vertical-align: middle;
-    border-radius: 10px;
+    width: 250px;
+    border: 1px solid black;
+    border-top-left-radius: 15px;
+    border-top-right-radius: 15px;
+    border-bottom: none;
+    justify-content: space-between;
+    background-color: rgba(0, 0, 0, 0.8);
+    /* Adjust the spacing between links and the form */
+}
+
+.searchLink {
+    cursor: pointer;
+    text-decoration: none;
+    padding: 3px;
+    margin-top: 3px;
+    margin-left: 3px;
+    margin-right: 3px;
+    color: white;
+    /* Adjust the color as needed */
+}
+
+.select {
+    width: 100%;
+    margin-top: 5px;
+    background-color: rgba(0, 0, 0, 0.8);
+    font-size: 16px;
+    color: white;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    outline: none;
+    transition: border-color 0.3s ease;
+}
+
+.searchLink:hover {
+    text-decoration: underline;
+    color: red;
+}
+
+.input-container input {
+    width: 60px;
+    background-color: rgba(0, 0, 0, 0.9);
+    margin: 20px;
+    color: white;
+    text-align: center;
 }
