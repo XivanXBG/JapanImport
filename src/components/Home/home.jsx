@@ -2,9 +2,15 @@
 import { useState, useEffect } from 'react';
 import styles from './home.module.css'; // Import the CSS module
 import FormSearch from '../SearchForms/FormSearch';
+import AdvancedSearch from '../SearchForms/AdvancedFormSearch';
+import Car from './car';
 
 const Home = () => {
     const [backgroundImage, setBackgroundImage] = useState('');
+    const [isSearchVisible, setIsSearchVisible] = useState(true);
+    const [isAdSerachVisible, setIsAdSerachVisible] = useState(false);
+
+
 
     // Array of image URLs for the background
     const backgroundImages = [
@@ -27,28 +33,52 @@ const Home = () => {
         // Initial background change
         changeBackground();
 
-        // Cleanup the interval on component unmount
+
         return () => clearInterval(intervalId);
     }, [backgroundImages]);
 
     return (
-        <div
-            className={styles.body}
-        >
+        <>
             <div
-                className={styles.background}
-                style={{
-                    backgroundImage: backgroundImage,
-                    backgroundSize: 'cover',
-                    backgroundPosition: 'center',
-                }}
+                className={styles.body}
             >
-                <div>
+                <div
+                    className={styles.background}
+                    style={{
+                        backgroundImage: backgroundImage,
+                        backgroundSize: 'cover',
+                        backgroundPosition: 'center',
+                    }}
+                >
+                    <div>
+                        <div className="link-container">
+                            <span onClick={() => {setIsSearchVisible(true); setIsAdSerachVisible(false)}} className="searchLink">
+                                Search
+                            </span>
+                            <span onClick={() => {setIsAdSerachVisible(true); setIsSearchVisible(false)}} className="searchLink">
+                                Advanced Search
+                            </span>
+                        </div>
 
-                    <FormSearch />
+                        {isSearchVisible && (
+                            <FormSearch />
+                        )}
+
+                        {isAdSerachVisible && (
+                            <AdvancedSearch />
+                        )}
+                        
+                    </div>
+
+
                 </div>
+                <div className={styles.cardsContainer}>
+                    <Car />
+                </div >
             </div>
-        </div>
+
+
+        </>
     );
 };
 

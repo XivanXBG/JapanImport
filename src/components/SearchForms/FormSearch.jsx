@@ -1,6 +1,9 @@
 
 import './formSearch.css';
 import useForm from "../../hooks/useForm";
+import { loadCars, loadModels } from '../../carsDB/carsDb';
+
+
 
 const SearchFormKeys = {
     Make: 'make',
@@ -28,26 +31,13 @@ export default function FormSearch() {
 
     });
 
-    const makeOptions = ["Mitsubishi", "Nissan"];
-    const modelOptions = {
-        Mitsubishi: ["Model1", "Model2", "Model3"],
-        Nissan: ["ModelA", "ModelB", "ModelC"],
-        // Add more models for each make as needed
-    };
 
 
 
 
     return (
         <>
-            <div className="link-container">
-                <span onClick={() => console.log('Search clicked')} className="searchLink">
-                    Search
-                </span>
-                <span onClick={() => console.log('Advanced Search clicked')} className="searchLink">
-                    Advanced Search
-                </span>
-            </div>
+            
             <form onSubmit={onSubmit} className="form">
 
 
@@ -64,7 +54,7 @@ export default function FormSearch() {
 
                         >
                             <option value="">Select make</option>
-                            {makeOptions?.map((make) => (
+                            {loadCars().map((make) => (
                                 <option key={make} value={make}>
                                     {make}
                                 </option>
@@ -112,8 +102,8 @@ export default function FormSearch() {
                                 <option value="">Select a model</option>
 
                             ) : (
-                                // Display models based on the selected make
-                                modelOptions[values[SearchFormKeys.Make]]?.map((model) => (
+
+                                loadModels(values[SearchFormKeys.Make]).map((model) => (
                                     <option key={model} value={model}>
                                         {model}
                                     </option>
@@ -133,7 +123,7 @@ export default function FormSearch() {
                             onChange={onChange}
                             value={values[SearchFormKeys.MinYear]}
                         />
-                         - 
+                        -
                         <input
                             type="number"
                             name={SearchFormKeys.MaxYear}
