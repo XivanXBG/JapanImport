@@ -4,10 +4,22 @@ export default function useForm(submitHandler, initalValues) {
     const [values, setValues] = useState(initalValues);
 
     const onChange = (e) => {
-        setValues((state) => ({
-            ...state,
-            [e.target.name]: e.target.value,
-        }));
+        let target = e.target.name;
+
+        if (target === 'make') {
+
+            setValues((state) => ({
+                ...state,
+                [e.target.name]: e.target.value,
+                model: '', // Set the value of 'model' to an empty string
+            }));
+        } else {
+
+            setValues((state) => ({
+                ...state,
+                [e.target.name]: e.target.value,
+            }));
+        }
     };
     const onSubmit = (e) => {
         e.preventDefault();

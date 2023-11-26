@@ -1,7 +1,10 @@
 
 import './formSearch.css';
 import useForm from "../../hooks/useForm";
-import { loadCars, loadModels } from '../../carsDB/carsDb';
+import { useEffect, useState } from 'react'
+
+
+import { loadCars } from '../../utills/firebase';
 
 
 
@@ -31,13 +34,21 @@ export default function FormSearch() {
 
     });
 
+    const [cars, setCars] = useState([])
 
+    useEffect(() => {
+        loadCars().then(cars => setCars(cars));
+        console.log(cars);
+    }, [])
 
-
+    const getModelsForCarId = (carId) => {
+        const car = cars.find(car => car.id === carId);
+        return car ? car.models : null;
+    };
 
     return (
         <>
-            
+
             <form onSubmit={onSubmit} className="form">
 
 
@@ -54,9 +65,9 @@ export default function FormSearch() {
 
                         >
                             <option value="">Select make</option>
-                            {loadCars().map((make) => (
-                                <option key={make} value={make}>
-                                    {make}
+                            {cars.map((car) => (
+                                <option key={car.id} value={car.id}>
+                                    {car.id}
                                 </option>
                             ))}
 
@@ -100,17 +111,16 @@ export default function FormSearch() {
                         <select name={SearchFormKeys.Model} onChange={onChange} className="select">
                             {values[SearchFormKeys.Make] === "" ? (
                                 <option value="">Select a model</option>
-
                             ) : (
-
-                                loadModels(values[SearchFormKeys.Make]).map((model) => (
-                                    <option key={model} value={model}>
-                                        {model}
-                                    </option>
-                                ))
+                                <>
+                                    <option value="">Select a model</option>
+                                    {getModelsForCarId(values[SearchFormKeys.Make]).map(model => (
+                                        <option key={model} value={model}>{model}</option>
+                                    ))}
+                                </>
                             )}
-
                         </select>
+
                     </div>
                     <div className="input-container">
 
