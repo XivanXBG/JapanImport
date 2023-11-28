@@ -1,12 +1,15 @@
-import { loadCarFullInfo } from "../../carsDB/carsDb";
+import { useEffect, useState } from "react";
+import { loadCars } from "../../utils/firebase";
 import "./car.css";
-export default function Car({ text, imageSource }) {
 
-    return Object.entries(loadCarFullInfo()).map(kvp => (
-
-        <div key={kvp[0]} className="card">
-            <img src={kvp[1].image} alt="A car" className="card-img" />
-        </div>
-    ))
-
+export default function Car() {
+  const [cars, setCars] = useState([]);
+  useEffect(() => {
+    loadCars().then((x) => setCars(x));
+  }, []);
+  return cars.map((car) => (
+    <div key={car.id} className="card">
+      <img src={car.image} alt="A car" className="card-img" />
+    </div>
+  ));
 }

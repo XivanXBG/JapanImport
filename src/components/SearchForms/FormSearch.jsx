@@ -4,7 +4,7 @@ import useForm from "../../hooks/useForm";
 import { useEffect, useState } from 'react'
 
 
-import { loadCars } from '../../utills/firebase';
+import { loadCars } from '../../utils/firebase';
 
 
 
