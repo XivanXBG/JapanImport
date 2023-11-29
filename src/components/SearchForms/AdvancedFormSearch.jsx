@@ -4,7 +4,8 @@ import useForm from "../../hooks/useForm";
 import { useEffect, useState } from 'react'
 
 
-import { loadCars } from '../../utils/firebase';
+
+import { loadCars } from '../../services/carsService';
 
 const SearchFormKeys = {
     Make: 'make',
@@ -21,8 +22,8 @@ const SearchFormKeys = {
 }
 
 export default function AdvancedSearch() {
-    const submitHandler = (e) => {
-        e.preventDefault();
+    const submitHandler = () => {
+        console.log(values);
 
     }
     const { values, onChange, onSubmit } = useForm(submitHandler, {

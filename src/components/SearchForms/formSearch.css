@@ -15,7 +15,7 @@
     border-bottom-right-radius: 15px;
     border-top-right-radius: 15px;
     width: 600px;
-    height: 200px;
+    height: 300px;
 }
 
 .adForm {
@@ -73,6 +73,7 @@
     color: white;
     padding: 3px;
     width: 80px;
+    height: 50px;
     /* Adjust the spacing above the button as needed */
 }
 

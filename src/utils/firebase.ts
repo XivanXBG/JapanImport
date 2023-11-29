@@ -1,56 +1,39 @@
 import { initializeApp } from "firebase/app";
+import { getFirestore } from "firebase/firestore";
+import { getStorage } from "firebase/storage";
 import {
-    getFirestore,
-    collection,
-    addDoc,
-    serverTimestamp,
-    getDocs,
-    doc,
-    getDoc,
-    setDoc,
+  getAuth,
+  setPersistence,
+  browserLocalPersistence,
+} from "firebase/auth";
 
-    updateDoc,
-    DocumentData
-} from "firebase/firestore";
-import {
-    getDownloadURL,
-    getStorage,
-    ref,
-    updateMetadata,
-    uploadBytes
-} from "firebase/storage";
-
-// Your web app's Firebase configuration
 const firebaseConfig = {
-    apiKey: "AIzaSyDUNhoi4OMYsxKDH9gjC7xa2oSv7_zBcpI",
-    authDomain: "j-import.firebaseapp.com",
-    databaseURL: "https://j-import-default-rtdb.europe-west1.firebasedatabase.app",
-    projectId: "j-import",
-    storageBucket: "j-import.appspot.com",
-    messagingSenderId: "237641535107",
-    appId: "1:237641535107:web:9978e176e2b70fb43e55b6",
-    measurementId: "G-FPS8R06VC7"
+  apiKey: "AIzaSyDUNhoi4OMYsxKDH9gjC7xa2oSv7_zBcpI",
+  authDomain: "j-import.firebaseapp.com",
+  databaseURL:
+    "https://j-import-default-rtdb.europe-west1.firebasedatabase.app",
+  projectId: "j-import",
+  storageBucket: "j-import.appspot.com",
+  messagingSenderId: "237641535107",
+  appId: "1:237641535107:web:9978e176e2b70fb43e55b6",
+  measurementId: "G-FPS8R06VC7",
 };
 
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
-// Initialize Cloud Storage and get a reference to the service
-const storage = getStorage(app);
-// Initialize Firestore Database
 const db = getFirestore(app);
+const storage = getStorage(app);
+const auth = getAuth(app);
 
-export const loadCars = async () => {
-    const carsCollection = await collection(db, 'cars')
-    const snapshot = await getDocs(carsCollection);
+setPersistence(auth, browserLocalPersistence)
+  .then(() => {
+   
+  })
+  .catch((error) => {
+    console.error("Error enabling session persistence:", error);
+  });
 
-    // Extract the data from the documents
-    const data = snapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
-
-    
-    return data
-}
-
-
+export { db, storage, auth };
 
 // export const uploadDataToFirestore = async (dataArray) => {
 //     const carsCollection = collection(db, "cars");
@@ -76,7 +59,7 @@ export const loadCars = async () => {
 
 // // Example usage:
 // const dataArray = [
-   
+
 //     { specificID: "Mitsubishi", image: 'https://upload.wikimedia.org/wikipedia/commons/thumb/5/5a/Mitsubishi_logo.svg/2381px-Mitsubishi_logo.svg.png', models: ['Lancer', 'Outlander', 'Pajero', 'Galant', 'Mirage'] },
 //     { specificID: "Nissan", image: 'https://upload.wikimedia.org/wikipedia/commons/8/8c/Nissan_logo.png', models: ['Altima', 'Maxima', 'Rogue', 'GT-R', '370Z'] },
 //     { specificID: "Toyota", image: 'https://upload.wikimedia.org/wikipedia/commons/thumb/5/5e/Toyota_EU.svg/2560px-Toyota_EU.svg.png', models: ['Camry', 'Corolla', 'Rav4', 'Prius', 'Highlander'] },

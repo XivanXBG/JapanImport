@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
-import { loadCars } from "../../utils/firebase";
+
+import { loadCars } from '../../services/carsService';
 import "./car.css";
 
 export default function Car() {

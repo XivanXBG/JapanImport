@@ -1,6 +1,9 @@
 import { Link } from "react-router-dom";
 import styles from "./header.module.css";
 import useForm from "../../hooks/useForm";
+import { useContext } from "react";
+import AuthContext from "../../contexts/authContext";
+import { auth } from "../../utils/firebase";
 
 export default function Header() {
   const currencyOptions = [
@@ -18,6 +21,10 @@ export default function Header() {
   const { onChange, values, onSubmit } = useForm(searchHandler, {
     [SearchFormKeys.Text]: "",
   });
+
+  const { isAuthenticated } = useContext(AuthContext);
+  console.log(isAuthenticated);
+
   return (
     <>
       <div className={styles.navigationWrapper}>
@@ -51,22 +58,34 @@ export default function Header() {
                 className={`${styles.icon} ${styles.profileIcon}`}
               >
                 <span className={styles.profileWrapper}>
-                  <img
-                    src="/images/user.svg"
-                    alt=""
-                    width="40"
-                    height="40"
-                  />
+                  <img src="/images/user.svg" alt="" width="40" height="40" />
                 </span>
               </Link>
 
               <div className={styles.dropdownContent}>
-                <Link className={styles.dropLink} to="/login">
-                  Login
-                </Link>
-                <Link className={styles.dropLink} to="/register">
-                  Register
-                </Link>
+                {!isAuthenticated && (
+                  <>
+                    <Link className={styles.dropLink} to="/login">
+                      Login
+                    </Link>
+                    <Link className={styles.dropLink} to="/register">
+                      Register
+                    </Link>
+                  </>
+                )}
+                {isAuthenticated && (
+                  <>
+                    <Link className={styles.dropLink} to="/profile">
+                      Profile
+                    </Link>
+                    <Link className={styles.dropLink} to="/my-orders">
+                      Orders
+                    </Link>
+                    <Link className={styles.dropLink} to="/logout">
+                      Logout
+                    </Link>
+                  </>
+                )}
               </div>
             </div>
 
@@ -101,10 +120,11 @@ export default function Header() {
             <Link className={styles.link} to="/reviews">
               Reviews
             </Link>
-            <Link className={styles.link} to="/create">
-              Create
-            </Link>
-            
+            {isAuthenticated && (
+              <Link className={styles.link} to="/create">
+                Create
+              </Link>
+            )}
           </div>
         </nav>
       </div>
