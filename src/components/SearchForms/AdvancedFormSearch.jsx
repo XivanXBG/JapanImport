@@ -29,12 +29,12 @@ export default function AdvancedSearch() {
     const { values, onChange, onSubmit } = useForm(submitHandler, {
         [SearchFormKeys.Make]: "",
         [SearchFormKeys.Model]: "",
-        [SearchFormKeys.MinPrice]: 10,
-        [SearchFormKeys.MaxPrice]: 500000,
-        [SearchFormKeys.MaxYear]: 2023,
-        [SearchFormKeys.MinYear]: 1960,
+        [SearchFormKeys.MinPrice]: '',
+        [SearchFormKeys.MaxPrice]: '',
+        [SearchFormKeys.MaxYear]: "",
+        [SearchFormKeys.MinYear]: "",
         [SearchFormKeys.TransmissionType]: '',
-        [SearchFormKeys.Killomenters]: 0,
+        [SearchFormKeys.Killomenters]: "",
         [SearchFormKeys.Category]: '',
         [SearchFormKeys.EngineType]: '',
 
@@ -54,7 +54,7 @@ export default function AdvancedSearch() {
     };
 
     return (
-        <form onSubmit={onSubmit} className="adForm">
+        <form onSubmit={onSubmit} className="form">
 
             <div className="row">
                 <div className="input-container">
@@ -126,6 +126,7 @@ export default function AdvancedSearch() {
                         name={SearchFormKeys.MinPrice}
                         onChange={onChange}
                         value={values[SearchFormKeys.MinPrice]}
+                        placeholder="1000"
 
                     />
                     -
@@ -134,6 +135,8 @@ export default function AdvancedSearch() {
                         name={SearchFormKeys.MaxPrice}
                         onChange={onChange}
                         value={values[SearchFormKeys.MaxPrice]}
+                        placeholder="50000"
+
 
                     />
 
@@ -211,6 +214,8 @@ export default function AdvancedSearch() {
                         name={SearchFormKeys.MinYear}
                         onChange={onChange}
                         value={values[SearchFormKeys.MinYear]}
+                        placeholder="1980"
+
                     />
                     -
                     <input
@@ -218,6 +223,7 @@ export default function AdvancedSearch() {
                         name={SearchFormKeys.MaxYear}
                         onChange={onChange}
                         value={values[SearchFormKeys.MaxYear]}
+                        placeholder="2023"
 
                     />
 

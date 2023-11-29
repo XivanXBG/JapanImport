@@ -1,131 +1,106 @@
 .form {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    /* Two columns, equal width */
-    gap: 15px;
-    /* Adjust the gap between columns as needed */
-    max-width: 600px;
-    /* Adjust the width as needed */
-    margin: auto;
-    background-color: rgba(0, 0, 0, 0.8);
-    /* White with 50% opacity */
-    padding: 20px;
-    border: 1px solid black;
-    border-bottom-left-radius: 15px;
-    border-bottom-right-radius: 15px;
-    border-top-right-radius: 15px;
-    width: 600px;
-    height: 300px;
-}
-
-.adForm {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    /* Two columns, equal width */
-    gap: 15px;
-    /* Adjust the gap between columns as needed */
-    max-width: 600px;
-    /* Adjust the width as needed */
-    margin: auto;
-    background-color: rgba(0, 0, 0, 0.8);
-    /* White with 50% opacity */
-    padding: 20px;
-    border: 1px solid black;
-    border-bottom-left-radius: 15px;
-    border-bottom-right-radius: 15px;
-    border-top-right-radius: 15px;
-    width: 600px;
-    height: auto;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 15px;
+  max-width: 600px;
+  margin: auto;
+  background-color: rgba(0, 0, 0, 0.8);
+  padding: 20px;
+  border: 1px solid black;
+  border-bottom-left-radius: 15px;
+  border-bottom-right-radius: 15px;
+  border-top-right-radius: 15px;
+  width: 600px;
+  height: auto;
 }
 
 .row {
-    display: flex;
-    flex-direction: column;
+  display: flex;
+  flex-direction: column;
 }
 
+.select{
+  padding: 3px;
+}
 .input-container {
-    margin-bottom: 20px;
+  margin-bottom: 20px;
+  color: white;
+  font-size: large;
 }
 
 .input-container:last-child {
-    margin-bottom: 0px
-    /* Adjust the spacing between input containers */
+  margin-bottom: 0px;
+  
 }
 
 .label {
-    margin-bottom: 5px;
-    color: white;
-    /* Adjust the spacing between label and input */
+  margin-bottom: 5px;
+  color: white;
+ 
 }
 
-.select,
-.range-container {
-    width: 100%;
-}
 
 .button {
-    grid-column: span 2;
-    /* Make the button span both columns */
-    margin-top: 15px;
-    background-color: rgba(0, 0, 0, 0.5);
-    border: white 1px solid;
-    border-radius: 8px;
-    color: white;
-    padding: 3px;
-    width: 80px;
-    height: 50px;
-    /* Adjust the spacing above the button as needed */
+  grid-column: span 2;
+  margin-top: 15px;
+  background-color: rgba(0, 0, 0, 0.5);
+  border: white 1px solid;
+  border-radius: 8px;
+  color: white;
+  padding: 3px;
+  width: 80px;
+  height: 50px;
 }
 
 .button:hover {
-    transform: scale(1.1);
-    cursor: pointer;
+  transform: scale(1.1);
+  cursor: pointer;
 }
 
 .link-container {
-    display: flex;
-    width: 250px;
-    border: 1px solid black;
-    border-top-left-radius: 15px;
-    border-top-right-radius: 15px;
-    border-bottom: none;
-    justify-content: space-between;
-    background-color: rgba(0, 0, 0, 0.8);
+  display: flex;
+  width: 250px;
+  border: 1px solid black;
+  border-top-left-radius: 15px;
+  border-top-right-radius: 15px;
+  border-bottom: none;
+  justify-content: space-between;
+  background-color: rgba(0, 0, 0, 0.8);
 }
 
 .searchLink {
-    cursor: pointer;
-    text-decoration: none;
-    padding: 5px;
-    margin-top: 3px;
-    margin-left: 5px;
-    margin-right: 5px;
-    color: white;
-    border-bottom: 1px solid transparent;
-    /* Adjust the color as needed */
+  cursor: pointer;
+  text-decoration: none;
+  padding: 5px;
+  margin-top: 3px;
+  margin-left: 5px;
+  margin-right: 5px;
+  color: white;
+  border-bottom: 1px solid transparent;
+  /* Adjust the color as needed */
 }
 
 .searchLink:hover {
-    border-bottom: 1px solid red;
-    color: red;
+  border-bottom: 1px solid red;
+  color: red;
 }
 
 .select {
-    width: 100%;
-    margin-top: 5px;
-    background-color: rgba(0, 0, 0, 0.8);
-    font-size: 16px;
-    color: white;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    outline: none;
-    transition: border-color 0.3s ease;
+  width: 100%;
+  margin-top: 5px;
+  background-color: rgba(0, 0, 0, 0.8);
+  font-size: 16px;
+  color: white;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  outline: none;
+  transition: border-color 0.3s ease;
 }
 
 .input-container input {
-    width: 60px;
-    background-color: rgba(0, 0, 0, 0.9);
-    margin: 20px;
-    color: white;
-    text-align: center;
+  width: 60px;
+  background-color: rgba(0, 0, 0, 0.9);
+  margin: 20px;
+  color: white;
+  text-align: center;
 }

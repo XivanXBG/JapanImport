@@ -1,0 +1,95 @@
+.form {
+
+  margin: auto;
+  background-color: rgba(0, 0, 0, 0.8);
+  padding: 20px;
+  border: 1px solid black;
+  border-radius: 15px;
+  width: 600px;
+  height: auto;
+}
+.wrapper {
+  background-image: url(https://www.hdwallpapers.in/download/red_honda_nsx_1990_jdm_car_hd_jdm-HD.jpg);
+  margin: 0px;
+  background-repeat: no-repeat;
+  background-size: cover;
+  /* Adjust as needed */
+  background-position: bottom;
+  margin-bottom: 0px;
+  display: flex;
+  align-items: center;
+  min-height: calc(100vh - 100px);
+}
+
+.row {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 15px;
+}
+
+.input-container {
+  margin-bottom: 20px;
+  color: white;
+  font-size: large;
+}
+.numberInputs {
+  display: flex;
+  justify-content: space-between;
+  
+}
+.images{
+  width: auto;
+  border-radius: 5px;
+  background-color: rgba(0, 0, 0, 0.9);
+  font-size: small;
+  color: white;
+  text-align: center;
+  border: 1px solid #ccc;
+  padding: 8px;
+}
+.select{
+  padding: 3px;
+}
+.numberInput input{
+  width: 150px;
+  border-radius: 5px;
+  background-color: rgba(0, 0, 0, 0.9);
+  margin-top: 10px;
+  color: white;
+  text-align: center;
+}
+
+.label {
+  margin-bottom: 5px;
+  color: white;
+}
+
+.button {
+  margin-top: 25px;
+  background-color: rgba(0, 0, 0, 0.5);
+  border: white 1px solid;
+  border-radius: 8px;
+  color: white;
+  padding: 3px;
+  width: 80px;
+  height: 50px;
+}
+
+.button:hover {
+  transform: scale(1.1);
+  cursor: pointer;
+}
+
+
+
+.select {
+  width: 100%;
+  margin-top: 5px;
+  background-color: rgba(0, 0, 0, 0.8);
+  font-size: 16px;
+  color: white;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  outline: none;
+  transition: border-color 0.3s ease;
+}

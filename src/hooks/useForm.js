@@ -6,22 +6,31 @@ export default function useForm(submitHandler, initalValues) {
   const onChange = (e) => {
     let target = e.target.name;
 
+    if (e.target.value <= 0) {
+      e.target.value = "";
+    }
     if (target === "make") {
       setValues((state) => ({
         ...state,
-        [e.target.name]: e.target.value,
+        [target]: e.target.value,
         model: "",
+      }));
+    } else if (target === "photos") {
+      const selectedPhotos = Array.from(e.target.files);
+      setValues((state) => ({
+        ...state,
+        [target]: selectedPhotos
       }));
     } else {
       setValues((state) => ({
         ...state,
-        [e.target.name]: e.target.value,
+        [target]: e.target.value,
       }));
     }
   };
   const onSubmit = (e) => {
     e.preventDefault();
-    
+
     submitHandler(values);
   };
   return {
