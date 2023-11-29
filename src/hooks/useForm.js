@@ -11,7 +11,7 @@ export default function useForm(submitHandler, initalValues) {
             setValues((state) => ({
                 ...state,
                 [e.target.name]: e.target.value,
-                model: '', // Set the value of 'model' to an empty string
+                model: '',
             }));
         } else {
 

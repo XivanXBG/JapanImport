@@ -4,7 +4,7 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    color: #FFF;
+    background-color: #383838;
     /* Set text color to white for better visibility */
     font-family: Arial, sans-serif;
     overflow: hidden;

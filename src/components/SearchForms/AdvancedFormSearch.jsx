@@ -84,7 +84,7 @@ export default function AdvancedSearch() {
                         value={values[SearchFormKeys.EngineType]}
                         className="select"
                     >
-                        <option value="">Select engine type</option>
+                        <option value="">Select engine</option>
                         <option value="gasoline">Gasoline</option>
                         <option value="diesel">Diesel</option>
                         <option value="hybrid">Hybrid</option>

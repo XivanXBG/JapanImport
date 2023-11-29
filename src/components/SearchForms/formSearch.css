@@ -54,6 +54,7 @@
 
 .label {
     margin-bottom: 5px;
+    color: white;
     /* Adjust the spacing between label and input */
 }
 
@@ -89,7 +90,6 @@
     border-bottom: none;
     justify-content: space-between;
     background-color: rgba(0, 0, 0, 0.8);
-    /* Adjust the spacing between links and the form */
 }
 
 .searchLink {

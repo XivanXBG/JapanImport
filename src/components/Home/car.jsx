@@ -10,6 +10,7 @@ export default function Car() {
   return cars.map((car) => (
     <div key={car.id} className="card">
       <img src={car.image} alt="A car" className="card-img" />
+      <span>{car.id}</span>
     </div>
   ));
 }

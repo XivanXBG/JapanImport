@@ -1,0 +1,101 @@
+.wrapper {
+    background-image: url(https://www.hdwallpapers.in/download/red_honda_nsx_1990_jdm_car_hd_jdm-HD.jpg);
+    margin: 0px;
+    background-repeat: no-repeat;
+    background-size: cover;
+    /* Adjust as needed */
+    background-position: bottom;
+    margin-bottom: 0px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: calc(100vh - 100px)
+}
+
+.japanImportTheme {
+    background-color: rgba(0, 0, 0, 0.8);
+    padding: 20px;
+    border: 1px solid black;
+    width: 600px;
+    height: 270px;
+    padding: 16px;
+    margin: 0 auto;
+    border: 1px solid black;
+    border-radius: 15px;
+}
+
+
+/* Labels */
+
+label {
+    display: block;
+    font-weight: bold;
+    margin-top: 10px;
+    color: white;
+}
+
+
+/* Input fields */
+
+.inputs {
+    width: 100%;
+    padding: 8px;
+    margin-top: 6px;
+    border: 1px solid #ddd;
+    box-sizing: border-box;
+}
+
+.submitBtn {
+    background: radial-gradient( circle, rgba(198, 1, 1, 1) 0%, rgba(138, 0, 0, 1) 100%);
+    color: white;
+    padding: 8px 16px;
+    margin-top: 16px;
+    border: none;
+    cursor: pointer;
+    width: 30%;
+    border-radius: 5px;
+    opacity: 0.9;
+    margin-bottom: 20px;
+}
+
+.submitBtn:hover {
+    opacity: 1;
+}
+
+.button {
+    display: flex;
+    color: white;
+    align-items: center;
+    justify-content: space-between;
+    margin-top: 20px;
+}
+
+.loginText {
+    text-decoration: none;
+    color: red;
+    margin-left: 5px;
+}
+
+.loginText:hover {
+    text-decoration: underline;
+    color: white;
+    margin-left: 5px;
+}
+
+.loginItems {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    justify-content: center;
+}
+
+.loginItems img {
+    width: 35px;
+    height: 35px;
+    padding: 5px;
+}
+
+.loginItems img:hover {
+    cursor: pointer;
+    transform: scale(1.1);
+}

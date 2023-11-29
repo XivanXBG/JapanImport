@@ -20,7 +20,7 @@ export default function Header() {
   });
   return (
     <>
-      <div className={styles.navigation}>
+      <div className={styles.navigationWrapper}>
         <div className={styles.header}>
           <div className={styles.logo}>
             <Link to="/">
@@ -104,12 +104,7 @@ export default function Header() {
             <Link className={styles.link} to="/create">
               Create
             </Link>
-            <Link className={styles.linkAuth} to="/login">
-              Login
-            </Link>
-            <Link className={styles.linkAuth} to="/register">
-              Register
-            </Link>
+            
           </div>
         </nav>
       </div>
