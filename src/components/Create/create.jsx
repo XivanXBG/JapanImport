@@ -1,6 +1,6 @@
 import useForm from "../../hooks/useForm";
 import { useEffect, useState } from "react";
-import { loadCars,createOffer } from "../../services/carsService";
+import { loadCars, createOffer } from "../../services/carsService";
 import styles from "./create.module.css";
 
 const SearchFormKeys = {
@@ -13,10 +13,14 @@ const SearchFormKeys = {
   Category: "category",
   EngineType: "engine",
   Photos: "photos",
+  Color: "color",
+  Description: "description",
+  Loc: "loc",
+  Mobile: "mobile",
 };
 
+
 export default function Create() {
-  
   const { values, onChange, onSubmit } = useForm(createOffer, {
     [SearchFormKeys.Make]: "",
     [SearchFormKeys.Model]: "",
@@ -27,13 +31,16 @@ export default function Create() {
     [SearchFormKeys.Category]: "",
     [SearchFormKeys.EngineType]: "",
     [SearchFormKeys.Photos]: [],
+    [SearchFormKeys.Color]: "",
+    [SearchFormKeys.Description]: "",
+    [SearchFormKeys.Loc]: "",
+    [SearchFormKeys.Mobile]: "",
   });
 
   const [cars, setCars] = useState([]);
 
   useEffect(() => {
     loadCars().then((cars) => setCars(cars));
-    console.log(cars);
   }, []);
 
   const getModelsForCarId = (carId) => {
@@ -44,6 +51,8 @@ export default function Create() {
   return (
     <div className={styles.wrapper}>
       <form onSubmit={onSubmit} className={styles.form}>
+        <h3>Car Information</h3>
+        <hr />
         <div className={styles.row}>
           <div>
             <div className={styles["input-container"]}>
@@ -138,14 +147,17 @@ export default function Create() {
               </select>
             </div>
             <div className={styles["input-container"]}>
-              <label className={styles.label}>Photos:</label>
-              <input
-                type="file"
-                name={SearchFormKeys.Photos}
+              <label className={styles.label}>Color:</label>
+              <select
+                name={SearchFormKeys.Color}
                 onChange={onChange}
-                multiple
-                className={styles.images}
-              />
+                value={values[SearchFormKeys.Color]}
+                className={styles.select}
+              >
+                <option value="">Select Color</option>
+                <option value="red">red</option>
+                <option value="green">green</option>
+              </select>
             </div>
           </div>
         </div>
@@ -185,10 +197,67 @@ export default function Create() {
             />
           </div>
         </div>
+        <hr />
+        <div className={styles.moreInfoAndPhotos}>
+          <div className={styles.description}>
+            <label className={styles.label}>More Information:</label>
+            <input
+              type="text"
+              name={SearchFormKeys.Description}
+              onChange={onChange}
+              value={values[SearchFormKeys.Description]}
+              placeholder="Description"
+              className={styles.moreInfo}
+            />
+          </div>
 
+          <div className={styles.fileInput}>
+            <label className={styles.label}>Photos:</label>
+            <input
+              type="file"
+              name={SearchFormKeys.Photos}
+              multiple
+              onChange={onChange}
+              className={styles.moreInfo}
+            />
+          </div>
+        </div>
+        <hr />
+
+        <div className={styles.personalInfo}>
+          <h3>Personal Info:</h3>
+          <div className={styles.numberInput}>
+            <label>Mobile:</label>
+            <input
+              type="mobile"
+              name={SearchFormKeys.Mobile}
+              onChange={onChange}
+              value={values[SearchFormKeys.Mobile]}
+              placeholder="mobilephone"
+              className={styles.mobile}
+            />
+          </div>
+          <div className={styles.numberInput}>
+            <label className={styles.label}>Location:</label>
+            <select
+                name={SearchFormKeys.Loc}
+                onChange={onChange}
+                value={values[SearchFormKeys.Loc]}
+                className={styles.select}
+              >
+                <option value="">Select location</option>
+                <option value="hiroshima">Hiroshima</option>
+                <option value="tokyo">Tokyo</option>
+                
+              </select>
+          </div>
+        </div>
+        <div className={styles.btnWrapper}>
         <button type="submit" className={styles.button}>
           Submit
         </button>
+        </div>
+        
       </form>
     </div>
   );

@@ -1,0 +1,54 @@
+.pageContainer {
+    display: flex;
+    justify-content: space-between;
+    padding: 10px;
+  }
+  
+  .filterMenu {
+    width: 200px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    padding: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  }
+  
+.card {
+  display: flex;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  margin: 10px;
+  overflow: hidden;
+  width: 300px;
+  cursor: pointer;
+  transition: transform 0.3s ease-in-out;
+}
+
+.card:hover {
+  transform: scale(1.05);
+}
+
+.cardImage {
+  width: 150px;
+  height: 100%;
+  object-fit: cover;
+}
+.cardImage:hover {
+  
+  transform: scale(3);
+
+}
+
+.cardContent {
+  flex: 1;
+  padding: 10px;
+}
+
+h1 {
+  margin-bottom: 5px;
+}
+
+p {
+  margin: 5px 0;
+}
+
+/* Add more styles as needed */

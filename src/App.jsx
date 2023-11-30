@@ -9,6 +9,7 @@ import LoginPage from "./components/Login/login";
 import Logout from "./components/Logout/logout";
 import Create from "./components/Create/Create";
 import { useEffect, useState } from "react";
+import Cars from "./components/Cars/cars";
 
 
 function App() {
@@ -27,6 +28,7 @@ function App() {
         <Route path="/login" element={<LoginPage />}></Route>
         <Route path="/logout" element={<Logout />}></Route>
         <Route path="/create" element={<Create />}></Route>
+        <Route path="/cars" element={<Cars />}></Route>
       </Routes>
     </AuthProvider>
   );
