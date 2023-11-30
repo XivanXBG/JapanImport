@@ -1,6 +1,7 @@
 import { initializeApp } from "firebase/app";
 import { getFirestore } from "firebase/firestore";
 import { getStorage } from "firebase/storage";
+import { getDatabase } from "firebase/database";
 import {
   getAuth,
   setPersistence,
@@ -24,6 +25,7 @@ const app = initializeApp(firebaseConfig);
 const db = getFirestore(app);
 const storage = getStorage(app);
 const auth = getAuth(app);
+const rDB = getDatabase(app)
 
 setPersistence(auth, browserLocalPersistence)
   .then(() => {
@@ -33,7 +35,7 @@ setPersistence(auth, browserLocalPersistence)
     console.error("Error enabling session persistence:", error);
   });
 
-export { db, storage, auth };
+export {rDB, db, storage, auth };
 
 // export const uploadDataToFirestore = async (dataArray) => {
 //     const carsCollection = collection(db, "cars");

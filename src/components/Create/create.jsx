@@ -1,6 +1,6 @@
 import useForm from "../../hooks/useForm";
 import { useEffect, useState } from "react";
-import { loadCars } from "../../services/carsService";
+import { loadCars,createOffer } from "../../services/carsService";
 import styles from "./create.module.css";
 
 const SearchFormKeys = {
@@ -16,10 +16,8 @@ const SearchFormKeys = {
 };
 
 export default function Create() {
-  const submitHandler = () => {
-    console.log(values);
-  };
-  const { values, onChange, onSubmit } = useForm(submitHandler, {
+  
+  const { values, onChange, onSubmit } = useForm(createOffer, {
     [SearchFormKeys.Make]: "",
     [SearchFormKeys.Model]: "",
     [SearchFormKeys.Price]: "",

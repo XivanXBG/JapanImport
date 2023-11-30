@@ -60,6 +60,7 @@ export const AuthProvider = ({ children }) => {
   const contextValues = {
     loginHandler,
     isAuthenticated,
+    ownerId: auth.currentUser?.uid,
     registerHandler,
     logoutHandler,
   };
