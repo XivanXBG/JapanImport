@@ -17,8 +17,9 @@ const SearchFormKeys = {
     TransmissionType: 'transmission',
     Killomenters: 'killometers',
     Category: 'category',
-    EngineType: 'engine'
-
+    EngineType: 'engine',
+    Color: "color",
+    Loc: "loc",
 }
 
 export default function AdvancedSearch() {
@@ -37,6 +38,8 @@ export default function AdvancedSearch() {
         [SearchFormKeys.Killomenters]: "",
         [SearchFormKeys.Category]: '',
         [SearchFormKeys.EngineType]: '',
+        [SearchFormKeys.Color]: '',
+        [SearchFormKeys.Loc]: '',
 
 
     });
@@ -114,6 +117,24 @@ export default function AdvancedSearch() {
                         <option value="minivan">Minivan</option>
                         <option value="crossover">Crossover</option>
                         <option value="sportsCar">Sports Car</option>
+                    </select>
+                </div>
+                <div className="input-container">
+                    <label className="label">
+                        Color:
+                    </label>
+                    <select
+                        name={SearchFormKeys.Color}
+                        onChange={onChange}
+                        value={values[SearchFormKeys.Color]}
+                        className="select"
+                    >
+                        <option value="">Select color</option>
+                        <option value="blue">blue</option>
+                        <option value="red">red</option>
+
+
+
                     </select>
                 </div>
                 <div className="input-container">
@@ -203,6 +224,24 @@ export default function AdvancedSearch() {
 
                     </select>
 
+                </div>
+                <div className="input-container">
+                    <label className="label">
+                        Location:
+                    </label>
+                    <select
+                        name={SearchFormKeys.Loc}
+                        onChange={onChange}
+                        value={values[SearchFormKeys.Loc]}
+                        className="select"
+                    >
+                        <option value="">Select location</option>
+                        <option value="hiroshima">Hiroshima</option>
+                        <option value="nagasaki">Nagasaki</option>
+
+
+
+                    </select>
                 </div>
                 <div className="input-container">
 

@@ -1,0 +1,30 @@
+.asideForm {
+    display: flex;
+    flex-direction: column;
+    color: black;
+    background-color: rgb(235, 234, 234);
+    justify-content: space-between;
+    gap: 20px;
+    padding: 10px;
+    border: none;
+}
+
+.label {
+    color: black;
+    display: inline;
+    margin-bottom: 10px;
+}
+
+.search {
+    display: flex;
+    flex-direction: column;
+}
+
+.select {
+    color: darkgray;
+}
+
+.inputsNumber {
+    display: grid;
+    grid-template-columns: calc(50% - 1/2*6px) 6px calc(50% - 1/2*6px);
+}
