@@ -1,0 +1,51 @@
+.card {
+  display: grid;
+  grid-template-columns: 300px auto;
+  height: 200px;
+  background-color: white;
+  border: 1px solid lightgrey;
+  border-radius: 10px;
+}
+.card:hover{
+    cursor: pointer;
+    transform: scale(1.05);
+}
+
+.img {
+  padding: 5px;
+  width: 290px;
+  max-width: 300px;
+  height: 190px;
+  max-height: 200px;
+  display: block; /* Ensure that the image behaves as a block element */
+}
+.moreInfo{
+    font-size: 14px;
+    color: black;
+    margin-left: 5px;
+}
+.name{
+    margin-bottom: 5px;
+    color: black;
+}
+.fAwesome{
+    margin: 0px;
+}
+.price{
+    color: #f1611e;
+    font-size: x-large;
+    margin: 10px auto;
+}
+.condensedInfo{
+    display: grid;
+    grid-template-columns: 49% 2% 49%;
+    
+   
+}
+.condensedInfo p {
+    margin: 10px 0px;
+    padding-bottom:5px ;
+    padding-right: 5px;
+    border-bottom: 1px solid lightgray;
+   
+}

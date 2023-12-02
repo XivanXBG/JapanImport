@@ -19,6 +19,7 @@ function App() {
     console.log(offers);
   }, []);
   return (
+    
     <AuthProvider>
       <Header />
 

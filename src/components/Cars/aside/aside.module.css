@@ -2,29 +2,53 @@
     display: flex;
     flex-direction: column;
     color: black;
-    background-color: rgb(235, 234, 234);
+    background-color: white;
     justify-content: space-between;
     gap: 20px;
     padding: 10px;
     border: none;
+    height: auto;
 }
 
 .label {
     color: black;
     display: inline;
     margin-bottom: 10px;
+    font-size: 15px;
 }
 
 .search {
     display: flex;
     flex-direction: column;
+   
 }
-
+.reset{
+    font-size: medium;
+    background-color: white;
+    border: none;
+}
+.reset:hover{
+    cursor: pointer;
+}
+.resetFormWrapper{
+    display: flex;
+    justify-content: space-between;
+}
 .select {
     color: darkgray;
+    padding: 5px;
 }
 
 .inputsNumber {
     display: grid;
     grid-template-columns: calc(50% - 1/2*6px) 6px calc(50% - 1/2*6px);
+  
+}
+.filter{
+    height: 40px;
+    background-color:#fc4242 ;
+    color: white;
+}
+.filter:hover{
+    cursor: pointer;
 }

@@ -16,7 +16,7 @@
     top: 0;
     left: 0;
     width: 100%;
-    height: auto;
+    height: 60vh;
     padding: 20px;
     max-height: 100vh;
     -webkit-transition: background-image 1s ease-in-out;

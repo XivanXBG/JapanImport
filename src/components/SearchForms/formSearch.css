@@ -19,7 +19,7 @@
   flex-direction: column;
 }
 
-.select{
+.select {
   padding: 3px;
 }
 .input-container {
@@ -30,15 +30,12 @@
 
 .input-container:last-child {
   margin-bottom: 0px;
-  
 }
 
 .label {
   margin-bottom: 5px;
   color: white;
- 
 }
-
 
 .button {
   grid-column: span 2;
