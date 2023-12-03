@@ -91,17 +91,9 @@ export const loadOfferWithPhoto = async(id)=>{
         if (offerSnapshot.exists()) {
             let offerData=offerSnapshot.val();
             
-            // const offerWithPhotos = await Promise.all(
-            //     Object.entries(offerData).map(async([offerId, offerData]) => {
-            //         // Load photos from storage based on photo paths
-            //         const offerPhotos  = offerData.photos;
-            //         // const photos = await loadPhotosFromStorage(offerPhotos);
-
-            //         // Combine offer data with loaded photos
-            //         return {...offerData, offerPhotos, id: offerId };
-            //     })
-            // );
-            const photos = await loadPhotosFromStorage(offerData.photos)
+        
+            const photos = await loadPhotosFromStorage(offerData.photos);
+            console.log(photos);
             return {...offerData, photos}
         }
     }

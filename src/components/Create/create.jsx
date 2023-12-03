@@ -227,7 +227,7 @@ export default function Create() {
         <div className={styles.personalInfo}>
           <h3>Personal Info:</h3>
           <div className={styles.numberInput}>
-            <label>Mobile:</label>
+            <label className={styles.label}>Mobile:</label>
             <input
               type="mobile"
               name={SearchFormKeys.Mobile}

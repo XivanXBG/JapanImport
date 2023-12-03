@@ -12,12 +12,12 @@
 }
 .wrapper {
   padding: 20px;
-  background: #f4f4f4;
+  background-color: #dcdcdc;
   height: auto;
 }
 body,
 html {
-  background: #f4f4f4;
+  background-color: #dcdcdc;
   margin: 0px;
   padding: 0px;
 }
@@ -26,7 +26,7 @@ html {
   align-items: center;
   justify-content: end;
   gap: 10px;
-  background-color: #f4f4f4;
+  background-color: #dcdcdc;
 }
 .sort label {
   display: flex;
