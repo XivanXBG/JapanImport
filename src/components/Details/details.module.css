@@ -1,0 +1,47 @@
+.detailsCard {
+  margin: 200px 500px;
+  height: calc(100vh - 300px);
+
+  display: grid;
+  grid-template-columns: 80% 20%;
+  gap: 50px;
+  text-align: center;
+ 
+}
+
+.photo {
+  padding: 10px 10px;
+  height: 70%;
+  width: 90%;
+  object-fit: cover;
+}
+.detailsInfo {
+  
+  background-color: white;
+  border-radius: 10px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+}
+.photoWrapper {
+  background-color: white;
+  border-radius: 10px;
+  border: 1px solid #f4f4f4;
+  height: 80%;
+}
+
+body,
+html {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  background-color: #DCDCDC;
+}
+
+.wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: auto;
+  height: calc(100vh - 100px);
+}

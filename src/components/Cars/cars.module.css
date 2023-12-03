@@ -18,6 +18,8 @@
 body,
 html {
   background: #f4f4f4;
+  margin: 0px;
+  padding: 0px;
 }
 .sort {
   display: flex;

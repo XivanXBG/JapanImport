@@ -73,7 +73,7 @@ export const loadAllOffersWithPhotos = async() => {
                     return {...offerData, photos, id: offerId };
                 })
             );
-            console.log(allOffersWithPhotos);
+           
             return allOffersWithPhotos;
         } else {
             console.error("No offers found");
@@ -84,10 +84,35 @@ export const loadAllOffersWithPhotos = async() => {
         return [];
     }
 };
+export const loadOfferWithPhoto = async(id)=>{
+    try{
+        const offerRef = ref(rDB, "offers/"+id);
+        const offerSnapshot = await get(offerRef);
+        if (offerSnapshot.exists()) {
+            let offerData=offerSnapshot.val();
+            
+            // const offerWithPhotos = await Promise.all(
+            //     Object.entries(offerData).map(async([offerId, offerData]) => {
+            //         // Load photos from storage based on photo paths
+            //         const offerPhotos  = offerData.photos;
+            //         // const photos = await loadPhotosFromStorage(offerPhotos);
 
+            //         // Combine offer data with loaded photos
+            //         return {...offerData, offerPhotos, id: offerId };
+            //     })
+            // );
+            const photos = await loadPhotosFromStorage(offerData.photos)
+            return {...offerData, photos}
+        }
+    }
+    catch (error) {
+        console.error("Error loading offers:", error.message);
+        return [];
+    }
+}
 const loadPhotosFromStorage = async(photoPaths) => {
     try {
-        
+        console.log(photoPaths);
         const photos = await Promise.all(photoPaths.map(async(path) => {
             const photoRef = storageRef(storage, path);
             const photoURL = await getDownloadURL(photoRef);
