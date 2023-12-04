@@ -1,27 +1,21 @@
-// Cars.jsx
 import React, { useEffect, useState } from "react";
-import { loadAllOffersWithPhotos } from "../../services/carsService";
+import { connect } from "react-redux";
 import styles from "./Cars.module.css";
-import { useNavigate } from "react-router-dom";
+import { searchCarOffers } from "../../services/searchService.js";
 import Aside from "./aside/aside";
 import CarItem from "./carItem/carItem";
 
-export default function Cars() {
+const Cars = ({ searchCriteria }) => {
   const [cars, setCars] = useState([]);
   const [isLoaded, setisLoaded] = useState(false);
-  const navigate = useNavigate();
 
   useEffect(() => {
-    loadAllOffersWithPhotos().then((x) => {
+    searchCarOffers(searchCriteria).then((x) => {
       setCars(x);
       setisLoaded(true);
+     
     });
-  }, []);
-
-  const handleCardClick = (id) => {
-    // Redirect to the detailed view or wherever you want
-    navigate(`/car/${id}`);
-  };
+  }, [searchCriteria]);
 
   return (
     <>
@@ -30,7 +24,6 @@ export default function Cars() {
           <div className={styles.pageContainer}>
             <aside className={styles.filterMenu}>
               <Aside />
-            
             </aside>
             <div>
               <div className={styles.sort}>
@@ -50,4 +43,9 @@ export default function Cars() {
       )}
     </>
   );
-}
+};
+const mapStateToProps = (state) => ({
+  searchCriteria: state,
+});
+
+export default connect(mapStateToProps)(Cars);

@@ -1,37 +1,40 @@
 import "./formSearch.css";
 import useForm from "../../hooks/useForm";
 import { useEffect, useState } from "react";
-import {searchCarOffers} from '../../services/searchService'
-
+import { connect } from "react-redux";
+import { updateSearchCriteria } from "../../reducer/actions";
+import { useNavigate } from "react-router-dom";
 import { loadCars } from "../../services/carsService";
 
 const SearchFormKeys = {
   Make: "make",
-  Model: "model",
-  MinPrice: "minPrice",
-  MaxPrice: "maxPrice",
-  MinYear: "minYear",
-  MaxYear: "maxYear",
+    Model: "model",
+    MinPrice: "minPrice",
+    MaxPrice: "maxPrice",
+    MinYear: "minYear",
+    MaxYear: "maxYear",
+    
 };
 
-export default function FormSearch() {
+const FormSearch = ({ dispatch }) => {
+  const navigate = useNavigate();
   const submitHandler = () => {
-    searchCarOffers(values).then(x=>console.log(x));
+    dispatch(updateSearchCriteria(values));
+    navigate("/cars");
   };
   const { values, onChange, onSubmit } = useForm(submitHandler, {
     [SearchFormKeys.Make]: "",
     [SearchFormKeys.Model]: "",
-    [SearchFormKeys.MinPrice]: '',
-    [SearchFormKeys.MaxPrice]: '',
-    [SearchFormKeys.MaxYear]: '',
-    [SearchFormKeys.MinYear]: '',
+    [SearchFormKeys.MinPrice]: "",
+    [SearchFormKeys.MaxPrice]: "",
+    [SearchFormKeys.MaxYear]: "",
+    [SearchFormKeys.MinYear]: "",
   });
 
   const [cars, setCars] = useState([]);
 
   useEffect(() => {
     loadCars().then((cars) => setCars(cars));
-   
   }, []);
 
   const getModelsForCarId = (carId) => {
@@ -129,4 +132,9 @@ export default function FormSearch() {
       </form>
     </>
   );
-}
+};
+const mapStateToProps = (state) => ({
+  searchCriteria: state,
+});
+
+export default connect(mapStateToProps)(FormSearch);

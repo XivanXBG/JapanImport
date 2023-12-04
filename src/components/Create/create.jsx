@@ -9,7 +9,7 @@ const SearchFormKeys = {
   Price: "price",
   Year: "year",
   TransmissionType: "transmission",
-  Killomenters: "killometers",
+  Killometers: "killometers",
   Category: "category",
   EngineType: "engine",
   Photos: "photos",
@@ -27,7 +27,7 @@ export default function Create() {
     [SearchFormKeys.Price]: "",
     [SearchFormKeys.Year]: "",
     [SearchFormKeys.TransmissionType]: "",
-    [SearchFormKeys.Killomenters]: "",
+    [SearchFormKeys.Killometers]: "",
     [SearchFormKeys.Category]: "",
     [SearchFormKeys.EngineType]: "",
     [SearchFormKeys.Photos]: [],
@@ -188,10 +188,10 @@ export default function Create() {
           <div className={styles.numberInput}>
             <label className={styles.label}>Kilometers:</label>
             <input
-              name={SearchFormKeys.Killomenters}
+              name={SearchFormKeys.Killometers}
               type="number"
               onChange={onChange}
-              value={values[SearchFormKeys.Killomenters]}
+              value={values[SearchFormKeys.Killometers]}
               step="10000"
               placeholder="0"
             />

@@ -1,32 +1,33 @@
 import useForm from "../../hooks/useForm";
-
-
 import { useEffect, useState } from 'react'
-
-
-
+import { useNavigate } from "react-router-dom";
 import { loadCars } from '../../services/carsService';
+import { connect } from "react-redux";
+import { updateSearchCriteria } from "../../reducer/actions";
+
+
 
 const SearchFormKeys = {
-    Make: 'make',
-    Model: 'model',
-    MinPrice: 'minPrice',
-    MaxPrice: 'maxPrice',
-    MinYear: 'minYear',
-    MaxYear: 'maxYear',
-    TransmissionType: 'transmission',
-    Killomenters: 'killometers',
-    Category: 'category',
-    EngineType: 'engine',
+    Make: "make",
+    Model: "model",
+    MinPrice: "minPrice",
+    MaxPrice: "maxPrice",
+    MinYear: "minYear",
+    MaxYear: "maxYear",
+    TransmissionType: "transmissionType",
+    Killometers: "killometers",
+    Category: "category",
+    EngineType: "engineType",
     Color: "color",
     Loc: "loc",
 }
 
-export default function AdvancedSearch() {
+const AdvancedSearch = ({ dispatch }) => {
+    const navigate = useNavigate();
     const submitHandler = () => {
-        console.log(values);
-
-    }
+      dispatch(updateSearchCriteria(values));
+      navigate("/cars");
+    };
     const { values, onChange, onSubmit } = useForm(submitHandler, {
         [SearchFormKeys.Make]: "",
         [SearchFormKeys.Model]: "",
@@ -35,7 +36,7 @@ export default function AdvancedSearch() {
         [SearchFormKeys.MaxYear]: "",
         [SearchFormKeys.MinYear]: "",
         [SearchFormKeys.TransmissionType]: '',
-        [SearchFormKeys.Killomenters]: "",
+        [SearchFormKeys.Killometers]: "",
         [SearchFormKeys.Category]: '',
         [SearchFormKeys.EngineType]: '',
         [SearchFormKeys.Color]: '',
@@ -209,9 +210,9 @@ export default function AdvancedSearch() {
                         Max Kilometers:
                     </label>
                     <select
-                        name={SearchFormKeys.Killomenters}
+                        name={SearchFormKeys.Killometers}
                         onChange={onChange}
-                        value={values[SearchFormKeys.Killomenters]}
+                        value={values[SearchFormKeys.Killometers]}
                         className="select"
                     >
                         <option value="">Select max km</option>
@@ -281,3 +282,8 @@ export default function AdvancedSearch() {
     )
 
 }
+const mapStateToProps = (state) => ({
+    searchCriteria: state,
+  });
+  
+  export default connect(mapStateToProps)(AdvancedSearch);

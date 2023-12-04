@@ -2,8 +2,13 @@ import { loadCars } from "../../../services/carsService";
 import useForm from "../../../hooks/useForm";
 import { useEffect, useState } from "react";
 import styles from "./aside.module.css";
+import { connect } from "react-redux";
+import {
+  updateSearchCriteria,
+  resetSearchCriteria,
+} from "../../../reducer/actions";
 
-export default function Aside() {
+const Aside = ({ dispatch, searchCriteria }) => {
   const SearchFormKeys = {
     Make: "make",
     Model: "model",
@@ -11,46 +16,66 @@ export default function Aside() {
     MaxPrice: "maxPrice",
     MinYear: "minYear",
     MaxYear: "maxYear",
-    TransmissionType: "transmission",
-    Killomenters: "killometers",
+    TransmissionType: "transmissionType",
+    Killometers: "killometers",
     Category: "category",
-    EngineType: "engine",
+    EngineType: "engineType",
     Color: "color",
     Loc: "loc",
   };
-
-  const search = (values) => {
-    console.log(values);
+  const initialValues = {
+    [SearchFormKeys.Make]: "",
+    [SearchFormKeys.Model]: "",
+    [SearchFormKeys.MinPrice]: "",
+    [SearchFormKeys.MaxPrice]: "",
+    [SearchFormKeys.MinYear]: "",
+    [SearchFormKeys.MaxYear]: "",
+    [SearchFormKeys.TransmissionType]: "",
+    [SearchFormKeys.Killometers]: "",
+    [SearchFormKeys.Category]: "",
+    [SearchFormKeys.EngineType]: "",
+    [SearchFormKeys.Color]: "",
+    [SearchFormKeys.Loc]: "",
   };
+
   const getModelsForCarId = (carId) => {
     const car = cars.find((car) => car.id === carId);
     return car ? car.models : null;
+  };
+  const sumbitHandler = () => {
+    dispatch(updateSearchCriteria(values));
   };
   const [cars, setCars] = useState([]);
   useEffect(() => {
     loadCars().then((x) => setCars(x));
   }, []);
 
-  let { values, onChange, onSubmit } = useForm(search, {
-    [SearchFormKeys.Make]: "",
-    [SearchFormKeys.Model]: "",
-    [SearchFormKeys.MinPrice]: "",
-    [SearchFormKeys.MaxPrice]: "",
-    [SearchFormKeys.MaxYear]: "",
-    [SearchFormKeys.MinYear]: "",
-    [SearchFormKeys.TransmissionType]: "",
-    [SearchFormKeys.Killomenters]: "",
-    [SearchFormKeys.Category]: "",
-    [SearchFormKeys.EngineType]: "",
-    [SearchFormKeys.Color]: "",
-    [SearchFormKeys.Loc]: "",
+  let { values, resetForm, onChange, onSubmit } = useForm(sumbitHandler, {
+    [SearchFormKeys.Make]: searchCriteria.make,
+    [SearchFormKeys.Model]: searchCriteria.model,
+    [SearchFormKeys.MinPrice]: searchCriteria.minPrice,
+    [SearchFormKeys.MaxPrice]: searchCriteria.maxPrice,
+    [SearchFormKeys.MaxYear]: searchCriteria.maxYear,
+    [SearchFormKeys.MinYear]: searchCriteria.minYear,
+    [SearchFormKeys.TransmissionType]: searchCriteria.transmissionType,
+    [SearchFormKeys.Killometers]: searchCriteria.killometers,
+    [SearchFormKeys.Category]: searchCriteria.category,
+    [SearchFormKeys.EngineType]: searchCriteria.engineType,
+    [SearchFormKeys.Color]: searchCriteria.color,
+    [SearchFormKeys.Loc]: searchCriteria.loc,
   });
+  const resetHandler = () => {
+    resetSearchCriteria(initialValues);
+    resetForm(initialValues);
+  };
   return (
     <form onSubmit={onSubmit} className={styles.asideForm}>
       <div className={styles.search}>
         <div className={styles.resetFormWrapper}>
           <label className={styles.label}>Make:</label>
-          <button className={styles.reset}>Reset</button>
+          <button onClick={resetHandler} className={styles.reset}>
+            Reset
+          </button>
         </div>
 
         <select
@@ -79,7 +104,7 @@ export default function Aside() {
           ) : (
             <>
               <option value="">Select a model</option>
-              {getModelsForCarId(values[SearchFormKeys.Make]).map((model) => (
+              {getModelsForCarId(values[SearchFormKeys.Make])?.map((model) => (
                 <option key={model} value={model}>
                   {model}
                 </option>
@@ -193,9 +218,9 @@ export default function Aside() {
       <div className={styles.search}>
         <label className={styles.label}>Max Kilometers:</label>
         <select
-          name={SearchFormKeys.Killomenters}
+          name={SearchFormKeys.Killometers}
           onChange={onChange}
-          value={values[SearchFormKeys.Killomenters]}
+          value={values[SearchFormKeys.Killometers]}
           className={styles.select}
         >
           <option value="">Select max km</option>
@@ -224,4 +249,10 @@ export default function Aside() {
       <button className={styles.filter}>Apply Filters</button>
     </form>
   );
-}
+};
+
+const mapStateToProps = (state) => ({
+  searchCriteria: state,
+});
+
+export default connect(mapStateToProps)(Aside);

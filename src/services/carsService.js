@@ -1,5 +1,12 @@
 import { db, auth, storage } from "../utils/firebase.ts";
-import { collection, getDocs, addDoc, getDoc, doc,updateDoc } from "firebase/firestore";
+import {
+  collection,
+  getDocs,
+  addDoc,
+  getDoc,
+  doc,
+  updateDoc,
+} from "firebase/firestore";
 import {
   ref as storageRef,
   uploadBytes,
@@ -16,12 +23,20 @@ export const loadCars = async () => {
 };
 
 export const createOffer = async (offerData) => {
-  const { photos, ...otherOfferData } = offerData;
+  const { photos, price, year, killometers, ...otherOfferData } = offerData;
+
+  // Convert to numbers
+  offerData.price = Number(price);
+  offerData.year = Number(year);
+  offerData.killometers = Number(killometers);
 
   const offersCollection = collection(db, "offers");
   const newOfferDoc = await addDoc(offersCollection, {
     ...otherOfferData,
     ownerId: auth.currentUser?.uid,
+    price: Number(offerData.price),
+    year: Number(offerData.year),
+    killometers: Number(offerData.killometers),
     photos: [], // Initialize photos as an empty array
   });
 
@@ -45,6 +60,7 @@ export const createOffer = async (offerData) => {
   return newOfferId;
 };
 
+
 export const loadAllOffersWithPhotos = async () => {
   try {
     const offersCollection = collection(db, "offers");
@@ -53,7 +69,7 @@ export const loadAllOffersWithPhotos = async () => {
     const allOffersWithPhotos = offersSnapshot.docs.map((doc) => {
       const offerData = doc.data();
       const offerId = doc.id;
-      console.log(offerData);
+
       return { ...offerData, id: offerId };
     });
 
@@ -79,4 +95,3 @@ export const loadOfferWithPhoto = async (id) => {
     return null;
   }
 };
-
