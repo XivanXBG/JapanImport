@@ -11,13 +11,14 @@ import Create from "./components/Create/Create";
 import { useEffect, useState } from "react";
 import Cars from "./components/Cars/cars";
 import Details from "./components/Details/details";
+import Profile from "./components/Profile/profile";
 
 
 function App() {
   const [offers, setOffers] = useState();
   useEffect(() => {
     loadAllOffersWithPhotos().then((x) => setOffers(x));
-    console.log(offers);
+  
   }, []);
   return (
     
@@ -28,6 +29,7 @@ function App() {
         <Route path="/" element={<Home />}></Route>
         <Route path="/register" element={<RegisterPage />}></Route>
         <Route path="/login" element={<LoginPage />}></Route>
+        <Route path="/profile" element={<Profile />}></Route>
         <Route path="/logout" element={<Logout />}></Route>
         <Route path="/create" element={<Create />}></Route>
         <Route path="/cars" element={<Cars />}></Route>

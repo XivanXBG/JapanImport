@@ -12,7 +12,7 @@ export const AuthProvider = ({ children }) => {
 
   useEffect(() => {
     const unsubscribe = auth.onAuthStateChanged((user) => {
-      // Update isAuthenticated based on the user's authentication status
+     
       if (user) {
         setIsAuthenticated(true);
       } else {

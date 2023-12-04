@@ -25,7 +25,7 @@ const RegisterPage = () => {
       <div className={styles.wrapper}>
         <div className={styles.japanImportTheme}>
           <form onSubmit={onSubmit}>
-            <label htmlFor="username">Username:</label>
+            <label className={styles.label} htmlFor="username">Username:</label>
             <input
               className={styles.inputs}
               type="username"
@@ -36,7 +36,7 @@ const RegisterPage = () => {
               required
             />
 
-            <label htmlFor="email">Email:</label>
+            <label className={styles.label}  htmlFor="email">Email:</label>
             <input
               className={styles.inputs}
               type="email"
@@ -47,7 +47,7 @@ const RegisterPage = () => {
               required
             />
 
-            <label htmlFor="password">Password:</label>
+            <label className={styles.label}  htmlFor="password">Password:</label>
             <input
               className={styles.inputs}
               type="password"
@@ -57,7 +57,7 @@ const RegisterPage = () => {
               onChange={onChange}
               required
             />
-            <label htmlFor="rePassword">Repeat Password:</label>
+            <label className={styles.label}  htmlFor="rePassword">Repeat Password:</label>
             <input
               className={styles.inputs}
               type="rePassword"
@@ -71,7 +71,7 @@ const RegisterPage = () => {
               <button className={styles.submitBtn} type="submit">
                 Register
               </button>
-              <p>
+              <p className={styles.redirect}>
                 You already have an account:
                 <Link className={styles.loginText} to="/login">
                   Login

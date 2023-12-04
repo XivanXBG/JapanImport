@@ -3,7 +3,7 @@ import styles from "./header.module.css";
 import useForm from "../../hooks/useForm";
 import { useContext } from "react";
 import AuthContext from "../../contexts/authContext";
-import { auth } from "../../utils/firebase";
+
 
 export default function Header() {
   const currencyOptions = [

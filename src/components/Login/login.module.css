@@ -24,10 +24,12 @@
     border-radius: 15px;
 }
 
-
+.redirect{
+    font-size: 12px;
+}
 /* Labels */
 
-label {
+.label {
     display: block;
     font-weight: bold;
     margin-top: 10px;

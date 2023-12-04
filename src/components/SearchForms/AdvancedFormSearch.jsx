@@ -48,7 +48,7 @@ export default function AdvancedSearch() {
 
     useEffect(() => {
         loadCars().then(cars => setCars(cars));
-        console.log(cars);
+        
     }, [])
 
     const getModelsForCarId = (carId) => {

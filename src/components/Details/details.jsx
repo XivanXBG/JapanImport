@@ -12,7 +12,7 @@ export default function Details() {
 
   useEffect(() => {
     loadOfferWithPhoto(offerId).then((x) => {setOffer(x);setIsLoaded(true)});
-    console.log(offer);
+    
   }, []);
 
   const handlePhotoClick = () => {
@@ -24,8 +24,7 @@ export default function Details() {
   };
   
   const handleThumbnailClick = (index) => {
-    console.log('clivked');
-    console.log(index);
+    
     setCurrentPhotoIndex(index);
   };
   return (

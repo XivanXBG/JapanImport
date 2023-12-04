@@ -21,17 +21,20 @@
     padding: 20px;
     border: 1px solid black;
     width: 600px;
-    height: 400px;
+    height:auto;
     padding: 16px;
     margin: 0 auto;
     border: 1px solid black;
     border-radius: 15px;
 }
-
+.redirect{
+    font-size: 12px;
+    margin: 0px;
+}
 
 /* Labels */
 
-label {
+.label {
     display: block;
     font-weight: bold;
     margin-top: 10px;
@@ -94,6 +97,7 @@ label {
     align-items: center;
     gap: 10px;
     justify-content: center;
+    
 }
 
 .loginItems img {

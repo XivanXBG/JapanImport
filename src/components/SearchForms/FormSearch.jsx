@@ -30,7 +30,7 @@ export default function FormSearch() {
 
   useEffect(() => {
     loadCars().then((cars) => setCars(cars));
-    console.log(cars);
+   
   }, []);
 
   const getModelsForCarId = (carId) => {

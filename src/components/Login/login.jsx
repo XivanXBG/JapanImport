@@ -21,7 +21,7 @@ const LoginPage = () => {
       <div className={styles.wrapper}>
         <div className={styles.japanImportTheme}>
           <form onSubmit={onSubmit}>
-            <label htmlFor="usernameOrEmail">Username:</label>
+            <label className={styles.label} htmlFor="usernameOrEmail">Username:</label>
             <input
               className={styles.inputs}
               type="usernameOrEmail"
@@ -32,7 +32,7 @@ const LoginPage = () => {
               required
             />
 
-            <label htmlFor="password">Password:</label>
+            <label className={styles.label} htmlFor="password">Password:</label>
             <input
               className={styles.inputs}
               type="password"
@@ -47,7 +47,7 @@ const LoginPage = () => {
               <button className={styles.submitBtn} type="submit">
                 Login
               </button>
-              <p>
+              <p className={styles.redirect}> 
                 You don't have an account:
                 <Link className={styles.loginText} to="/register">
                   Register
