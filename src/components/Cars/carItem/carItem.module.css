@@ -43,8 +43,16 @@
     margin-bottom: 5px;
     color: black;
 }
+.desc{
+    text-align: left;
+    font-size: 16px;
+}
 .fAwesome{
     margin: 0px;
+    text-align: left;
+}
+.fAwesome span{
+    text-align: left;
 }
 .price{
     color: #f1611e;

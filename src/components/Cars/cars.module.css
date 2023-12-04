@@ -26,6 +26,7 @@ html {
   align-items: center;
   justify-content: end;
   gap: 10px;
+  margin-bottom: 5px;
   background-color: #dcdcdc;
 }
 .sort label {
@@ -38,21 +39,6 @@ html {
   height: 30px;
 
 }
-/* text-size-adjust: 100%;
-font-feature-settings: "palt";
---swiper-theme-color: #007aff;
---swiper-navigation-size: 44px;
-color: #383838;
-line-height: 18px;
-letter-spacing: 0;
-word-break: break-word;
-font-family: 'PT Sans',sans-serif;
-box-sizing: border-box;
--webkit-font-smoothing: antialiased;
-margin: 0;
-padding: 0;
-border: 0;
-outline: 0;
-font-size: 100%;
-vertical-align: baseline;
-background: #F4F4F4; */
+.sort p{
+  margin: 0px;
+}

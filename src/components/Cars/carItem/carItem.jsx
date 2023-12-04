@@ -1,11 +1,12 @@
 import styles from "./carItem.module.css";
 import {useNavigate} from 'react-router-dom'
 export default function CarItem({ car }) {
+ 
  const navigate = useNavigate()
   return (
     <div onClick={()=>navigate(`${car.id}`)} className={styles.card}>
       <div className={styles.image}>
-        <img className={styles.img} src={car.photos[0]} alt="car" />
+        <img className={styles.img} src={car?.photos[0]} alt="car" />
       </div>
       <div className={styles.moreInfo}>
         <div className={styles.wishlistHeader}>
@@ -23,14 +24,14 @@ export default function CarItem({ car }) {
 
         <div className={styles.condensedInfo}>
           <div>
-            <p>{car.year}</p>
+            <p className={styles.desc}>{car.year}</p>
 
-            <p>{car.color}</p>
+            <p className={styles.desc}>{car.color}</p>
           </div>
           <hr />
           <div>
-            <p>{car.engine}</p>
-            <p>{car.killometers} km</p>
+            <p className={styles.desc}>{car.engine}</p>
+            <p className={styles.desc}>{car.killometers} km</p>
           </div>
         </div>
       </div>

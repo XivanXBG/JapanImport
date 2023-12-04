@@ -82,6 +82,9 @@
   display: flex;
   align-items: center;
 }
+.description p {
+ font-size: 18px;
+}
 .details {
   display: flex;
   justify-content: space-between;
@@ -105,11 +108,13 @@
 
 .details p {
   margin: 0;
+  font-size: medium;
 }
 
-.label {
+.details label {
   color: black;
   margin: 5px;
+  font-weight: bold;
 }
 .navigationArrows {
   display: flex;

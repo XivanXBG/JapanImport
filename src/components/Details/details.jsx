@@ -105,7 +105,7 @@ export default function Details() {
               <p>{offer.killometers}</p>
             </div>
             <div>
-              <label htmlFor="">Color:</label>
+              <label  htmlFor="">Color:</label>
               <p> {offer.color}</p>
             </div>
             <div>

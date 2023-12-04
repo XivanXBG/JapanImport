@@ -1,6 +1,7 @@
 import "./formSearch.css";
 import useForm from "../../hooks/useForm";
 import { useEffect, useState } from "react";
+import {searchCarOffers} from '../../services/searchService'
 
 import { loadCars } from "../../services/carsService";
 
@@ -15,7 +16,7 @@ const SearchFormKeys = {
 
 export default function FormSearch() {
   const submitHandler = () => {
-    console.log(values);
+    searchCarOffers(values).then(x=>console.log(x));
   };
   const { values, onChange, onSubmit } = useForm(submitHandler, {
     [SearchFormKeys.Make]: "",
