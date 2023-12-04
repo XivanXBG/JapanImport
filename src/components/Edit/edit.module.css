@@ -20,12 +20,6 @@
   align-items: center;
   min-height: calc(100vh - 100px);
 }
-
-.row {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 15px;
-}
 .mobileInput{
   display: flex;
   flex-direction: column;
@@ -44,6 +38,11 @@
   margin-top: 5px;
   color: white;
   text-align: center;
+}
+.row {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 15px;
 }
 
 .input-container {

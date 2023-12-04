@@ -40,6 +40,7 @@ export default function useForm(submitHandler, initalValues) {
     values,
     onChange,
     onSubmit,
-    resetForm
+    resetForm,
+    setValues
   };
 }

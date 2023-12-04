@@ -2,6 +2,7 @@ import useForm from "../../hooks/useForm";
 import { useEffect, useState } from "react";
 import { loadCars, createOffer } from "../../services/carsService";
 import styles from "./create.module.css";
+import { useNavigate } from "react-router-dom";
 
 const SearchFormKeys = {
   Make: "make",
@@ -21,7 +22,12 @@ const SearchFormKeys = {
 
 
 export default function Create() {
-  const { values, onChange, onSubmit } = useForm(createOffer, {
+  const navigate = useNavigate();
+const create = () =>{
+  createOffer();
+  navigate('/')
+}
+  const { values, onChange, onSubmit } = useForm(create, {
     [SearchFormKeys.Make]: "",
     [SearchFormKeys.Model]: "",
     [SearchFormKeys.Price]: "",
@@ -38,7 +44,7 @@ export default function Create() {
   });
 
   const [cars, setCars] = useState([]);
-
+  
   useEffect(() => {
     loadCars().then((cars) => setCars(cars));
   }, []);
@@ -226,7 +232,7 @@ export default function Create() {
 
         <div className={styles.personalInfo}>
           <h3>Personal Info:</h3>
-          <div className={styles.numberInput}>
+          <div className={styles.mobileInput}>
             <label className={styles.label}>Mobile:</label>
             <input
               type="mobile"
@@ -240,24 +246,22 @@ export default function Create() {
           <div className={styles.numberInput}>
             <label className={styles.label}>Location:</label>
             <select
-                name={SearchFormKeys.Loc}
-                onChange={onChange}
-                value={values[SearchFormKeys.Loc]}
-                className={styles.select}
-              >
-                <option value="">Select location</option>
-                <option value="hiroshima">Hiroshima</option>
-                <option value="tokyo">Tokyo</option>
-                
-              </select>
+              name={SearchFormKeys.Loc}
+              onChange={onChange}
+              value={values[SearchFormKeys.Loc]}
+              className={styles.select}
+            >
+              <option value="">Select location</option>
+              <option value="hiroshima">Hiroshima</option>
+              <option value="tokyo">Tokyo</option>
+            </select>
           </div>
         </div>
         <div className={styles.btnWrapper}>
-        <button type="submit" className={styles.button}>
-          Submit
-        </button>
+          <button type="submit" className={styles.button}>
+            Submit
+          </button>
         </div>
-        
       </form>
     </div>
   );

@@ -13,15 +13,21 @@
 .thumbnailGallery {
   display: flex;
   justify-content: center;
- align-items: center;
+  align-items: center;
   overflow-x: auto;
- 
- /* Light background color */
- background-color: grey;
-  border-top: 1px solid #ddd; /* Top border */
-  border-bottom: 1px solid #ddd; 
-}
 
+  /* Light background color */
+  background-color: grey;
+  border-top: 1px solid #ddd; /* Top border */
+  border-bottom: 1px solid #ddd;
+}
+p i{
+  font-size: 12px !important;
+  margin:0px
+}
+p span{
+  margin-left: 2px;
+}
 .thumbnail {
   width: 60px;
   height: 40px;
@@ -31,7 +37,23 @@
   border: 2px solid #fff;
   border-radius: 5px;
 }
-
+.ownerButtons {
+  display: flex;
+  justify-content: end;
+  gap: 30px;
+}
+.ownerButtons button {
+  height: 30px;
+  width: 100px;
+  background-color: rgba(0, 0, 0, 0.8);
+  border-radius: 10px;
+  color: white;
+  text-align: center;
+}
+.ownerButtons button:hover {
+  cursor: pointer;
+  transform: scale(1.1);
+}
 .photo {
   max-width: 100%;
   max-height: 100%;
@@ -81,9 +103,10 @@
   height: 100%;
   display: flex;
   align-items: center;
+  overflow-y: scroll;
 }
 .description p {
- font-size: 18px;
+  font-size: 18px;
 }
 .details {
   display: flex;
@@ -198,7 +221,7 @@ html {
     width: 100%;
     height: 100%;
     object-fit: fill;
-    
+
     display: block;
     margin: 0 auto;
     cursor: pointer;
@@ -211,5 +234,4 @@ html {
     display: grid;
     grid-template-rows: 15% 75% 10%;
   }
- 
 }

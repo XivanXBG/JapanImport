@@ -9,12 +9,14 @@ const AuthContext = createContext();
 export const AuthProvider = ({ children }) => {
   const navigate = useNavigate();
   const [isAuthenticated, setIsAuthenticated] = useState(null);
+  const [user,setUser] = useState(null)
 
   useEffect(() => {
     const unsubscribe = auth.onAuthStateChanged((user) => {
      
       if (user) {
         setIsAuthenticated(true);
+        setUser(user)
       } else {
         setIsAuthenticated(false);
       }
@@ -63,6 +65,8 @@ export const AuthProvider = ({ children }) => {
     ownerId: auth.currentUser?.uid,
     registerHandler,
     logoutHandler,
+    user
+    
   };
 
   return <AuthContext.Provider value={contextValues}>{children}</AuthContext.Provider>;

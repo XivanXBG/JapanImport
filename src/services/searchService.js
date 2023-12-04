@@ -7,7 +7,7 @@ export const searchCarOffers = async (searchCriteria) => {
   // Start with a base query
   let baseQuery = query(offersCollection);
 
-
+console.log(searchCriteria);
   // Apply filters based on search criteria
   if (searchCriteria?.make) {
     baseQuery = query(baseQuery, where("make", "==", searchCriteria.make));
@@ -51,10 +51,12 @@ export const searchCarOffers = async (searchCriteria) => {
   }
 
   if (searchCriteria?.ownerId) {
+    console.log(searchCriteria?.ownerId);
     baseQuery = query(
       baseQuery,
       where("ownerId", "==", searchCriteria.ownerId)
     );
+  
   }
 
   try {

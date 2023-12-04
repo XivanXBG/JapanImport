@@ -11,6 +11,7 @@ const initialState = {
     engineType: '',
     color: "",
     loc: "",
+    ownerId:""
   };
   
   const searchCriteriaReducer = (state = initialState, action) => {

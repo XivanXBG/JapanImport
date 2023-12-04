@@ -6,12 +6,15 @@ import {
   getDoc,
   doc,
   updateDoc,
+  query, where,
+  deleteDoc 
 } from "firebase/firestore";
 import {
   ref as storageRef,
   uploadBytes,
   getDownloadURL,
 } from "firebase/storage";
+
 
 export const loadCars = async () => {
   const carsCollection = collection(db, "cars");
@@ -57,26 +60,75 @@ export const createOffer = async (offerData) => {
   await updateDoc(offerDocRef, { photos: uploadedPhotos });
 
   console.log("Offer added with id:", newOfferId);
+  
   return newOfferId;
+};
+export const updateOffer = async (offerId, updatedOfferData) => {
+  const offerDocRef = doc(db, "offers", offerId);
+
+  try {
+    const { photos: newPhotos, price, year, killometers, ...otherOfferData } = updatedOfferData;
+
+    // Convert to numbers
+    updatedOfferData.price = Number(price);
+    updatedOfferData.year = Number(year);
+    updatedOfferData.killometers = Number(killometers);
+
+    // Update other fields of the offer
+    await updateDoc(offerDocRef, {
+      ...otherOfferData,
+      price: Number(updatedOfferData.price),
+      year: Number(updatedOfferData.year),
+      killometers: Number(updatedOfferData.killometers),
+    });
+
+    // If there are new photos, append them to the existing ones
+    if (newPhotos && newPhotos.length > 0) {
+      const storagePhotosRef = storageRef(storage, `offers/${offerId}/photos`);
+
+      // Fetch the existing photos
+      const existingPhotos = (await getDoc(offerDocRef)).data().photos || [];
+
+      // Combine existing photos with new photos
+      const allPhotos = [...existingPhotos, ...newPhotos];
+
+      // Upload all photos
+      const uploadedPhotos = await Promise.all(
+        allPhotos.map(async (photo, index) => {
+          if (typeof photo === 'string') {
+            // This is an existing photo URL, no need to re-upload
+            return photo;
+          }
+
+          // This is a new photo, upload it
+          const photoRef = storageRef(storagePhotosRef, `${index + 1}.jpg`);
+          await uploadBytes(photoRef, photo);
+          const photoURL = await getDownloadURL(photoRef);
+          return photoURL;
+        })
+      );
+
+      // Update the offer document with the new photo URLs
+      await updateDoc(offerDocRef, { photos: uploadedPhotos });
+    }
+
+    console.log("Offer updated successfully!");
+  } catch (error) {
+    console.error("Error updating offer:", error.message);
+    throw error;
+  }
 };
 
 
-export const loadAllOffersWithPhotos = async () => {
+export const deleteOfferById = async (id) => {
   try {
-    const offersCollection = collection(db, "offers");
-    const offersSnapshot = await getDocs(offersCollection);
+    const offerDocRef = doc(db, "offers", id);
+    await deleteDoc(offerDocRef);
 
-    const allOffersWithPhotos = offersSnapshot.docs.map((doc) => {
-      const offerData = doc.data();
-      const offerId = doc.id;
-
-      return { ...offerData, id: offerId };
-    });
-
-    return allOffersWithPhotos;
+    console.log(`Offer with ID ${id} deleted successfully.`);
   } catch (error) {
-    console.error("Error loading offers:", error.message);
-    return [];
+    console.error("Error deleting offer:", error.message);
+    throw error;
   }
 };
 
@@ -92,6 +144,26 @@ export const loadOfferWithPhoto = async (id) => {
     }
   } catch (error) {
     console.error("Error loading offer:", error.message);
+    return null;
+  }
+};
+export const loadOffersByOwnerId = async (ownerId) => {
+  try {
+    
+    const offersQuery = query(collection(db, "offers"), where("ownerId", "==", ownerId));
+    
+    // Execute the query and get the documents
+    const querySnapshot = await getDocs(offersQuery);
+
+    // Extract the data from the querySnapshot
+    const offers = querySnapshot.docs.map((doc) => ({
+      id: doc.id,
+      ...doc.data(),
+    }));
+console.log(offers);
+    return offers;
+  } catch (error) {
+    console.error("Error loading offers by ownerId:", error.message);
     return null;
   }
 };

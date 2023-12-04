@@ -4,7 +4,7 @@ export default function CarItem({ car }) {
  
  const navigate = useNavigate()
   return (
-    <div onClick={()=>navigate(`${car.id}`)} className={styles.card}>
+    <div onClick={()=>navigate(`/cars/${car.id}`)} className={styles.card}>
       <div className={styles.image}>
         <img className={styles.img} src={car?.photos[0]} alt="car" />
       </div>

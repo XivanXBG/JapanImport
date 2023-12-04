@@ -9,7 +9,7 @@ import { Link } from "react-router-dom";
 
 const Profile = () => {
   const [userData, setUserData] = useState({});
-  const [newProfilePicture, setNewProfilePicture] = useState(null);
+
 
   useEffect(() => {
     const fetchUserInfo = async () => {
