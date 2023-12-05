@@ -80,7 +80,7 @@ export const AuthProvider = ({ children }) => {
     
     try {
       register(values.email, values.password, values.username);
-      navigate("/");
+      navigate("/verify-email");
     } catch (error) {
       console.error(error);
     }

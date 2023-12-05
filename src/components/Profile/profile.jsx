@@ -43,7 +43,7 @@ const Profile = () => {
         <div className={styles.profilePicture}>
           <label htmlFor="profilePictureInput">
             <img
-              src={userData?.photoURL || "https://images.rawpixel.com/image_png_social_square/cHJpdmF0ZS9sci9pbWFnZXMvd2Vic2l0ZS8yMDIzLTAxL3JtNjA5LXNvbGlkaWNvbi13LTAwMi1wLnBuZw.png"}
+              src={userData?.photoURL || "https://cdn-icons-png.flaticon.com/512/3135/3135715.png"}
               alt="Profile"
               style={{ cursor: "pointer" }}
             />

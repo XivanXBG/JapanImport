@@ -14,13 +14,17 @@ import Details from "./components/Details/details";
 import Profile from "./components/Profile/profile";
 import MyOffers from "./components/MyOffers/myOffers";
 import Edit from "./components/Edit/edit";
+import Reviews from "./components/Reviews/reviews";
+
+import NotFound from "./components/NotFound/notFound";
+import VerifyEmail from "./components/VerifyEmail/verifyEmail";
+import ForgotPassword from "./components/ForgotPassword/forgotPassword";
 
 function App() {
   return (
     <Provider store={store}>
       <AuthProvider>
         <Header />
-
         <Routes>
           <Route path="/" element={<Home />}></Route>
           <Route path="/cars" element={<Cars />}></Route>
@@ -30,8 +34,16 @@ function App() {
           <Route path="/profile" element={<Profile />}></Route>
           <Route path="/logout" element={<Logout />}></Route>
           <Route path="/create" element={<Create />}></Route>
+          <Route path="/reviews" element={<Reviews />}></Route>
           <Route path="/cars/:offerId" element={<Details />}></Route>
-          <Route path="/profile/:userId/my-offers" element={<MyOffers />}></Route>
+          <Route path="/verify-email" element={<VerifyEmail />}></Route>
+          <Route path="/reset-password" element={<ForgotPassword />}></Route>
+          <Route
+            path="/profile/:userId/my-offers"
+            element={<MyOffers />}
+          ></Route>
+
+          <Route path="*" element={<NotFound />}></Route>
         </Routes>
       </AuthProvider>
     </Provider>

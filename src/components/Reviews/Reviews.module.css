@@ -1,0 +1,163 @@
+.wrapper {
+  background-color: #f4f4f4;
+  height: calc(100vh - 200px);
+  display: flex;
+  flex-direction: column;
+  
+  padding: 50px;
+}
+.reviews{
+  margin-top: 100px;
+}
+.heading {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+h1 {
+  text-align: center;
+  font-family: Cambria, Cochin, Georgia, Times, "Times New Roman", serif;
+  font-size: x-large;
+  letter-spacing: 0.1cm;
+  padding-bottom: 5px;
+  border-bottom: 1px solid grey;
+}
+.ownerButtons{
+  display: flex;
+  gap: 20px;
+  justify-content: flex-end;
+  height: auto;
+  
+}
+.ownerButtons button:hover{
+  cursor: pointer;
+  transform: scale(1.1);
+  
+}
+
+
+.stars {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 10px;
+  width: 100%;
+}
+.stars p {
+  text-align: center;
+  font-size: 20px;
+  margin: 0px;
+}
+.start div{
+  text-align: center;
+}
+.review {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+}
+.content {
+  background-color: white;
+  width: 300px;
+  height: 200px;
+  border-radius: 10px;
+  border: 1px solid lightgray;
+  display: flex;
+  flex-direction: column;
+}
+.content:last-child{
+  justify-content: end;
+}
+.profile {
+  display: flex;
+  flex-direction: row;
+  gap: 40px;
+}
+.profile img {
+  padding: 5px;
+  height: 80px;
+  width: 80px;
+  object-fit: cover;
+}
+.buttons {
+  margin-top: 40px;
+  display: flex;
+  justify-content: flex-end;
+}
+.buttons button {
+  padding: 5px;
+  border-radius: 5px;
+  background-color: rgb(100, 100, 239);
+  color: white;
+  width: 100px;
+}
+.modalOverlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5); /* Semi-transparent background */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.modal {
+  background-color: white;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  max-width: 400px;
+  width: 100%;
+}
+
+.modal h2 {
+  text-align: center;
+}
+
+.modal textarea {
+  width: 100%;
+  padding: 10px;
+  margin-top: 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+.modal button {
+  background-color: #4caf50;
+  color: white;
+  padding: 10px;
+  margin-top: 10px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.modal button:hover {
+  background-color: #45a049;
+}
+
+.modal button + button {
+  margin-left: 10px;
+  background-color: #f44336;
+}
+
+.modal button + button:hover {
+  background-color: #d32f2f;
+}
+.navButtons {
+  display: flex;
+  align-items: center;
+}
+.navButtons button {
+  height: 40px;
+  width: 40px;
+  border: none;
+  background-color: none;
+  font-size: 50px;
+}
+.navButtons button:hover {
+  cursor: pointer;
+  transform: scale(1.4);
+}

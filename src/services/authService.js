@@ -8,6 +8,7 @@ import {
   signInWithPopup,
   GithubAuthProvider,
   OAuthProvider,
+  sendEmailVerification,
 } from "firebase/auth";
 import { ref, uploadBytes, getDownloadURL } from "firebase/storage";
 import { doc, getDoc } from "firebase/firestore";
@@ -35,6 +36,14 @@ export const register = (email, password, username) => {
         })
         .catch((error) => {
           console.error("Error setting display name:", error.message);
+        });
+
+      sendEmailVerification(user)
+        .then(() => {
+          console.log("Verification email sent successfully.");
+        })
+        .catch((error) => {
+          console.error("Error sending verification email:", error.message);
         });
       console.log("Registred in", user);
     })
@@ -136,7 +145,7 @@ export const githubSignIn = async () => {
   }
 };
 export const yahooSignIn = async () => {
-  const provider = new OAuthProvider('yahoo.com');
+  const provider = new OAuthProvider("yahoo.com");
   try {
     const result = await signInWithPopup(auth, provider);
     const user = result.user;
