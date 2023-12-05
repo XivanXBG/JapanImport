@@ -3,24 +3,20 @@
   display: grid;
   grid-template-columns: 15% auto;
   gap: 20px;
+  height: 100%;
 }
 .cardContainer {
   display: grid;
   grid-template-columns: auto auto;
-  height: 200px;
+  height: auto;
   gap: 20px;
 }
 .wrapper {
   padding: 20px;
   background-color: #dcdcdc;
-  height: auto;
+  min-height: calc(100vh - 200px);
 }
-body,
-html {
-  background-color: #dcdcdc;
-  margin: 0px;
-  padding: 0px;
-}
+
 .sort {
   display: flex;
   align-items: center;

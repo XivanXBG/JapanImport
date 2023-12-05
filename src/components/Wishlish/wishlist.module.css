@@ -1,8 +1,9 @@
 .cardContainer {
     display: grid;
     grid-template-columns: 50% 50%;
-    height: 200px;
+    height: auto;
     gap: 20px;
+    min-height: calc(100vh - 326px);
     margin: 0px 100px 100px 100px;
   }
   .heading{

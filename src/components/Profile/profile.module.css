@@ -63,7 +63,7 @@ h2{
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  height: calc(100vh - 100px);
+  height: calc(100vh - 160px);;
   background: url("https://wallpaperaccess.com/full/1315789.jpg");
   background-size: cover  ;
   background-position: center;

@@ -27,17 +27,16 @@ export const AuthProvider = ({ children }) => {
     return () => unsubscribe();
   }, []);
 
-  const loginHandler =  (values) => {
-    
+  const loginHandler = (values, setError) => {
     try {
       login(values.usernameOrEmail, values.password);
+      // If login is successful, reset the error (if there was any)
+      
       navigate("/");
     } catch (error) {
-      
+      console.log('asdhello');
+      throw new Error(error)
     }
-    
-    
-    
   };
   const googleHandler = async () => {
     

@@ -10,9 +10,11 @@ const LoginPage = () => {
     UsernameOrEmail: "usernameOrEmail",
     Password: "password",
   };
-  const { loginHandler,googleHandler,githubHandler,yahooHandler } = useContext(AuthContext);
 
-  const { values, onChange, onSubmit } = useForm(loginHandler, {
+  const { loginHandler, googleHandler, githubHandler, yahooHandler } =
+    useContext(AuthContext);
+  
+  const { values, onChange,onSubmit } = useForm(loginHandler, {
     [SearchFormKeys.UsernameOrEmail]: "",
     [SearchFormKeys.Password]: "",
   });
@@ -22,7 +24,9 @@ const LoginPage = () => {
       <div className={styles.wrapper}>
         <div className={styles.japanImportTheme}>
           <form onSubmit={onSubmit}>
-            <label className={styles.label} htmlFor="usernameOrEmail">Username:</label>
+            <label className={styles.label} htmlFor="usernameOrEmail">
+              Username:
+            </label>
             <input
               className={styles.inputs}
               type="usernameOrEmail"
@@ -33,7 +37,9 @@ const LoginPage = () => {
               required
             />
 
-            <label className={styles.label} htmlFor="password">Password:</label>
+            <label className={styles.label} htmlFor="password">
+              Password:
+            </label>
             <input
               className={styles.inputs}
               type="password"
@@ -43,12 +49,17 @@ const LoginPage = () => {
               onChange={onChange}
               required
             />
-
+            <p className={styles.forgot}>
+              Forgot password?:{" "}
+              <Link className={styles.Link} to={"/reset-password"}>
+                Reset
+              </Link>
+            </p>
             <div className={styles.button}>
               <button className={styles.submitBtn} type="submit">
                 Login
               </button>
-              <p className={styles.redirect}> 
+              <p className={styles.redirect}>
                 You don't have an account:
                 <Link className={styles.loginText} to="/register">
                   Register

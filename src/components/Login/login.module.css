@@ -9,15 +9,34 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    min-height: calc(100vh - 100px)
+    min-height: calc(100vh - 160px);
 }
-
+.forgot{
+    color: white;
+    font-size: small;
+    text-align: left;
+    margin-top: 5px;
+}   
+.Link{
+    color: red;
+    font-size: small;
+    text-align: left;
+    margin-top: 5px;
+    text-decoration: none;
+}
+.Link:hover{
+    color: white;
+    font-size: small;
+    text-align: left;
+    margin-top: 5px;
+    text-decoration: underline;
+}
 .japanImportTheme {
     background-color: rgba(0, 0, 0, 0.8);
     padding: 20px;
     border: 1px solid black;
     width: 600px;
-    height: 270px;
+    height: auto;
     padding: 16px;
     margin: 0 auto;
     border: 1px solid black;

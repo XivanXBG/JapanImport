@@ -4,8 +4,10 @@ import styles from './home.module.css'; // Import the CSS module
 import FormSearch from '../SearchForms/FormSearch';
 import AdvancedSearch from '../SearchForms/AdvancedFormSearch';
 import Car from './car';
+import { connect } from 'react-redux';
+import { updateSearchCriteria } from '../../reducer/actions';
 
-const Home = () => {
+const Home = ({dispatch}) => {
     const [backgroundImage, setBackgroundImage] = useState('');
     const [isSearchVisible, setIsSearchVisible] = useState(true);
     const [isAdSerachVisible, setIsAdSerachVisible] = useState(false);
@@ -73,7 +75,7 @@ const Home = () => {
 
                 </div>
                 <div className={styles.cardsContainer}>
-                    <Car />
+                    <Car customDispatch={dispatch} />
                 </div >
             </div>
 
@@ -82,4 +84,4 @@ const Home = () => {
     );
 };
 
-export default Home;
+export default connect()(Home);

@@ -40,7 +40,7 @@ console.log(searchCriteria);
   if (searchCriteria?.engineType) {
     baseQuery = query(
       baseQuery,
-      where("engineType", "==", searchCriteria.engineType)
+      where("engine", "==", searchCriteria.engineType)
     );
   }
   if (searchCriteria?.color) {

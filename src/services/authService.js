@@ -13,41 +13,67 @@ import {
 import { ref, uploadBytes, getDownloadURL } from "firebase/storage";
 import { doc, getDoc } from "firebase/firestore";
 
-export const login = (email, password) => {
-  signInWithEmailAndPassword(auth, email, password)
-    .then((userCredential) => {
-      const user = userCredential.user;
-      console.log("Signed in", user);
-    })
-    .catch((err) => console.error("Error signing in:", err.message));
+export const login = async (email, password) => {
+  try {
+    const userCredential = await signInWithEmailAndPassword(
+      auth,
+      email,
+      password
+    );
+    const user = userCredential.user;
+    console.log("Signed in", user);
+  } catch (err) {
+    console.error("Error signing in:", err.code, err.message);
+
+    let errorMessage = "Login failed. Please check your credentials.";
+
+    // Customize error message based on Firebase error code
+    switch (err.code) {
+      case "auth/user-not-found":
+        errorMessage = "Login failed. User not found.";
+        break;
+      case "auth/wrong-password":
+        errorMessage = "Login failed. Incorrect password.";
+        break;
+      // ... Add more cases for other Firebase error codes as needed
+    }
+
+    throw new Error(errorMessage);
+  }
 };
 
-export const register = (email, password, username) => {
-  createUserWithEmailAndPassword(auth, email, password)
-    .then((userCredential) => {
-      const user = userCredential.user;
+export const register = async (email, password, username) => {
+  const auth = getAuth();
 
-      // Set display name
-      updateProfile(user, {
-        displayName: username,
-      })
-        .then(() => {
-          console.log("User registered with display name:", user.displayName);
-        })
-        .catch((error) => {
-          console.error("Error setting display name:", error.message);
-        });
+  try {
+    const userCredential = await createUserWithEmailAndPassword(auth, email, password);
+    const user = userCredential.user;
 
-      sendEmailVerification(user)
-        .then(() => {
-          console.log("Verification email sent successfully.");
-        })
-        .catch((error) => {
-          console.error("Error sending verification email:", error.message);
-        });
-      console.log("Registred in", user);
-    })
-    .catch((err) => console.error("Error signing in:", err.message));
+    // Set display name
+    await updateProfile(user, { displayName: username });
+
+    console.log("User registered with display name:", user.displayName);
+
+    // Send email verification
+    await sendEmailVerification(user);
+    console.log("Verification email sent successfully.");
+
+    console.log("Registered in", user);
+  } catch (err) {
+    console.error("Error registering:", err.code, err.message);
+
+    let errorMessage = "Registration failed. Please try again.";
+
+    // Customize error message based on Firebase error code
+    switch (err.code) {
+      case 'auth/email-already-in-use':
+        errorMessage = "Registration failed. Email is already in use.";
+        break;
+      // ... Add more cases for other Firebase error codes as needed
+    }
+
+    throw new Error(errorMessage);
+  }
 };
 
 export const logout = () => {
