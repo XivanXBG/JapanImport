@@ -103,7 +103,7 @@ const Aside = ({ dispatch, searchCriteria }) => {
             <option value="">Select a model</option>
           ) : (
             <>
-              <option value="">Select a model</option>
+              <option value={values[SearchFormKeys.Model]}>Select a model</option>
               {getModelsForCarId(values[SearchFormKeys.Make])?.map((model) => (
                 <option key={model} value={model}>
                   {model}

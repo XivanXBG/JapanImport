@@ -1,8 +1,9 @@
 import { createContext } from "react";
 import { useNavigate } from "react-router-dom";
-import { login, register, logout } from "../services/authService";
+import { login, register, logout, githubSignIn, yahooSignIn } from "../services/authService";
 import { useState, useEffect } from "react";
 import { auth } from "../utils/firebase";
+import { googleSignIn } from "../services/authService";
 
 const AuthContext = createContext();
 
@@ -30,32 +31,71 @@ export const AuthProvider = ({ children }) => {
     
     try {
       login(values.usernameOrEmail, values.password);
+      navigate("/");
     } catch (error) {
       
     }
     
-    navigate("/");
+    
     
   };
-
+  const googleHandler = async () => {
+    
+    try {
+      await googleSignIn();
+      navigate("/");
+    } catch (error) {
+      
+    }
+    
+    
+    
+  };
+  const yahooHandler = async () => {
+    
+    try {
+      await yahooSignIn();
+      navigate("/");
+    } catch (error) {
+      
+    }
+    
+    
+    
+  };
+  const githubHandler = () => {
+    
+    try {
+      githubSignIn();
+      
+      navigate('/')
+    } catch (error) {
+      
+    }
+    
+    
+    
+  };
   const registerHandler = (values) => {
     
     try {
       register(values.email, values.password, values.username);
+      navigate("/");
     } catch (error) {
       console.error(error);
     }
-    navigate("/");
+    
     
   };
 
   const logoutHandler = () => {
     try {
       logout();
+      navigate("/");
     } catch (error) {
       console.error(error);
     }
-    navigate("/");
+   
     
   };
 
@@ -65,8 +105,10 @@ export const AuthProvider = ({ children }) => {
     ownerId: auth.currentUser?.uid,
     registerHandler,
     logoutHandler,
-    user
-    
+    user,
+    googleHandler,
+    githubHandler,
+    yahooHandler
   };
 
   return <AuthContext.Provider value={contextValues}>{children}</AuthContext.Provider>;

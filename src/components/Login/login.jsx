@@ -4,12 +4,13 @@ import styles from "./login.module.css";
 import { Link } from "react-router-dom";
 import { useContext } from "react";
 import AuthContext from "../../contexts/authContext";
+
 const LoginPage = () => {
   const SearchFormKeys = {
     UsernameOrEmail: "usernameOrEmail",
     Password: "password",
   };
-  const { loginHandler } = useContext(AuthContext);
+  const { loginHandler,googleHandler,githubHandler,yahooHandler } = useContext(AuthContext);
 
   const { values, onChange, onSubmit } = useForm(loginHandler, {
     [SearchFormKeys.UsernameOrEmail]: "",
@@ -57,9 +58,9 @@ const LoginPage = () => {
           </form>
 
           <div className={styles.loginItems}>
-            <img src="/images/google.png" alt="" />
-            <img src="/images/facebook.png" alt="" />
-            <img src="/images/github.png" alt="" />
+            <img onClick={googleHandler} src="/images/google.png" alt="" />
+            <img onClick={yahooHandler} src="/images/facebook.png" alt="" />
+            <img onClick={githubHandler} src="/images/github.png" alt="" />
           </div>
         </div>
       </div>

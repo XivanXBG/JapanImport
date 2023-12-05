@@ -8,15 +8,21 @@ import CarItem from "./carItem/carItem";
 const Cars = ({ searchCriteria }) => {
   const [cars, setCars] = useState([]);
   const [isLoaded, setisLoaded] = useState(false);
+  const [selectedSortOption, setSelectedSortOption] = useState("");
 
   useEffect(() => {
     searchCarOffers(searchCriteria).then((x) => {
-      setCars(x);
-      setisLoaded(true);
-     
-    });
-  }, [searchCriteria]);
+      
+      const sortedCars = sortCars(x, selectedSortOption);
 
+      setCars(sortedCars);
+      setisLoaded(true);
+    });
+  }, [searchCriteria, selectedSortOption]);
+
+  const handleSortChange = (e) => {
+    setSelectedSortOption(e.target.value);
+  };
   return (
     <>
       {isLoaded && (
@@ -28,8 +34,10 @@ const Cars = ({ searchCriteria }) => {
             <div>
               <div className={styles.sort}>
                 <p htmlFor="sort">Sort by:</p>
-                <select name="sort" id="">
-                  <option value="">Price</option>
+                <select onChange={handleSortChange} name="sort" id="">
+                  <option value="priceAC">Price ascending</option>
+                  <option value="priceDC">Price decending</option>
+                  <option value="name">Name</option>
                 </select>
               </div>
               <div className={styles.cardContainer}>
@@ -49,3 +57,20 @@ const mapStateToProps = (state) => ({
 });
 
 export default connect(mapStateToProps)(Cars);
+
+const sortCars = (cars, sortOption) => {
+  
+  switch (sortOption) {
+    case "priceAC":
+      
+      return cars.slice().sort((a, b) => a.price - b.price);
+    case "priceDC":
+      return cars.slice().sort((a, b) => b.price - a.price);
+    case "name":
+      return cars.slice().sort((a, b) => a.make.localeCompare(b.make));
+    default:
+   
+      return cars.slice();
+  }
+
+};

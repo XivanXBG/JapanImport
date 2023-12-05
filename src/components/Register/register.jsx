@@ -3,6 +3,7 @@ import useForm from "../../hooks/useForm";
 import styles from "./register.module.css";
 import { Link } from "react-router-dom";
 import { useContext } from "react";
+
 import AuthContext from "../../contexts/authContext";
 const RegisterPage = () => {
   const SearchFormKeys = {
@@ -11,8 +12,8 @@ const RegisterPage = () => {
     Email: "email",
     rePassword: "rePassword",
   };
-  const { registerHandler } = useContext(AuthContext);
-
+  const { registerHandler,googleHandler,githubHandler,yahooHandler } = useContext(AuthContext);
+  
   const { values, onChange, onSubmit } = useForm(registerHandler, {
     [SearchFormKeys.Username]: "",
     [SearchFormKeys.Password]: "",
@@ -81,9 +82,9 @@ const RegisterPage = () => {
           </form>
 
           <div className={styles.loginItems}>
-            <img src="/images/google.png" alt="" />
-            <img src="/images/facebook.png" alt="" />
-            <img src="/images/github.png" alt="" />
+            <img onClick={googleHandler} src="/images/google.png" alt="" />
+            <img onClick={yahooHandler} src="/images/facebook.png" alt="" />
+            <img onChange={githubHandler} src="/images/github.png" alt="" />
           </div>
         </div>
       </div>

@@ -1,13 +1,16 @@
-import {db,auth, storage } from "../utils/firebase";
+import { db, auth, storage } from "../utils/firebase";
 import {
   createUserWithEmailAndPassword,
   signInWithEmailAndPassword,
   updateProfile,
-  onAuthStateChanged 
+  onAuthStateChanged,
+  GoogleAuthProvider,
+  signInWithPopup,
+  GithubAuthProvider,
+  OAuthProvider,
 } from "firebase/auth";
-import { ref,uploadBytes,getDownloadURL } from "firebase/storage";
-import { doc, getDoc } from 'firebase/firestore';
-
+import { ref, uploadBytes, getDownloadURL } from "firebase/storage";
+import { doc, getDoc } from "firebase/firestore";
 
 export const login = (email, password) => {
   signInWithEmailAndPassword(auth, email, password)
@@ -52,26 +55,30 @@ export const logout = () => {
 
 export const getCurrentUserInfo = async () => {
   return new Promise((resolve, reject) => {
-    const unsubscribe = onAuthStateChanged(auth, (user) => {
-      if (user) {
-        // User is authenticated, resolve with user info
-        resolve({
-          uid: user.uid,
-          email: user.email,
-          displayName: user.displayName,
-          photoURL: user.photoURL,
-        });
-      } else {
-        // User is not authenticated, resolve with null
-        resolve(null);
-      }
+    const unsubscribe = onAuthStateChanged(
+      auth,
+      (user) => {
+        if (user) {
+          // User is authenticated, resolve with user info
+          resolve({
+            uid: user.uid,
+            email: user.email,
+            displayName: user.displayName,
+            photoURL: user.photoURL,
+          });
+        } else {
+          // User is not authenticated, resolve with null
+          resolve(null);
+        }
 
-      // Unsubscribe to avoid memory leaks
-      unsubscribe();
-    }, (error) => {
-      // Reject with the error if there is an issue
-      reject(error);
-    });
+        // Unsubscribe to avoid memory leaks
+        unsubscribe();
+      },
+      (error) => {
+        // Reject with the error if there is an issue
+        reject(error);
+      }
+    );
   });
 };
 const uploadProfilePicture = async (file, storagePath) => {
@@ -92,18 +99,49 @@ export const updateAuthProfilePicture = async (file) => {
       await updateProfile(user, { photoURL });
 
       // Fetch the updated user data from Firestore
-      
-      const userDocRef = doc(db, 'users', user.uid);
+
+      const userDocRef = doc(db, "users", user.uid);
       const userDocSnap = await getDoc(userDocRef);
       const updatedUser = userDocSnap.data();
 
-      console.log('Updated user profile:', updatedUser);
+      console.log("Updated user profile:", updatedUser);
       return photoURL;
     } else {
-      console.error('No authenticated user or file found.');
+      console.error("No authenticated user or file found.");
     }
   } catch (error) {
-    console.error('Error updating user profile picture:', error);
+    console.error("Error updating user profile picture:", error);
     throw error; // Propagate the error to the caller if needed
+  }
+};
+
+export const googleSignIn = async () => {
+  const provider = new GoogleAuthProvider();
+  try {
+    const result = await signInWithPopup(auth, provider);
+    const user = result.user;
+    console.log("Google login successful:", user);
+  } catch (error) {
+    console.error("Google login error:", error);
+  }
+};
+export const githubSignIn = async () => {
+  const provider = new GithubAuthProvider();
+  try {
+    const result = await signInWithPopup(auth, provider);
+    const user = result.user;
+    console.log("GitHub login successful:", user);
+  } catch (error) {
+    console.error("GitHub login error:", error);
+  }
+};
+export const yahooSignIn = async () => {
+  const provider = new OAuthProvider('yahoo.com');
+  try {
+    const result = await signInWithPopup(auth, provider);
+    const user = result.user;
+    console.log("Yahoo login successful:", user);
+  } catch (error) {
+    console.error("Yahoo login error:", error);
   }
 };
