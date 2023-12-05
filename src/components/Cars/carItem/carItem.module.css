@@ -15,11 +15,11 @@
     align-items: baseline;
     justify-content: space-between;
 }
-.wishlistHeader i{
+.wrapper i{
     font-size: xx-large;
     margin: 5px
 }
-.wishlistHeader i:hover{
+.wrapper i:hover{
     transform: scale(1.2);
     color: red;
 }
@@ -51,6 +51,7 @@
     margin: 0px;
     text-align: left;
 }
+
 .fAwesome span{
     text-align: left;
 }

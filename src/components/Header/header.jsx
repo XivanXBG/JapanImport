@@ -23,7 +23,7 @@ export default function Header() {
   });
 
   const { isAuthenticated } = useContext(AuthContext);
-  console.log(isAuthenticated);
+
 
   return (
     <>

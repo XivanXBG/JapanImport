@@ -6,15 +6,17 @@ import {
   getDoc,
   doc,
   updateDoc,
-  query, where,
-  deleteDoc 
+  query,
+  where,
+  deleteDoc,
+  setDoc,
+  arrayUnion
 } from "firebase/firestore";
 import {
   ref as storageRef,
   uploadBytes,
   getDownloadURL,
 } from "firebase/storage";
-
 
 export const loadCars = async () => {
   const carsCollection = collection(db, "cars");
@@ -60,14 +62,20 @@ export const createOffer = async (offerData) => {
   await updateDoc(offerDocRef, { photos: uploadedPhotos });
 
   console.log("Offer added with id:", newOfferId);
-  
+
   return newOfferId;
 };
 export const updateOffer = async (offerId, updatedOfferData) => {
   const offerDocRef = doc(db, "offers", offerId);
 
   try {
-    const { photos: newPhotos, price, year, killometers, ...otherOfferData } = updatedOfferData;
+    const {
+      photos: newPhotos,
+      price,
+      year,
+      killometers,
+      ...otherOfferData
+    } = updatedOfferData;
 
     // Convert to numbers
     updatedOfferData.price = Number(price);
@@ -95,7 +103,7 @@ export const updateOffer = async (offerId, updatedOfferData) => {
       // Upload all photos
       const uploadedPhotos = await Promise.all(
         allPhotos.map(async (photo, index) => {
-          if (typeof photo === 'string') {
+          if (typeof photo === "string") {
             // This is an existing photo URL, no need to re-upload
             return photo;
           }
@@ -118,7 +126,6 @@ export const updateOffer = async (offerId, updatedOfferData) => {
     throw error;
   }
 };
-
 
 export const deleteOfferById = async (id) => {
   try {
@@ -149,9 +156,11 @@ export const loadOfferWithPhoto = async (id) => {
 };
 export const loadOffersByOwnerId = async (ownerId) => {
   try {
-    
-    const offersQuery = query(collection(db, "offers"), where("ownerId", "==", ownerId));
-    
+    const offersQuery = query(
+      collection(db, "offers"),
+      where("ownerId", "==", ownerId)
+    );
+
     // Execute the query and get the documents
     const querySnapshot = await getDocs(offersQuery);
 
@@ -160,10 +169,53 @@ export const loadOffersByOwnerId = async (ownerId) => {
       id: doc.id,
       ...doc.data(),
     }));
-console.log(offers);
+    console.log(offers);
     return offers;
   } catch (error) {
     console.error("Error loading offers by ownerId:", error.message);
     return null;
+  }
+};
+
+
+export const updateUserFavoritesInFirestore = async (userId, offer) => {
+  try {
+    console.log('asd');
+    const usersCollection = collection(db,'users')
+    const userDocRef = doc(usersCollection, userId);
+    const userDocSnap = await getDoc(userDocRef);
+
+    if (userDocSnap.exists()) {
+      // If the user document already exists, update the favorites array
+      await setDoc(userDocRef, { favorites: arrayUnion(offer) }, { merge: true });
+    } else {
+      // If the user document doesn't exist, create it with the favorites array
+      await setDoc(userDocRef, { userId, favorites: [offer] });
+    }
+
+    console.log("User favorites updated in Firestore:", userId, offer);
+  } catch (error) {
+    console.error("Error updating user favorites in Firestore:", error);
+    throw error;
+  }
+};
+
+export const loadUserFavoritesFromFirestore = async (userId) => {
+  try {
+    const usersCollection = collection(db,'users')
+    const userDocRef = doc(usersCollection, userId);
+    const userDocSnap = await getDoc(userDocRef);
+
+    if (userDocSnap.exists()) {
+      const userData = userDocSnap.data();
+      const favorites = userData.favorites || [];
+      return favorites;
+    } else {
+      console.log("User document not found:", userId);
+      return [];
+    }
+  } catch (error) {
+    console.error("Error loading user favorites from Firestore:", error);
+    throw error;
   }
 };
