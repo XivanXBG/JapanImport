@@ -3,6 +3,7 @@ import useForm from "../../hooks/useForm";
 import styles from "./login.module.css";
 import { Link } from "react-router-dom";
 import { useContext } from "react";
+import {parseFirebaseError} from '../../utils/parseFirebaseErrors'
 import AuthContext from "../../contexts/authContext";
 
 const LoginPage = () => {
@@ -11,10 +12,13 @@ const LoginPage = () => {
     Password: "password",
   };
 
-  const { loginHandler, googleHandler, githubHandler, yahooHandler } =
+  const { loginHandler, googleHandler, githubHandler, yahooHandler, error } =
     useContext(AuthContext);
-  
-  const { values, onChange,onSubmit } = useForm(loginHandler, {
+  const handleLogin = (values) => {
+    loginHandler(values);
+   
+  };
+  const { values, onChange, onSubmit } = useForm(handleLogin, {
     [SearchFormKeys.UsernameOrEmail]: "",
     [SearchFormKeys.Password]: "",
   });
