@@ -18,7 +18,7 @@ const MyOffers = ({ dispatch, searchCriteria }) => {
     <div className={styles.cardContainer}>
         
     {offers.map((car) => (
-      <CarItem key={car.id} car={car} />
+      <CarItem key={car.id} car={car}/>
     ))}
   </div>
     </>

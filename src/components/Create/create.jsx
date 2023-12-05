@@ -24,7 +24,7 @@ const SearchFormKeys = {
 export default function Create() {
   const navigate = useNavigate();
 const create = () =>{
-  createOffer();
+  createOffer(values);
   navigate('/')
 }
   const { values, onChange, onSubmit } = useForm(create, {

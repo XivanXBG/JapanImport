@@ -21,11 +21,11 @@
   border-top: 1px solid #ddd; /* Top border */
   border-bottom: 1px solid #ddd;
 }
-p i{
+p i {
   font-size: 12px !important;
-  margin:0px
+  margin: 0px;
 }
-p span{
+p span {
   margin-left: 2px;
 }
 .thumbnail {
@@ -58,7 +58,7 @@ p span{
   max-width: 100%;
   max-height: 100%;
   object-fit: fill;
-  width: 500px;
+  width: 600px;
   height: 400px;
 
   display: block;
@@ -222,8 +222,8 @@ html {
     height: 100%;
     object-fit: fill;
 
-    display: block;
-    margin: 0 auto;
+    width: 1000px;
+    margin: 0px;
     cursor: pointer;
   }
   .photoWrapper {

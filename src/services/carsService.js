@@ -10,7 +10,8 @@ import {
   where,
   deleteDoc,
   setDoc,
-  arrayUnion
+  arrayUnion,
+  arrayRemove
 } from "firebase/firestore";
 import {
   ref as storageRef,
@@ -28,6 +29,7 @@ export const loadCars = async () => {
 };
 
 export const createOffer = async (offerData) => {
+ 
   const { photos, price, year, killometers, ...otherOfferData } = offerData;
 
   // Convert to numbers
@@ -180,7 +182,7 @@ export const loadOffersByOwnerId = async (ownerId) => {
 
 export const updateUserFavoritesInFirestore = async (userId, offer) => {
   try {
-    console.log('asd');
+    
     const usersCollection = collection(db,'users')
     const userDocRef = doc(usersCollection, userId);
     const userDocSnap = await getDoc(userDocRef);
@@ -199,6 +201,25 @@ export const updateUserFavoritesInFirestore = async (userId, offer) => {
     throw error;
   }
 };
+export const removeFavoriteFromFirestore = async (userId, offer) => {
+  try {
+    const usersCollection = collection(db,'users')
+    const userDocRef = doc(usersCollection, userId);
+    const userDocSnap = await getDoc(userDocRef);
+
+    if (userDocSnap.exists()) {
+      // If the user document exists, remove the offer from the favorites array
+      await setDoc(userDocRef, { favorites: arrayRemove(offer) }, { merge: true });
+
+      console.log("User favorites updated in Firestore:", userId, offer);
+    } else {
+      console.log("User document not found:", userId);
+    }
+  } catch (error) {
+    console.error("Error updating user favorites in Firestore:", error);
+    throw error;
+  }
+};
 
 export const loadUserFavoritesFromFirestore = async (userId) => {
   try {
@@ -209,7 +230,11 @@ export const loadUserFavoritesFromFirestore = async (userId) => {
     if (userDocSnap.exists()) {
       const userData = userDocSnap.data();
       const favorites = userData.favorites || [];
-      return favorites;
+
+      // Load the offers based on offerIds
+      const offers = await Promise.all(favorites.map((offerId) => loadOfferWithPhoto(offerId)));
+
+      return offers;
     } else {
       console.log("User document not found:", userId);
       return [];
