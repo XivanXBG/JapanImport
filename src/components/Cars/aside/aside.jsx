@@ -7,6 +7,8 @@ import {
   updateSearchCriteria,
   resetSearchCriteria,
 } from "../../../reducer/actions";
+import { toast } from "react-toastify";
+import { toastStyles } from "../../../components/toastStyle";
 
 const Aside = ({ dispatch, searchCriteria }) => {
   const SearchFormKeys = {
@@ -42,15 +44,33 @@ const Aside = ({ dispatch, searchCriteria }) => {
     const car = cars.find((car) => car.id === carId);
     return car ? car.models : null;
   };
-  const sumbitHandler = () => {
-    dispatch(updateSearchCriteria(values));
+  const submitHandler = () => {
+    try {
+      toast.dismiss();
+
+      if (!isMaxPriceUnderOneMillion(values.maxPrice)) {
+        return;
+      }
+      if (!isMaxYearCurrentYear(values.maxYear)) {
+        return;
+      }
+      if (!isMinYear(values.minYear)) {
+        return;
+      }
+
+      // Continue with the rest of the logic
+      dispatch(updateSearchCriteria(values));
+      
+    } catch (error) {
+      // Handle other errors if needed
+    }
   };
   const [cars, setCars] = useState([]);
   useEffect(() => {
     loadCars().then((x) => setCars(x));
   }, []);
 
-  let { values, resetForm, onChange, onSubmit } = useForm(sumbitHandler, {
+  let { values, resetForm, onChange, onSubmit } = useForm(submitHandler, {
     [SearchFormKeys.Make]: searchCriteria.make,
     [SearchFormKeys.Model]: searchCriteria.model,
     [SearchFormKeys.MinPrice]: searchCriteria.minPrice,
@@ -256,3 +276,39 @@ const mapStateToProps = (state) => ({
 });
 
 export default connect(mapStateToProps)(Aside);
+function isMaxPriceUnderOneMillion(maxPrice) {
+  if(maxPrice==""){
+    return true
+  }
+  if (maxPrice < 1000000) {
+    return true;
+  } else {
+    // Throw a toast error if maxPrice is not under 1000000
+    toast.error("Maximum price must be under 1000000", toastStyles);
+    return false;
+  }
+}
+function isMaxYearCurrentYear(maxYear) {
+  if(maxYear==""){
+    return true
+  }
+  if (maxYear <= 2023) {
+    return true;
+  } else {
+    // Throw a toast error if maxPrice is not under 1000000
+    toast.error("Maximum year must be under 2024", toastStyles);
+    return false;
+  }
+}
+function isMinYear(minYear) {
+  if(minYear==""){
+    return true
+  }
+  if (minYear >= 1980) {
+    return true;
+  } else {
+    // Throw a toast error if maxPrice is not under 1000000
+    toast.error("Minimun year must be over 1980", toastStyles);
+    return false;
+  }
+}

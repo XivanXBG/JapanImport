@@ -255,6 +255,9 @@ const mapStateToProps = (state) => ({
 
 export default connect(mapStateToProps)(AdvancedSearch);
 function isMaxPriceUnderOneMillion(maxPrice) {
+  if(maxPrice==""){
+    return true
+  }
   if (maxPrice < 1000000) {
     return true;
   } else {
@@ -264,6 +267,9 @@ function isMaxPriceUnderOneMillion(maxPrice) {
   }
 }
 function isMaxYearCurrentYear(maxYear) {
+  if(maxYear==""){
+    return true
+  }
   if (maxYear <= 2023) {
     return true;
   } else {
@@ -273,6 +279,9 @@ function isMaxYearCurrentYear(maxYear) {
   }
 }
 function isMinYear(minYear) {
+  if(minYear==""){
+    return true
+  }
   if (minYear >= 1980) {
     return true;
   } else {
