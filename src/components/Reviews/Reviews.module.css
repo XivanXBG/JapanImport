@@ -91,6 +91,10 @@ h1 {
   color: white;
   width: 100px;
 }
+.buttons button:hover {
+cursor: pointer;
+transform: scale(1.1);
+}
 .modalOverlay {
   position: fixed;
   top: 0;

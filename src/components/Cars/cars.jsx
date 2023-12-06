@@ -19,7 +19,7 @@ const Cars = ({ searchCriteria }) => {
       setisLoaded(true);
     });
   }, [searchCriteria, selectedSortOption]);
-
+console.log(cars);
   const handleSortChange = (e) => {
     setSelectedSortOption(e.target.value);
   };
@@ -40,11 +40,18 @@ const Cars = ({ searchCriteria }) => {
                   <option value="name">Name</option>
                 </select>
               </div>
-              <div className={styles.cardContainer}>
+              {(cars.length > 0) && (
+                <div className={styles.cardContainer}>
                 {cars.map((car) => (
                   <CarItem key={car.id} car={car} />
                 ))}
               </div>
+              )}
+              {(cars.length == 0) && (
+                <div >
+                <h1 style={{textAlign:'center'}}>No offers found!</h1>
+              </div>
+              )}
             </div>
           </div>
         </div>

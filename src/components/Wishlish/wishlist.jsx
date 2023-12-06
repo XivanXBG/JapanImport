@@ -20,12 +20,21 @@ export default function Wishlist() {
   }
   return (
     <>
-      <h1 className={styles.heading}>My Wishlist:</h1>
-      <div className={styles.cardContainer}>
-        {offers.map((car) => (
-          <CarItem key={car.id} removeFromState={removeFromState} removeFavorite={true} car={car} />
-        ))}
-      </div>
+      
+      {offers.length > 0 && (
+          <>
+          <h1 className={styles.heading}>My Offers:</h1>
+          <div className={styles.cardContainer}>
+            {offers.map((car) => (
+              <CarItem key={car.id} removeFromState={removeFromState} removeFavorite={true} car={car} />
+            ))}
+          </div>
+          </>
+          
+        )}
+        {offers.length == 0 && (
+          <h1>No offers created!</h1>
+        )}
     </>
   );
 }
