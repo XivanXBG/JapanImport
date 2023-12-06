@@ -1,6 +1,10 @@
 import useForm from "../../hooks/useForm";
 import { useEffect, useState } from "react";
-import { loadCars, createOffer } from "../../services/carsService";
+import {
+  loadCars,
+  createOffer,
+  loadCriteria,
+} from "../../services/carsService";
 import styles from "./create.module.css";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
@@ -22,32 +26,27 @@ const SearchFormKeys = {
   Mobile: "mobile",
 };
 
-
 export default function Create() {
   const navigate = useNavigate();
-  const create = async(values) => {
+  const create = async (values) => {
     try {
       toast.dismiss();
 
       if (!isMaxPriceUnderOneMillion(values.price)) {
-        
         return;
       }
       if (!isMaxYearCurrentYear(values.year)) {
-     
         return;
       }
       if (!isMinYear(values.year)) {
-      
         return;
-      }if (!maxKillometers(values.killometers)) {
-        
+      }
+      if (!maxKillometers(values.killometers)) {
         return;
       }
 
-      console.log('asd');
       const res = await createOffer(values);
-      console.log(res);
+
       navigate("/cars");
     } catch (error) {
       // Handle other errors if needed
@@ -70,9 +69,13 @@ export default function Create() {
   });
 
   const [cars, setCars] = useState([]);
-  
+  const [criteria, setCriteria] = useState([]);
+
   useEffect(() => {
-    loadCars().then((cars) => setCars(cars));
+    loadCars().then((x) => setCars(x));
+    loadCriteria().then((x) => {
+      setCriteria(x);
+    });
   }, []);
 
   const getModelsForCarId = (carId) => {
@@ -114,10 +117,11 @@ export default function Create() {
                 required
               >
                 <option value="">Select engine</option>
-                <option value="gasoline">Gasoline</option>
-                <option value="diesel">Diesel</option>
-                <option value="hybrid">Hybrid</option>
-                <option value="electric">Electric</option>
+                {criteria.fuelTypes?.map((car) => (
+                  <option key={car} value={car}>
+                    {car}
+                  </option>
+                ))}
               </select>
             </div>
             <div className={styles["input-container"]}>
@@ -130,16 +134,11 @@ export default function Create() {
                 required
               >
                 <option value="">Select category</option>
-                <option value="sedan">Sedan</option>
-                <option value="suv">SUV</option>
-                <option value="coupe">Coupe</option>
-                <option value="convertible">Convertible</option>
-                <option value="hatchback">Hatchback</option>
-                <option value="wagon">Wagon</option>
-                <option value="pickup">Pickup Truck</option>
-                <option value="minivan">Minivan</option>
-                <option value="crossover">Crossover</option>
-                <option value="sportsCar">Sports Car</option>
+                {criteria.bodyTypes?.map((car) => (
+                  <option key={car} value={car}>
+                    {car}
+                  </option>
+                ))}
               </select>
             </div>
           </div>
@@ -179,8 +178,11 @@ export default function Create() {
                 required
               >
                 <option value="">Select transmission type</option>
-                <option value="automatic">Automatic</option>
-                <option value="manual">Manual</option>
+                {criteria.transmissionTypes?.map((car) => (
+                  <option key={car} value={car}>
+                    {car}
+                  </option>
+                ))}
               </select>
             </div>
             <div className={styles["input-container"]}>
@@ -193,8 +195,11 @@ export default function Create() {
                 required
               >
                 <option value="">Select Color</option>
-                <option value="red">red</option>
-                <option value="green">green</option>
+                {criteria.carColors?.map((car) => (
+                  <option key={car} value={car}>
+                    {car}
+                  </option>
+                ))}
               </select>
             </div>
           </div>
@@ -291,8 +296,11 @@ export default function Create() {
               required
             >
               <option value="">Select location</option>
-              <option value="hiroshima">Hiroshima</option>
-              <option value="tokyo">Tokyo</option>
+              {criteria.citiesWithPortsAndAirports?.map((car) => (
+                <option key={car} value={car}>
+                  {car}
+                </option>
+              ))}
             </select>
           </div>
         </div>
@@ -318,7 +326,6 @@ function maxKillometers(killometers) {
   if (killometers < 1000000) {
     return true;
   } else {
-    
     toast.error("Maximum killometers must be under 1000000", toastStyles);
     return false;
   }

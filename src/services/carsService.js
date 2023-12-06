@@ -27,6 +27,18 @@ export const loadCars = async () => {
 
   return data;
 };
+export const loadCriteria = async () => {
+  const criteriasCollection = collection(db, "criterias");
+  const snapshot = await getDocs(criteriasCollection);
+
+  const data = {};
+  snapshot.docs.forEach((doc) => {
+    data[doc.id] = doc.data().models;
+  });
+
+  return data;
+};
+
 
 export const createOffer = async (offerData) => {
  

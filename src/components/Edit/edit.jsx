@@ -3,6 +3,7 @@ import {
   loadCars,
   updateOffer,
   loadOfferWithPhoto,
+  loadCriteria,
 } from "../../services/carsService";
 import styles from "./edit.module.css";
 import { useNavigate } from "react-router-dom";
@@ -29,24 +30,24 @@ const SearchFormKeys = {
 export default function Edit() {
   const navigate = useNavigate();
   const [cars, setCars] = useState([]);
+  const [criteria, setCriteria] = useState([]);
   const [offer, setOffers] = useState({});
   const [value, setValues] = useState({
-    [SearchFormKeys.Make]: offer.make || '',
-    [SearchFormKeys.Model]: offer.model ||'',
-    [SearchFormKeys.Price]: offer.price||'',
-    [SearchFormKeys.Year]: offer.year||'',
-    [SearchFormKeys.TransmissionType]: offer.transmission||'',
-    [SearchFormKeys.Killometers]: offer.killometers||'',
-    [SearchFormKeys.Category]: offer.category||'',
-    [SearchFormKeys.EngineType]: offer.engine||'',
+    [SearchFormKeys.Make]: offer.make || "",
+    [SearchFormKeys.Model]: offer.model || "",
+    [SearchFormKeys.Price]: offer.price || "",
+    [SearchFormKeys.Year]: offer.year || "",
+    [SearchFormKeys.TransmissionType]: offer.transmission || "",
+    [SearchFormKeys.Killometers]: offer.killometers || "",
+    [SearchFormKeys.Category]: offer.category || "",
+    [SearchFormKeys.EngineType]: offer.engine || "",
     [SearchFormKeys.Photos]: [],
-    [SearchFormKeys.Color]: offer.color||'',
-    [SearchFormKeys.Description]: offer.description||'',
-    [SearchFormKeys.Loc]: offer.loc||'',
-    [SearchFormKeys.Mobile]: offer.mobile||'',
+    [SearchFormKeys.Color]: offer.color || "",
+    [SearchFormKeys.Description]: offer.description || "",
+    [SearchFormKeys.Loc]: offer.loc || "",
+    [SearchFormKeys.Mobile]: offer.mobile || "",
   });
-  console.log(offer);
-  console.log(value);
+
   const [isLoaded, setIsLoaded] = useState(false);
   const { offerId } = useParams();
   const onChange = (e) => {
@@ -84,7 +85,9 @@ export default function Edit() {
           setValues(x);
           setOffers(x);
         });
-
+        loadCriteria().then((x) => {
+          setCriteria(x);
+        });
         setIsLoaded(true);
       } catch (error) {
         console.error("Error loading data:", error);
@@ -94,8 +97,8 @@ export default function Edit() {
     fetchData();
   }, []);
 
-  const edit = async(e) => {
-    e.preventDefault()
+  const edit = async (e) => {
+    e.preventDefault();
     try {
       toast.dismiss();
 
@@ -105,26 +108,25 @@ export default function Edit() {
       }
       if (!isMaxYearCurrentYear(value.year)) {
         console.log(mas2);
-     
+
         return;
       }
       if (!isMinYear(value.year)) {
         console.log(mas3);
-      
+
         return;
-      }if (!maxKillometers(value.killometers)) {
+      }
+      if (!maxKillometers(value.killometers)) {
         console.log(mas4);
-        
+
         return;
       }
 
-      const res = await updateOffer(offerId,value);
+      const res = await updateOffer(offerId, value);
       navigate(`/cars/${offerId}`);
-      
     } catch (error) {
       // Handle other errors if needed
     }
-    
   };
 
   const getModelsForCarId = (carId) => {
@@ -167,10 +169,11 @@ export default function Edit() {
                     required
                   >
                     <option value="">Select engine</option>
-                    <option value="gasoline">Gasoline</option>
-                    <option value="diesel">Diesel</option>
-                    <option value="hybrid">Hybrid</option>
-                    <option value="electric">Electric</option>
+                    {criteria.fuelTypes?.map((car) => (
+                      <option key={car} value={car}>
+                        {car}
+                      </option>
+                    ))}
                   </select>
                 </div>
                 <div className={styles["input-container"]}>
@@ -183,16 +186,11 @@ export default function Edit() {
                     required
                   >
                     <option value="">Select category</option>
-                    <option value="sedan">Sedan</option>
-                    <option value="suv">SUV</option>
-                    <option value="coupe">Coupe</option>
-                    <option value="convertible">Convertible</option>
-                    <option value="hatchback">Hatchback</option>
-                    <option value="wagon">Wagon</option>
-                    <option value="pickup">Pickup Truck</option>
-                    <option value="minivan">Minivan</option>
-                    <option value="crossover">Crossover</option>
-                    <option value="sportsCar">Sports Car</option>
+                    {criteria.bodyTypes?.map((car) => (
+                      <option key={car} value={car}>
+                        {car}
+                      </option>
+                    ))}
                   </select>
                 </div>
               </div>
@@ -207,19 +205,17 @@ export default function Edit() {
                     required
                   >
                     {offer.make === "" ? (
-                  <option value=''>Select a model</option>
-                ) : (
-                  <>
-                    <option value={offer.model}>Select model</option>
-                    {getModelsForCarId(offer.make)?.map(
-                      (model) => (
-                        <option key={model} value={model}>
-                          {model}
-                        </option>
-                      )
+                      <option value="">Select a model</option>
+                    ) : (
+                      <>
+                        <option value={offer.model}>Select model</option>
+                        {getModelsForCarId(offer.make)?.map((model) => (
+                          <option key={model} value={model}>
+                            {model}
+                          </option>
+                        ))}
+                      </>
                     )}
-                  </>
-                )}
                   </select>
                 </div>
                 <div className={styles["input-container"]}>
@@ -232,8 +228,11 @@ export default function Edit() {
                     required
                   >
                     <option value="">Select transmission type</option>
-                    <option value="automatic">Automatic</option>
-                    <option value="manual">Manual</option>
+                    {criteria.transmissionTypes?.map((car) => (
+                      <option key={car} value={car}>
+                        {car}
+                      </option>
+                    ))}
                   </select>
                 </div>
                 <div className={styles["input-container"]}>
@@ -246,8 +245,11 @@ export default function Edit() {
                     required
                   >
                     <option value="">Select Color</option>
-                    <option value="red">red</option>
-                    <option value="green">green</option>
+                    {criteria.carColors?.map((car) => (
+                      <option key={car} value={car}>
+                        {car}
+                      </option>
+                    ))}
                   </select>
                 </div>
               </div>
@@ -344,8 +346,11 @@ export default function Edit() {
                   required
                 >
                   <option value="">Select location</option>
-                  <option value="hiroshima">Hiroshima</option>
-                  <option value="tokyo">Tokyo</option>
+                  {criteria.citiesWithPortsAndAirports?.map((car) => (
+                      <option key={car} value={car}>
+                        {car}
+                      </option>
+                    ))}
                 </select>
               </div>
             </div>
@@ -373,7 +378,6 @@ function maxKillometers(killometers) {
   if (killometers < 1000000) {
     return true;
   } else {
-    
     toast.error("Maximum killometers must be under 1000000", toastStyles);
     return false;
   }
@@ -396,4 +400,3 @@ function isMinYear(minYear) {
     return false;
   }
 }
-

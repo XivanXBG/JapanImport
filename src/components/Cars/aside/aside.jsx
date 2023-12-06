@@ -1,4 +1,4 @@
-import { loadCars } from "../../../services/carsService";
+import { loadCars,loadCriteria } from "../../../services/carsService";
 import useForm from "../../../hooks/useForm";
 import { useEffect, useState } from "react";
 import styles from "./aside.module.css";
@@ -66,8 +66,10 @@ const Aside = ({ dispatch, searchCriteria }) => {
     }
   };
   const [cars, setCars] = useState([]);
+  const [criteria,setCriteria] = useState([]);
   useEffect(() => {
     loadCars().then((x) => setCars(x));
+    loadCriteria().then((x) => {setCriteria(x);console.log(x);});
   }, []);
 
   let { values, resetForm, onChange, onSubmit } = useForm(submitHandler, {
@@ -182,10 +184,11 @@ const Aside = ({ dispatch, searchCriteria }) => {
           className={styles.select}
         >
           <option value="">Select engine</option>
-          <option value="gasoline">Gasoline</option>
-          <option value="diesel">Diesel</option>
-          <option value="hybrid">Hybrid</option>
-          <option value="electric">Electric</option>
+          {criteria.fuelTypes?.map((car) => (
+            <option key={car} value={car}>
+              {car}
+            </option>
+          ))}
         </select>
       </div>
       <div className={styles.search}>
@@ -197,16 +200,11 @@ const Aside = ({ dispatch, searchCriteria }) => {
           className={styles.select}
         >
           <option value="">Select category</option>
-          <option value="sedan">Sedan</option>
-          <option value="suv">SUV</option>
-          <option value="coupe">Coupe</option>
-          <option value="convertible">Convertible</option>
-          <option value="hatchback">Hatchback</option>
-          <option value="wagon">Wagon</option>
-          <option value="pickup">Pickup Truck</option>
-          <option value="minivan">Minivan</option>
-          <option value="crossover">Crossover</option>
-          <option value="sportsCar">Sports Car</option>
+          {criteria.bodyTypes?.map((car) => (
+            <option key={car} value={car}>
+              {car}
+            </option>
+          ))}
         </select>
       </div>
       <div className={styles.search}>
@@ -218,8 +216,11 @@ const Aside = ({ dispatch, searchCriteria }) => {
           className={styles.select}
         >
           <option value="">Select color</option>
-          <option value="blue">blue</option>
-          <option value="red">red</option>
+          {criteria.carColors?.map((car) => (
+            <option key={car} value={car}>
+              {car}
+            </option>
+          ))}
         </select>
       </div>
       <div className={styles.search}>
@@ -231,8 +232,11 @@ const Aside = ({ dispatch, searchCriteria }) => {
           className={styles.select}
         >
           <option value="">Select transmission type</option>
-          <option value="automatic">Automatic</option>
-          <option value="manual">Manual</option>
+          {criteria.transmissionTypes?.map((car) => (
+            <option key={car} value={car}>
+              {car}
+            </option>
+          ))}
         </select>
       </div>
       <div className={styles.search}>
@@ -244,11 +248,11 @@ const Aside = ({ dispatch, searchCriteria }) => {
           className={styles.select}
         >
           <option value="">Select max km</option>
-          <option value="10000">Under 10,000 km</option>
-          <option value="30000">Under 30,000 km</option>
-          <option value="50000">Under 50,000 km</option>
-          <option value="100000">Under 100,000 km</option>
-          <option value="200000">Under 200,000 km</option>
+          {criteria.mileageRanges?.map((car) => (
+            <option key={car} value={car}>
+              {car}
+            </option>
+          ))}
         </select>
       </div>
 
@@ -262,8 +266,11 @@ const Aside = ({ dispatch, searchCriteria }) => {
           className={styles.select}
         >
           <option value="">Select location</option>
-          <option value="hiroshima">Hiroshima</option>
-          <option value="nagasaki">Nagasaki</option>
+          {criteria.citiesWithPortsAndAirports?.map((car) => (
+            <option key={car} value={car}>
+              {car}
+            </option>
+          ))}
         </select>
       </div>
       <button className={styles.filter}>Apply Filters</button>
