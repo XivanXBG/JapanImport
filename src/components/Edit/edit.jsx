@@ -7,7 +7,8 @@ import {
 import styles from "./edit.module.css";
 import { useNavigate } from "react-router-dom";
 import { useParams } from "react-router-dom";
-
+import { toast } from "react-toastify";
+import { toastStyles } from "../toastStyle";
 
 const SearchFormKeys = {
   Make: "make",
@@ -44,6 +45,8 @@ export default function Edit() {
     [SearchFormKeys.Loc]: offer.loc||'',
     [SearchFormKeys.Mobile]: offer.mobile||'',
   });
+  console.log(offer);
+  console.log(value);
   const [isLoaded, setIsLoaded] = useState(false);
   const { offerId } = useParams();
   const onChange = (e) => {
@@ -91,14 +94,37 @@ export default function Edit() {
     fetchData();
   }, []);
 
-  const edit = async (e) => {
-    e.preventDefault();
+  const edit = async(e) => {
+    e.preventDefault()
     try {
-      await updateOffer(offerId, value); // Assuming you have an updateOffer function
-      navigate("/");
+      toast.dismiss();
+
+      if (!isMaxPriceUnderOneMillion(value.price)) {
+        console.log(mas1);
+        return;
+      }
+      if (!isMaxYearCurrentYear(value.year)) {
+        console.log(mas2);
+     
+        return;
+      }
+      if (!isMinYear(value.year)) {
+        console.log(mas3);
+      
+        return;
+      }if (!maxKillometers(value.killometers)) {
+        console.log(mas4);
+        
+        return;
+      }
+
+      const res = await updateOffer(offerId,value);
+      navigate(`/cars/${offerId}`);
+      
     } catch (error) {
-      console.error("Error updating offer:", error);
+      // Handle other errors if needed
     }
+    
   };
 
   const getModelsForCarId = (carId) => {
@@ -121,6 +147,7 @@ export default function Edit() {
                     onChange={onChange}
                     value={value.make}
                     className={styles.select}
+                    required
                   >
                     <option value="">Select make</option>
                     {cars.map((car) => (
@@ -137,6 +164,7 @@ export default function Edit() {
                     onChange={onChange}
                     value={value.engine}
                     className={styles.select}
+                    required
                   >
                     <option value="">Select engine</option>
                     <option value="gasoline">Gasoline</option>
@@ -152,6 +180,7 @@ export default function Edit() {
                     onChange={onChange}
                     value={value.category}
                     className={styles.select}
+                    required
                   >
                     <option value="">Select category</option>
                     <option value="sedan">Sedan</option>
@@ -175,6 +204,7 @@ export default function Edit() {
                     name={SearchFormKeys.Model}
                     onChange={onChange}
                     className={styles.select}
+                    required
                   >
                     {offer.make === "" ? (
                   <option value=''>Select a model</option>
@@ -199,6 +229,7 @@ export default function Edit() {
                     onChange={onChange}
                     value={value.transmission}
                     className={styles.select}
+                    required
                   >
                     <option value="">Select transmission type</option>
                     <option value="automatic">Automatic</option>
@@ -212,6 +243,7 @@ export default function Edit() {
                     onChange={onChange}
                     value={value.color}
                     className={styles.select}
+                    required
                   >
                     <option value="">Select Color</option>
                     <option value="red">red</option>
@@ -231,6 +263,7 @@ export default function Edit() {
                   step="10"
                   value={value.year}
                   placeholder="0"
+                  required
                 />
               </div>
               <div className={styles.numberInput}>
@@ -242,6 +275,7 @@ export default function Edit() {
                   value={value.price}
                   step="1000"
                   placeholder="0"
+                  required
                 />
               </div>
               <div className={styles.numberInput}>
@@ -253,6 +287,7 @@ export default function Edit() {
                   value={value.killometers}
                   step="10000"
                   placeholder="0"
+                  required
                 />
               </div>
             </div>
@@ -267,6 +302,7 @@ export default function Edit() {
                   value={value.description}
                   placeholder="Description"
                   className={styles.moreInfo}
+                  required
                 />
               </div>
 
@@ -278,6 +314,7 @@ export default function Edit() {
                   multiple
                   onChange={onChange}
                   className={styles.moreInfo}
+                  required
                 />
               </div>
             </div>
@@ -294,6 +331,7 @@ export default function Edit() {
                   value={value.mobile}
                   placeholder="mobilephone"
                   className={styles.mobile}
+                  required
                 />
               </div>
               <div className={styles.numberInput}>
@@ -303,6 +341,7 @@ export default function Edit() {
                   onChange={onChange}
                   value={value.loc}
                   className={styles.select}
+                  required
                 >
                   <option value="">Select location</option>
                   <option value="hiroshima">Hiroshima</option>
@@ -321,3 +360,40 @@ export default function Edit() {
     </>
   );
 }
+function isMaxPriceUnderOneMillion(maxPrice) {
+  if (maxPrice < 1000000) {
+    return true;
+  } else {
+    // Throw a toast error if maxPrice is not under 1000000
+    toast.error("Maximum price must be under 1000000", toastStyles);
+    return false;
+  }
+}
+function maxKillometers(killometers) {
+  if (killometers < 1000000) {
+    return true;
+  } else {
+    
+    toast.error("Maximum killometers must be under 1000000", toastStyles);
+    return false;
+  }
+}
+function isMaxYearCurrentYear(maxYear) {
+  if (maxYear <= 2023) {
+    return true;
+  } else {
+    // Throw a toast error if maxPrice is not under 1000000
+    toast.error("Maximum year must be under 2024", toastStyles);
+    return false;
+  }
+}
+function isMinYear(minYear) {
+  if (minYear >= 1980) {
+    return true;
+  } else {
+    // Throw a toast error if maxPrice is not under 1000000
+    toast.error("Minimun year must be over 1980", toastStyles);
+    return false;
+  }
+}
+
