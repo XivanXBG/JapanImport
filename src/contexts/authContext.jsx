@@ -1,6 +1,12 @@
 import { createContext } from "react";
 import { useNavigate } from "react-router-dom";
-import { login, register, logout, githubSignIn, yahooSignIn } from "../services/authService";
+import {
+  login,
+  register,
+  logout,
+  githubSignIn,
+  yahooSignIn,
+} from "../services/authService";
 import { useState, useEffect } from "react";
 import { auth } from "../utils/firebase";
 import { googleSignIn } from "../services/authService";
@@ -10,14 +16,13 @@ const AuthContext = createContext();
 export const AuthProvider = ({ children }) => {
   const navigate = useNavigate();
   const [isAuthenticated, setIsAuthenticated] = useState(null);
-  const [user,setUser] = useState(null)
+  const [user, setUser] = useState(null);
 
   useEffect(() => {
     const unsubscribe = auth.onAuthStateChanged((user) => {
-     
       if (user) {
         setIsAuthenticated(true);
-        setUser(user)
+        setUser(user);
       } else {
         setIsAuthenticated(false);
       }
@@ -27,76 +32,57 @@ export const AuthProvider = ({ children }) => {
     return () => unsubscribe();
   }, []);
 
-  const loginHandler =  (values) => {
-    
+  const loginHandler = async (values) => {
     try {
-      login(values.usernameOrEmail, values.password);
-      
+      await login(values.usernameOrEmail, values.password);
     } catch (error) {
-      return error
+      throw error;
     }
     navigate("/");
-    
-    
   };
   const googleHandler = async () => {
-    
     try {
       await googleSignIn();
-      navigate("/");
     } catch (error) {
-      
+      throw error;
     }
-    
-    
-    
+    navigate("/");
   };
   const yahooHandler = async () => {
-    
     try {
       await yahooSignIn();
-      navigate("/");
     } catch (error) {
-      
+      throw error;
     }
-    
-    
-    
+
+    navigate("/");
   };
-  const githubHandler = () => {
-    
+  const githubHandler = async() => {
     try {
-      githubSignIn();
-      
-      navigate('/')
+      await githubSignIn();
     } catch (error) {
-      
+      throw error;
     }
-    
-    
-    
+    navigate("/");
   };
-  const registerHandler = (values) => {
-    
+  const registerHandler = async(values) => {
     try {
-      register(values.email, values.password, values.username);
-      navigate("/verify-email");
+      await register(values.email, values.password, values.username);
+     
     } catch (error) {
-      console.error(error);
+      throw error
     }
-    
-    
+    navigate("/verify-email");
   };
 
-  const logoutHandler = () => {
+  const logoutHandler = async() => {
     try {
-      logout();
-      navigate("/");
+      await logout();
+     
     } catch (error) {
-      console.error(error);
+     throw error
     }
-   
-    
+    navigate("/");
   };
 
   const contextValues = {
@@ -108,10 +94,14 @@ export const AuthProvider = ({ children }) => {
     user,
     googleHandler,
     githubHandler,
-    yahooHandler
+    yahooHandler,
   };
 
-  return <AuthContext.Provider value={contextValues}>{children}</AuthContext.Provider>;
+  return (
+    <AuthContext.Provider value={contextValues}>
+      {children}
+    </AuthContext.Provider>
+  );
 };
 
 AuthContext.displayName = "AuthContext";

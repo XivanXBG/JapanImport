@@ -5,6 +5,8 @@ import { connect } from "react-redux";
 import { updateSearchCriteria } from "../../reducer/actions";
 import { useNavigate } from "react-router-dom";
 import { loadCars } from "../../services/carsService";
+import { toast } from "react-toastify";
+import { toastStyles } from "../toastStyle";
 
 const SearchFormKeys = {
   Make: "make",
@@ -19,8 +21,26 @@ const SearchFormKeys = {
 const FormSearch = ({ dispatch }) => {
   const navigate = useNavigate();
   const submitHandler = () => {
-    dispatch(updateSearchCriteria(values));
-    navigate("/cars");
+    try {
+      toast.dismiss();
+  
+      if (!isMaxPriceUnderOneMillion(values.maxPrice)) {
+        
+        return;
+      }
+      if(!isMaxYearCurrentYear(values.maxYear)){
+        return
+      }
+      if(!isMinYear(values.minYear)){
+        return
+      }
+  
+      // Continue with the rest of the logic
+      dispatch(updateSearchCriteria(values));
+      navigate("/cars");
+    } catch (error) {
+      // Handle other errors if needed
+    }
   };
   const { values, onChange, onSubmit } = useForm(submitHandler, {
     [SearchFormKeys.Make]: "",
@@ -138,3 +158,30 @@ const mapStateToProps = (state) => ({
 });
 
 export default connect(mapStateToProps)(FormSearch);
+function isMaxPriceUnderOneMillion(maxPrice) {
+  if (maxPrice < 1000000) {
+    return true;
+  } else {
+    // Throw a toast error if maxPrice is not under 1000000
+    toast.error("Maximum price must be under 1000000",toastStyles);
+    return false;
+  }
+}
+function isMaxYearCurrentYear(maxYear) {
+  if (maxYear <= 2023) {
+    return true;
+  } else {
+    // Throw a toast error if maxPrice is not under 1000000
+    toast.error("Maximum year must be under 2024",toastStyles);
+    return false;
+  }
+}
+function isMinYear(minYear) {
+  if (minYear >= 1980) {
+    return true;
+  } else {
+    // Throw a toast error if maxPrice is not under 1000000
+    toast.error("Minimun year must be over 1980",toastStyles);
+    return false;
+  }
+}

@@ -22,56 +22,54 @@ import ForgotPassword from "./components/ForgotPassword/forgotPassword";
 import AuthGuard from "./components/Guards/AuthGuard";
 import GuestGuard from "./components/Guards/GuestGuard";
 import Wishlist from "./components/Wishlish/wishlist";
-import { ErrorProvider } from "./contexts/errorContext";
+
 function App() {
   return (
     <Provider store={store}>
-      <ErrorProvider>
-        <AuthProvider>
-          <div
-            style={{
-              display: "flex",
-              flexDirection: "column",
-              minHeight: "100vh",
-            }}
-          >
-            <Header />
-            <div style={{ flex: 1 }}>
-              <Routes>
-                <Route element={<AuthGuard />}>
-                  <Route path="/profile" element={<Profile />}></Route>
-                  <Route path="/create" element={<Create />}></Route>
-                  <Route path="/wishlist" element={<Wishlist />}></Route>
-                  <Route
-                    path="/profile/:userId/my-offers"
-                    element={<MyOffers />}
-                  ></Route>
-                  <Route path="/cars/:offerId/edit" element={<Edit />}></Route>
-                </Route>
-                <Route element={<GuestGuard />}>
-                  <Route path="/register" element={<RegisterPage />}></Route>
-                  <Route path="/login" element={<LoginPage />}></Route>
-                </Route>
-
-                <Route path="/logout" element={<Logout />}></Route>
-                <Route path="/" element={<Home />}></Route>
-                <Route path="/cars" element={<Cars />}></Route>
-                <Route path="/reviews" element={<Reviews />}></Route>
-                <Route path="/cars/:offerId" element={<Details />}></Route>
-                <Route path="/verify-email" element={<VerifyEmail />}></Route>
+      <AuthProvider>
+        <div
+          style={{
+            display: "flex",
+            flexDirection: "column",
+            minHeight: "100vh",
+          }}
+        >
+          <Header />
+          <div style={{ flex: 1 }}>
+            <Routes>
+              <Route element={<AuthGuard />}>
+                <Route path="/profile" element={<Profile />}></Route>
+                <Route path="/create" element={<Create />}></Route>
+                <Route path="/wishlist" element={<Wishlist />}></Route>
                 <Route
-                  path="/reset-password"
-                  element={<ForgotPassword />}
+                  path="/profile/:userId/my-offers"
+                  element={<MyOffers />}
                 ></Route>
+                <Route path="/cars/:offerId/edit" element={<Edit />}></Route>
+              </Route>
+              <Route element={<GuestGuard />}>
+                <Route path="/register" element={<RegisterPage />}></Route>
+                <Route path="/login" element={<LoginPage />}></Route>
+              </Route>
 
-                <Route path="*" element={<NotFound />}></Route>
-              </Routes>
-            </div>
+              <Route path="/logout" element={<Logout />}></Route>
+              <Route path="/" element={<Home />}></Route>
+              <Route path="/cars" element={<Cars />}></Route>
+              <Route path="/reviews" element={<Reviews />}></Route>
+              <Route path="/cars/:offerId" element={<Details />}></Route>
+              <Route path="/verify-email" element={<VerifyEmail />}></Route>
+              <Route
+                path="/reset-password"
+                element={<ForgotPassword />}
+              ></Route>
 
-            <FooterComponent />
+              <Route path="*" element={<NotFound />}></Route>
+            </Routes>
           </div>
-        </AuthProvider>
-      </ErrorProvider>
+
+          <FooterComponent />
+        </div>
+      </AuthProvider>
     </Provider>
   );
 }

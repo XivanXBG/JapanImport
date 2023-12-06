@@ -1,9 +1,12 @@
 import React from "react";
 import useForm from "../../hooks/useForm";
+import { toast } from "react-toastify";
 import styles from "./login.module.css";
 import { Link } from "react-router-dom";
 import { useContext } from "react";
-import {parseFirebaseError} from '../../utils/parseFirebaseErrors'
+import { parseFirebaseError } from "../../utils/parseFirebaseErrors";
+import "react-toastify/dist/ReactToastify.css";
+import { toastStyles } from "../toastStyle";
 import AuthContext from "../../contexts/authContext";
 
 const LoginPage = () => {
@@ -12,11 +15,50 @@ const LoginPage = () => {
     Password: "password",
   };
 
-  const { loginHandler, googleHandler, githubHandler, yahooHandler, error } =
+  const { loginHandler, googleHandler, githubHandler, yahooHandler } =
     useContext(AuthContext);
-  const handleLogin = (values) => {
-    loginHandler(values);
-   
+  const handleLogin = async (values) => {
+    toast.dismiss();
+    try {
+      const response = await loginHandler(values);
+      console.log(response);
+      // Clear all toasts on successful form submission
+      toast.dismiss();
+    } catch (error) {
+      toast.error(parseFirebaseError(error.code),toastStyles)
+      console.log('asd');
+    }
+  };
+
+  const yahooLogin = async () => {
+    try {
+      const response = await yahooHandler();
+      console.log(response);
+      // Clear all toasts on successful form submission
+      toast.dismiss();
+    } catch (error) {
+      toast.error(parseFirebaseError(error.code),toastStyles)
+    }
+  };
+  const googleLogin = async () => {
+    try {
+      const response = await googleHandler();
+      console.log(response);
+      // Clear all toasts on successful form submission
+      toast.dismiss();
+    } catch (error) {
+      toast.error(parseFirebaseError(error.code),toastStyles)
+    }
+  };
+  const githubLogin = async (values) => {
+    try {
+      const response = await githubHandler();
+      console.log(response);
+      // Clear all toasts on successful form submission
+      toast.dismiss();
+    } catch (error) {
+      toast.error(parseFirebaseError(error.code),toastStyles)
+    }
   };
   const { values, onChange, onSubmit } = useForm(handleLogin, {
     [SearchFormKeys.UsernameOrEmail]: "",
@@ -73,9 +115,9 @@ const LoginPage = () => {
           </form>
 
           <div className={styles.loginItems}>
-            <img onClick={googleHandler} src="/images/google.png" alt="" />
-            <img onClick={yahooHandler} src="/images/facebook.png" alt="" />
-            <img onClick={githubHandler} src="/images/github.png" alt="" />
+            <img onClick={googleLogin} src="/images/google.png" alt="" />
+            <img onClick={yahooLogin} src="/images/facebook.png" alt="" />
+            <img onClick={githubLogin} src="/images/github.png" alt="" />
           </div>
         </div>
       </div>

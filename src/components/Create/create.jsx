@@ -3,6 +3,8 @@ import { useEffect, useState } from "react";
 import { loadCars, createOffer } from "../../services/carsService";
 import styles from "./create.module.css";
 import { useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
+import { toastStyles } from "../toastStyle";
 
 const SearchFormKeys = {
   Make: "make",
@@ -23,10 +25,34 @@ const SearchFormKeys = {
 
 export default function Create() {
   const navigate = useNavigate();
-const create = () =>{
-  createOffer(values);
-  navigate('/')
-}
+  const create = async(values) => {
+    try {
+      toast.dismiss();
+
+      if (!isMaxPriceUnderOneMillion(values.price)) {
+        
+        return;
+      }
+      if (!isMaxYearCurrentYear(values.year)) {
+     
+        return;
+      }
+      if (!isMinYear(values.year)) {
+      
+        return;
+      }if (!maxKillometers(values.killometers)) {
+        
+        return;
+      }
+
+      console.log('asd');
+      const res = await createOffer(values);
+      console.log(res);
+      navigate("/cars");
+    } catch (error) {
+      // Handle other errors if needed
+    }
+  };
   const { values, onChange, onSubmit } = useForm(create, {
     [SearchFormKeys.Make]: "",
     [SearchFormKeys.Model]: "",
@@ -68,6 +94,7 @@ const create = () =>{
                 onChange={onChange}
                 value={values[SearchFormKeys.Make]}
                 className={styles.select}
+                required
               >
                 <option value="">Select make</option>
                 {cars.map((car) => (
@@ -84,6 +111,7 @@ const create = () =>{
                 onChange={onChange}
                 value={values[SearchFormKeys.EngineType]}
                 className={styles.select}
+                required
               >
                 <option value="">Select engine</option>
                 <option value="gasoline">Gasoline</option>
@@ -99,6 +127,7 @@ const create = () =>{
                 onChange={onChange}
                 value={values[SearchFormKeys.Category]}
                 className={styles.select}
+                required
               >
                 <option value="">Select category</option>
                 <option value="sedan">Sedan</option>
@@ -122,6 +151,7 @@ const create = () =>{
                 name={SearchFormKeys.Model}
                 onChange={onChange}
                 className={styles.select}
+                required
               >
                 {values[SearchFormKeys.Make] === "" ? (
                   <option value="">Select a model</option>
@@ -146,6 +176,7 @@ const create = () =>{
                 onChange={onChange}
                 value={values[SearchFormKeys.TransmissionType]}
                 className={styles.select}
+                required
               >
                 <option value="">Select transmission type</option>
                 <option value="automatic">Automatic</option>
@@ -159,6 +190,7 @@ const create = () =>{
                 onChange={onChange}
                 value={values[SearchFormKeys.Color]}
                 className={styles.select}
+                required
               >
                 <option value="">Select Color</option>
                 <option value="red">red</option>
@@ -178,6 +210,7 @@ const create = () =>{
               step="10"
               value={values[SearchFormKeys.Year]}
               placeholder="0"
+              required
             />
           </div>
           <div className={styles.numberInput}>
@@ -189,6 +222,7 @@ const create = () =>{
               value={values[SearchFormKeys.Price]}
               step="1000"
               placeholder="0"
+              required
             />
           </div>
           <div className={styles.numberInput}>
@@ -200,6 +234,7 @@ const create = () =>{
               value={values[SearchFormKeys.Killometers]}
               step="10000"
               placeholder="0"
+              required
             />
           </div>
         </div>
@@ -214,6 +249,7 @@ const create = () =>{
               value={values[SearchFormKeys.Description]}
               placeholder="Description"
               className={styles.moreInfo}
+              required
             />
           </div>
 
@@ -225,6 +261,7 @@ const create = () =>{
               multiple
               onChange={onChange}
               className={styles.moreInfo}
+              required
             />
           </div>
         </div>
@@ -241,6 +278,7 @@ const create = () =>{
               value={values[SearchFormKeys.Mobile]}
               placeholder="mobilephone"
               className={styles.mobile}
+              required
             />
           </div>
           <div className={styles.numberInput}>
@@ -250,6 +288,7 @@ const create = () =>{
               onChange={onChange}
               value={values[SearchFormKeys.Loc]}
               className={styles.select}
+              required
             >
               <option value="">Select location</option>
               <option value="hiroshima">Hiroshima</option>
@@ -265,4 +304,40 @@ const create = () =>{
       </form>
     </div>
   );
+}
+function isMaxPriceUnderOneMillion(maxPrice) {
+  if (maxPrice < 1000000) {
+    return true;
+  } else {
+    // Throw a toast error if maxPrice is not under 1000000
+    toast.error("Maximum price must be under 1000000", toastStyles);
+    return false;
+  }
+}
+function maxKillometers(killometers) {
+  if (killometers < 1000000) {
+    return true;
+  } else {
+    
+    toast.error("Maximum killometers must be under 1000000", toastStyles);
+    return false;
+  }
+}
+function isMaxYearCurrentYear(maxYear) {
+  if (maxYear <= 2023) {
+    return true;
+  } else {
+    // Throw a toast error if maxPrice is not under 1000000
+    toast.error("Maximum year must be under 2024", toastStyles);
+    return false;
+  }
+}
+function isMinYear(minYear) {
+  if (minYear >= 1980) {
+    return true;
+  } else {
+    // Throw a toast error if maxPrice is not under 1000000
+    toast.error("Minimun year must be over 1980", toastStyles);
+    return false;
+  }
 }

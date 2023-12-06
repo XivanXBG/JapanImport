@@ -25,7 +25,7 @@ export default function CarItem({ car, removeFavorite, removeFromState }) {
 
   const favoriteHandler = () => {
     if (user) {
-      updateUserFavoritesInFirestore(user.uid, car.id)
+      updateUserFavoritesInFirestore(user?.uid, car?.id)
         .then(() => {
           console.log("Favorite added successfully!");
         })
@@ -53,10 +53,10 @@ export default function CarItem({ car, removeFavorite, removeFromState }) {
   const navigate = useNavigate();
 
   useEffect(() => {
-    if (user.uid === car.ownerId) {
+    if (user?.uid === car?.ownerId) {
       setIsOwner(true);
     }
-  }, [user.uid, car.ownerId]);
+  }, [user?.uid, car?.ownerId]);
 
   return (
     <div style={Wrapper} className={styles.wrapper}>

@@ -13,9 +13,7 @@ import {
 import { ref, uploadBytes, getDownloadURL } from "firebase/storage";
 import { doc, getDoc } from "firebase/firestore";
 
-
 export const login = async (email, password) => {
-  
   try {
     const userCredential = await signInWithEmailAndPassword(
       auth,
@@ -25,11 +23,7 @@ export const login = async (email, password) => {
     const user = userCredential.user;
     console.log("Signed in", user);
   } catch (err) {
-    console.error("Error signing in:", err.code, err.message);
-
-    let errorMessage = "Login failed. Please check your credentials.";
-
-    throw new Error(errorMessage);
+    throw err;
   }
 };
 
@@ -53,19 +47,7 @@ export const register = async (email, password, username) => {
 
     console.log("Registered in", user);
   } catch (err) {
-    console.error("Error registering:", err.code, err.message);
-
-    let errorMessage = "Registration failed. Please try again.";
-
-    // Customize error message based on Firebase error code
-    switch (err.code) {
-      case "auth/email-already-in-use":
-        errorMessage = "Registration failed. Email is already in use.";
-        break;
-      // ... Add more cases for other Firebase error codes as needed
-    }
-
-    throw new Error(errorMessage);
+    throw err;
   }
 };
 

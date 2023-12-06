@@ -78,9 +78,7 @@ export default function Header() {
                     <Link className={styles.dropLink} to="/profile">
                       Profile
                     </Link>
-                    <Link className={styles.dropLink} to="/my-orders">
-                      Orders
-                    </Link>
+                    
                     <Link className={styles.dropLink} to="/logout">
                       Logout
                     </Link>
