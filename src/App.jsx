@@ -4,16 +4,17 @@ import { AuthProvider } from "./contexts/authContext";
 import { CartProvider } from "./contexts/cartContext";
 import { Provider } from "react-redux";
 import store from "../src/reducer/store";
+import { lazy, Suspense } from 'react';
 
 import Home from "./components/Home/home";
 import RegisterPage from "./components/Register/register";
 import LoginPage from "./components/Login/login";
 import Logout from "./components/Logout/logout";
 import Create from "./components/Create/Create";
-import Cars from "./components/Cars/cars";
-import Details from "./components/Details/details";
+const Cars = lazy(()=>import('./components/Cars/cars'));
+const Details = lazy(()=>import('./components/Details/details'));
 import Profile from "./components/Profile/profile";
-import MyOffers from "./components/MyOffers/myOffers";
+const MyOffers = lazy(()=>import('./components/MyOffers/myOffers'));
 import Edit from "./components/Edit/edit";
 import Reviews from "./components/Reviews/reviews";
 import FooterComponent from "./components/Footer/footer";
@@ -22,12 +23,12 @@ import VerifyEmail from "./components/VerifyEmail/verifyEmail";
 import ForgotPassword from "./components/ForgotPassword/forgotPassword";
 import AuthGuard from "./components/Guards/AuthGuard";
 import GuestGuard from "./components/Guards/GuestGuard";
-import Wishlist from "./components/Wishlish/wishlist";
+const Wishlist =lazy(()=>import('./components/Wishlish/wishlist'));
 import CheckoutPage from "./components/Checkout/checkout";
 import Successfull from "./components/Succesfull/successfull";
-import MyOrders from "./components/MyOrders/myOrders";
-import OrderDetails from "./components/OrderDetail/orderDetail";
-import { lazy, Suspense } from 'react';
+const MyOrders = lazy(()=>import('./components/MyOrders/myOrders'));
+const OrderDetails =lazy(()=>import('./components/OrderDetail/orderDetail'));
+
 
 function App() {
   return (
@@ -43,7 +44,8 @@ function App() {
           >
             <Header />
             <div style={{ flex: 1 }}>
-              <Routes>
+            <Suspense fallback={<h1>Loading...</h1>}>
+            <Routes>
                 <Route element={<AuthGuard />}>
                   <Route path="/successfull" element={<Successfull/>}></Route>
                   <Route path="/profile" element={<Profile />}></Route>
@@ -53,7 +55,7 @@ function App() {
                     path="/profile/:userId/my-offers"
                     element={<MyOffers />}
                   ></Route>
-                  <Route path="/cars/:offerId/edit" element={<Edit />}></Route>
+               <Route path="/cars/:offerId/edit" element={<Edit />}></Route>
                   <Route path="/checkout" element={<CheckoutPage/>}></Route>
                   <Route path="/profile/:userId/my-orders" element={<MyOrders/>}></Route>
                   <Route path="/orders/:orderId" element={<OrderDetails/>}></Route>
@@ -78,6 +80,8 @@ function App() {
                 <Route path="/404" element={<NotFound/>}></Route>
                 <Route path="*" element={<NotFound />}></Route>
               </Routes>
+            </Suspense>
+              
             </div>
 
             <FooterComponent />
