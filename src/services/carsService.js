@@ -18,7 +18,21 @@ import {
   uploadBytes,
   getDownloadURL,
 } from "firebase/storage";
+export const addNewOrder = async (orderData) => {
+  try {
+    const ordersCollection = collection(db, 'orders');
+    const docRef = await addDoc(ordersCollection, orderData);
 
+    // Log the ID of the newly created document
+    console.log('Document ID:', docRef.id);
+
+    // Return the ID if needed
+    return docRef.id;
+  } catch (error) {
+    console.error('Error adding document:', error);
+    throw error; // Optionally rethrow the error
+  }
+};
 export const loadCars = async () => {
   const carsCollection = collection(db, "cars");
   const snapshot = await getDocs(carsCollection);

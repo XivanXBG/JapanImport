@@ -2,6 +2,7 @@ import { useContext, useEffect, useState } from "react";
 import styles from "./carItem.module.css";
 import { useNavigate } from "react-router-dom";
 import AuthContext from "../../../contexts/authContext";
+import CartContext from "../../../contexts/cartContext";
 import {
   updateUserFavoritesInFirestore,
   removeFavoriteFromFirestore,
@@ -14,13 +15,20 @@ const Wrapper = {
 const HeartIcon = {
   position: "absolute",
   top: "0",
-  right: "0",
+  right: "60px",
   cursor: "pointer",
   fontSize: "2.5rem",
 };
-
+const buyIcon = {
+  position: "absolute",
+  top: "0",
+  right: "0",
+  cursor: "pointer",
+  fontSize: "2.5rem",
+}
 export default function CarItem({ car, removeFavorite, removeFromState }) {
   const { user, isAuthenticated } = useContext(AuthContext);
+  const { addToCart} = useContext(CartContext);
   const [isOwner, setIsOwner] = useState(false);
 
   const favoriteHandler = () => {
@@ -36,7 +44,9 @@ export default function CarItem({ car, removeFavorite, removeFromState }) {
       console.error("User not authenticated");
     }
   };
-
+  const buyHandler = () => {
+    addToCart(car)
+  };
   const removeHandler = () => {
     if (user) {
       removeFavoriteFromFirestore(user.uid, car.id)
@@ -61,11 +71,15 @@ export default function CarItem({ car, removeFavorite, removeFromState }) {
   return (
     <div style={Wrapper} className={styles.wrapper}>
       {isAuthenticated && !removeFavorite && !isOwner && (
+        <>
         <i
           style={HeartIcon}
           onClick={favoriteHandler}
           className="fa-regular fa-heart"
         ></i>
+        <i style={buyIcon} onClick={buyHandler} className="fa-solid fa-cart-shopping"></i>
+        </>
+        
       )}
       {removeFavorite && !isOwner && (
         <i
@@ -105,6 +119,7 @@ export default function CarItem({ car, removeFavorite, removeFromState }) {
             </div>
           </div>
         </div>
+       
       </div>
     </div>
   );

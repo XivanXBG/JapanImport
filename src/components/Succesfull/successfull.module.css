@@ -1,0 +1,28 @@
+.container {
+  text-align: center;
+  margin-top: 50px;
+  height: calc(100vh - 200px);;
+}
+
+.carImage {
+  width: 45%; /* Adjust the size as needed */
+  margin-top: 20px;
+}
+
+.redirectButton {
+  display: inline-block;
+  padding: 10px 20px;
+  margin-top: 20px;
+  background-color: #4caf50; /* Green color, you can customize */
+  color: white;
+  text-decoration: none;
+  border-radius: 5px;
+  font-size: 16px;
+}
+
+.redirectButton:hover {
+  background-color: #45a049; /* Darker green on hover, you can customize */
+}
+p{
+  font-size: 20px;
+}

@@ -1,0 +1,96 @@
+.checkoutContainer {
+  display: flex;
+  justify-content: space-around;
+  margin: 100px 100px;
+  height: 600px;
+}
+
+.cartContainer {
+  width: 60%;
+  padding: 20px;
+  max-height: 600px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  background-color: white;
+  overflow-y: scroll;
+}
+
+.cartItem {
+  display: flex;
+  margin-bottom: 20px;
+  
+  align-items: center;
+  width: 100%;
+}
+.cartItem:hover{
+  cursor: pointer;
+  transform: scale(1.05);
+}
+.itemPrice{
+  text-align: left;
+}
+.cartItem img {
+  width: 250px;
+  height: 150px;
+  margin-right: 10px;
+}
+
+.checkoutFormContainer {
+  width: 30%;
+  padding: 20px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  background-color: white;
+}
+
+.checkoutForm {
+  display: flex;
+  flex-direction: column;
+}
+
+.formGroup {
+  margin-bottom: 20px;
+  display: flex;
+  flex-direction: column;
+}
+
+.label {
+  font-size: 18px;
+  margin-bottom: 5px;
+}
+
+.input,
+.select {
+  padding: 10px;
+  font-size: 16px;
+  width: 320px;
+  border: 1px solid black !important;
+  border-radius: 5px;
+}
+
+.totalPrice {
+  margin-top: 20px;
+  display: flex;
+  justify-content: space-between;
+  font-size: 18px;
+}
+
+.totalLabel {
+  font-weight: bold;
+}
+
+.totalAmount {
+  color: #e44d26;
+}
+
+.submitButton {
+  background-color: #e44d26;
+  color: #fff;
+  padding: 15px;
+  font-size: 18px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.submitButton:hover {
+  background-color: #d6451d;
+}

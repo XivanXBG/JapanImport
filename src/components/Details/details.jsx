@@ -1,10 +1,13 @@
 import styles from "./details.module.css";
 import { useParams, useNavigate } from "react-router-dom";
 import { useState, useEffect, useContext } from "react";
-import { loadOfferWithPhoto,deleteOfferById } from "../../services/carsService";
+import {
+  loadOfferWithPhoto,
+  deleteOfferById,
+} from "../../services/carsService";
 import AuthContext from "../../contexts/authContext";
 import DeleteModal from "./deleteModal";
-
+import CartContext from "../../contexts/cartContext";
 
 export default function Details() {
   const { offerId } = useParams();
@@ -14,14 +17,15 @@ export default function Details() {
   const [modalOpen, setModalOpen] = useState(false);
   const [isLoaded, setIsLoaded] = useState(false);
   const [isOwner, setIsOwner] = useState(false);
-  const { user } = useContext(AuthContext);
+  const { user, isAuthenticated } = useContext(AuthContext);
+  const { addToCart } = useContext(CartContext);
   const navigate = useNavigate();
   useEffect(() => {
     loadOfferWithPhoto(offerId).then((x) => {
       setOffer(x);
       setIsLoaded(true);
     });
-  }, []);
+  }, [offerId]);
   useEffect(() => {
     console.log(user);
     if (offer.ownerId === user?.uid) {
@@ -42,14 +46,17 @@ export default function Details() {
   };
 
   const handleConfirmDelete = () => {
-    deleteOfferById(offer.id)
+    deleteOfferById(offer.id);
     setIsDeleteModalOpen(false);
-    navigate('/cars')
+    navigate("/cars");
   };
 
   const handleThumbnailClick = (index) => {
     setCurrentPhotoIndex(index);
   };
+  const buyHandler = ()=>{
+    addToCart(offer)
+  }
   return (
     <div className={styles.wrapper}>
       {modalOpen && (
@@ -154,6 +161,13 @@ export default function Details() {
                   onCancel={closeModal}
                   onConfirm={handleConfirmDelete}
                 />
+              </div>
+            )}
+            {!isOwner && isAuthenticated && (
+              <div className={styles.ownerButtons}>
+                <button style={{marginRight:'60px'}} type="submit" onClick={buyHandler}>
+                  Buy
+                </button>
               </div>
             )}
           </div>
