@@ -27,6 +27,7 @@ import CheckoutPage from "./components/Checkout/checkout";
 import Successfull from "./components/Succesfull/successfull";
 import MyOrders from "./components/MyOrders/myOrders";
 import OrderDetails from "./components/OrderDetail/orderDetail";
+import { lazy, Suspense } from 'react';
 
 function App() {
   return (

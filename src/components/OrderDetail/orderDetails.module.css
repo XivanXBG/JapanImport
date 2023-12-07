@@ -3,38 +3,57 @@
     justify-content: space-around;
     margin: 100px 100px;
     height: 600px;
-  }
-  
-  .cartContainer {
+}
+
+.fullScreenModal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: rgba( 0, 0, 0, 0.8);
+    /* Semi-transparent black overlay for better visibility */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 999;
+    /* Ensure the modal appears on top of other elements */
+}
+.btn{
+  cursor: pointer;
+}
+.cartContainer {
     width: 60%;
     padding: 20px;
     max-height: 600px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
     background-color: white;
     overflow-y: scroll;
-  }
-  
-  .cartItem {
+}
+
+.cartItem {
     display: flex;
     margin-bottom: 20px;
-    
     align-items: center;
     width: 100%;
-  }
-  .cartItem:hover{
+}
+
+.cartItem:hover {
     cursor: pointer;
     transform: scale(1.02);
-  }
-  .itemPrice{
+}
+
+.itemPrice {
     text-align: left;
-  }
-  .cartItem img {
+}
+
+.cartItem img {
     width: 250px;
     height: 150px;
     margin-right: 10px;
-  }
-  
-  .checkoutFormContainer {
+}
+
+.checkoutFormContainer {
     width: 30%;
     padding: 20px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
@@ -42,58 +61,59 @@
     display: flex;
     flex-direction: column;
     height: 100%;
-    
-  }
-  .formGroup p{
+}
+
+.formGroup p {
     width: 100%;
     text-align: left;
-    
-  }
-  
-  .checkoutForm {
+}
+
+.checkoutForm {
     display: flex;
     flex-direction: column;
-  }
-  
-  .formGroup {
+}
+
+.formGroup {
     margin-bottom: 20px;
     display: flex;
     flex-direction: column;
-  }
-  
-  .label {
+}
+
+.label {
     font-size: 18px;
     margin-bottom: 5px;
     font-weight: bold;
-  }
-  .location{
+}
+
+.location {
     text-transform: capitalize;
-  }
-  .input,
-  .select {
+}
+
+.input,
+.select {
     padding: 10px;
     font-size: 16px;
     width: 320px;
     border: 1px solid black !important;
     border-radius: 5px;
-  }
-  
-  .totalPrice {
+}
+
+.totalPrice {
     margin-top: 20px;
     display: flex;
     justify-content: space-between;
     font-size: 18px;
-  }
-  
-  .totalLabel {
+}
+
+.totalLabel {
     font-weight: bold;
-  }
-  
-  .totalAmount {
+}
+
+.totalAmount {
     color: #e44d26;
-  }
-  
-  .submitButton {
+}
+
+.submitButton {
     background-color: #e44d26;
     color: #fff;
     padding: 15px;
@@ -101,8 +121,8 @@
     border: none;
     border-radius: 5px;
     cursor: pointer;
-  }
-  
-  .submitButton:hover {
+}
+
+.submitButton:hover {
     background-color: #d6451d;
-  }
+}

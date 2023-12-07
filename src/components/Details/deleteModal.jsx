@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-
+import styles from '../OrderDetail/orderDetails.module.css'
 const DeleteModal = ({ isOpen, onCancel, onConfirm }) => {
   return (
     <div style={{ display: isOpen ? "block" : "none" }}>
@@ -24,9 +24,12 @@ const DeleteModal = ({ isOpen, onCancel, onConfirm }) => {
           zIndex: 1,
         }}
       >
-        <p style={{fontSize:"20px"}}>Are you sure you want to delete?</p>
-        <button onClick={onConfirm}>Yes</button>
-        <button onClick={onCancel}>No</button>
+        <p style={{fontSize:"20px",display:'flex',justifyContent:'center'}}>Are you sure you want to delete?</p>
+        <div style={{fontSize:"20px",display:'flex',justifyContent:'space-around'}}>
+        <button className={styles.btn} style={{backgroundColor: 'rgba(0, 0, 0, 0.8)',color:"white",width:'100px',height:'30px'}} onClick={onConfirm}>Yes</button>
+        <button className={styles.btn} style={{backgroundColor: 'rgba(0, 0, 0, 0.8)',color:"white",width:'100px',height:'30px'}} onClick={onCancel}>No</button>
+        </div>
+        
       </div>
     </div>
   );

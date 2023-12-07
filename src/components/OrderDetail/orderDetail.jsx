@@ -2,17 +2,29 @@ import { useEffect, useState } from "react";
 import { useParams,useNavigate } from "react-router-dom";
 import { getOrderByIdWithOffers,deleteOrderById } from "../../services/carsService";
 import styles from "./orderDetails.module.css";
+import DeleteModal from "../Details/deleteModal";
+
 export default function OrderDetails() {
   const { orderId } = useParams();
   const [order, setOrder] = useState();
+  const [showConfirmModal, setShowConfirmModal] = useState(false);
 
   useEffect(() => {
     getOrderByIdWithOffers(orderId).then((x) => {
       setOrder(x);
-      console.log(x);
+
     });
   }, []);
-  const navigate = useNavigate()
+  const navigate = useNavigate();
+  const handleDeleteOrder = () => {
+    // Show the confirm order cancel modal
+    setShowConfirmModal(true);
+  };
+
+  const handleCancelDelete = () => {
+    // Hide the confirm order cancel modal
+    setShowConfirmModal(false);
+  };
   return (
     <div className={styles.checkoutContainer}>
       <div className={styles.cartContainer}>
@@ -58,10 +70,12 @@ export default function OrderDetails() {
             <p className={styles.totalLabel}>Total Price:</p>
             <p className={styles.totalAmount}> {order?.order.price}</p>
           </div>
-          <button onClick={()=>{deleteOrderById(order?.orderId);navigate('/profile')}} type="submit" className={styles.submitButton}>
-            Delete Order
+          <button onClick={handleDeleteOrder} type="submit" className={styles.submitButton}>
+            Cancel Order
           </button>
-        
+          {showConfirmModal && (
+          <DeleteModal  isOpen={showConfirmModal} onCancel={handleCancelDelete} onConfirm={()=>{deleteOrderById(order?.orderId);navigate('/profile')}} />
+        )}
       </div>
     </div>
   );
