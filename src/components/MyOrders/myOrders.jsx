@@ -1,10 +1,11 @@
 import React, { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { useParams,useNavigate } from "react-router-dom";
 import { getOrdersByOwnerId } from "../../services/carsService"; // Replace with your orders service
 import styles from "./myOrders.module.css"; // Add your CSS module for styling
 
 const MyOrders = () => {
   const { userId } = useParams();
+  const navigate = useNavigate();
   const [orders, setOrders] = useState([]);
 
   useEffect(() => {
@@ -31,7 +32,7 @@ const MyOrders = () => {
           <h1 className={styles.heading}>My Orders</h1>
           <div className={styles.cardContainer}>
           {orders.map((order) => (
-            <div key={order.id} className={styles.orderCard}>
+            <div onClick={()=>navigate(`/orders/${order.id}`)} key={order.id} className={styles.orderCard}>
               <h3>Order ID: {order.id}</h3>
               {/* Display other order details as needed */}
               <p className={styles.location}>Location: {order.location}</p>

@@ -18,7 +18,7 @@ export default function Header() {
     [SearchFormKeys.Text]: "",
   });
 
-  const { isAuthenticated } = useContext(AuthContext);
+  const { isAuthenticated,user } = useContext(AuthContext);
   const { getCart } = useContext(CartContext);
   const [itemsInCart, setItemsInCart] = useState(false);
   const cart = getCart();
@@ -87,6 +87,12 @@ export default function Header() {
                       Profile
                     </Link>
 
+                    <Link className={styles.dropLink} to={`/profile/${user.uid}/my-offers`}>
+                      My Offers
+                    </Link>
+                    <Link className={styles.dropLink} to={`/profile/${user.uid}/my-orders`}>
+                      My Orders
+                    </Link>
                     <Link className={styles.dropLink} to="/logout">
                       Logout
                     </Link>

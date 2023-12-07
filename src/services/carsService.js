@@ -18,6 +18,49 @@ import {
   uploadBytes,
   getDownloadURL,
 } from "firebase/storage";
+export const deleteOrderById = async (orderId) => {
+  try {
+    const orderDocRef = doc(db, "orders", orderId);
+    await deleteDoc(orderDocRef);
+
+    console.log("Order deleted successfully");
+  } catch (error) {
+    console.error("Error deleting order:", error);
+  }
+};
+export const getOrderByIdWithOffers = async (orderId) => {
+  try {
+    // Assuming you have a Firestore collection called "orders"
+    const orderDocRef = doc(db, "orders", orderId);
+    const orderDocSnapshot = await getDoc(orderDocRef);
+
+    if (orderDocSnapshot.exists()) {
+      const orderData = orderDocSnapshot.data();
+
+      // Assuming your order data has an "itemIds" field which is an array of offer IDs
+      const itemIds = orderData.car_ids;
+
+      // Load offer data for each item ID
+      const offersData = await Promise.all(itemIds.map((itemId) => loadOfferWithPhoto(itemId)));
+
+      // Combine order and offer data
+      const combinedData = {
+        orderId: orderId,
+        order: orderData,
+        offers: offersData,
+      };
+
+      return combinedData;
+    } else {
+      console.error("Order not found");
+      return null;
+    }
+  } catch (error) {
+    console.error("Error retrieving order:", error);
+    return null;
+  }
+};
+
 export const addNewOrder = async (orderData) => {
   try {
     const ordersCollection = collection(db, 'orders');

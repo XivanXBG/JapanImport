@@ -26,6 +26,7 @@ import Wishlist from "./components/Wishlish/wishlist";
 import CheckoutPage from "./components/Checkout/checkout";
 import Successfull from "./components/Succesfull/successfull";
 import MyOrders from "./components/MyOrders/myOrders";
+import OrderDetails from "./components/OrderDetail/orderDetail";
 
 function App() {
   return (
@@ -54,6 +55,7 @@ function App() {
                   <Route path="/cars/:offerId/edit" element={<Edit />}></Route>
                   <Route path="/checkout" element={<CheckoutPage/>}></Route>
                   <Route path="/profile/:userId/my-orders" element={<MyOrders/>}></Route>
+                  <Route path="/orders/:orderId" element={<OrderDetails/>}></Route>
                 </Route>
                
                 <Route element={<GuestGuard />}>
