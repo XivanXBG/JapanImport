@@ -33,7 +33,7 @@ export default function Wishlist() {
           
         )}
         {offers.length == 0 && (
-          <h1>No offers created!</h1>
+          <h1>No favorite offers!</h1>
         )}
     </>
   );

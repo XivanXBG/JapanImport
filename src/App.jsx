@@ -25,6 +25,7 @@ import GuestGuard from "./components/Guards/GuestGuard";
 import Wishlist from "./components/Wishlish/wishlist";
 import CheckoutPage from "./components/Checkout/checkout";
 import Successfull from "./components/Succesfull/successfull";
+import MyOrders from "./components/MyOrders/myOrders";
 
 function App() {
   return (
@@ -42,6 +43,7 @@ function App() {
             <div style={{ flex: 1 }}>
               <Routes>
                 <Route element={<AuthGuard />}>
+                  <Route path="/successfull" element={<Successfull/>}></Route>
                   <Route path="/profile" element={<Profile />}></Route>
                   <Route path="/create" element={<Create />}></Route>
                   <Route path="/wishlist" element={<Wishlist />}></Route>
@@ -51,7 +53,7 @@ function App() {
                   ></Route>
                   <Route path="/cars/:offerId/edit" element={<Edit />}></Route>
                   <Route path="/checkout" element={<CheckoutPage/>}></Route>
-                  <Route path="/successfull" element={<Successfull/>}></Route>
+                  <Route path="/profile/:userId/my-orders" element={<MyOrders/>}></Route>
                 </Route>
                
                 <Route element={<GuestGuard />}>

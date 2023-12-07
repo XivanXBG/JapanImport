@@ -22,25 +22,19 @@ const CheckoutPage = () => {
   };
 
   const calculateTotalPrice = () => {
-    
-
-    if (formData?.location === undefined) {
-        return 'Select shipping location first!';
+    if (formData?.location === '') {
+        return 'Select shipping location first to see!';
     } else {
-        // Add a return statement in front of cart.reduce
-        return cart.reduce((total, item) => {
-            console.log('asd');
+        // Use template literals to include text and total in the string
+        const total = cart.reduce((acc, item) => {
             const isAirLocation = formData?.location && formData?.location.toUpperCase().includes('AIR');
-
-            // Calculate travel cost based on location
             const travelCost = isAirLocation ? 10000 : 5000;
-
-            // Add the travel cost to the total
-            return total + Number(item.price) + travelCost;
+            return acc + Number(item.price) + travelCost;
         }, 0);
+
+        return `Total: $${total}`;
     }
 };
-
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -52,12 +46,12 @@ const CheckoutPage = () => {
       ...formData,
       price,
     };
-    if(cart.length <=0){
-        toast.error("Cart is empty!", toastStyles);
-        return
+    if (cart.length <= 0) {
+      toast.error("Cart is empty!", toastStyles);
+      return;
     }
     addNewOrder(data);
-    navigate("/cars");
+    navigate("/successfull");
   };
 
   return (
@@ -68,34 +62,31 @@ const CheckoutPage = () => {
         {cart.length > 0 && (
           <>
             {cart.map((item) => (
-              
-                <div key={item.id} style={{ display: "flex" }}>
-                  <div
-                    onClick={() => navigate(`/cars/${item.id}`)}
-                    
-                    className={styles.cartItem}
-                  >
-                    <img src={item.photos[0]} alt={item.make} />
-                    <div>
-                      <p className={styles.itemName}>
-                        {item.make} {item.model}
-                      </p>
-                      <p className={styles.itemPrice}>${item.price}</p>
-                    </div>
-                  </div>
-                  <div
-                    onClick={() => removeFromCart(item)}
-                    style={{
-                      cursor: "pointer",
-                      fontSize: "30px",
-                      display: "flex",
-                      alignItems: "flex-start",
-                    }}
-                  >
-                    &#10006; {/* "X" character */}
+              <div key={item.id} style={{ display: "flex" }}>
+                <div
+                  onClick={() => navigate(`/cars/${item.id}`)}
+                  className={styles.cartItem}
+                >
+                  <img src={item.photos[0]} alt={item.make} />
+                  <div>
+                    <p className={styles.itemName}>
+                      {item.make} {item.model}
+                    </p>
+                    <p className={styles.itemPrice}>${item.price}</p>
                   </div>
                 </div>
-              
+                <div
+                  onClick={() => removeFromCart(item)}
+                  style={{
+                    cursor: "pointer",
+                    fontSize: "30px",
+                    display: "flex",
+                    alignItems: "flex-start",
+                  }}
+                >
+                  &#10006; {/* "X" character */}
+                </div>
+              </div>
             ))}
           </>
         )}
@@ -157,7 +148,7 @@ const CheckoutPage = () => {
           </div>
           <div className={styles.totalPrice}>
             <p className={styles.totalLabel}>Total Price:</p>
-            <p className={styles.totalAmount}>${calculateTotalPrice()}</p>
+            <p className={styles.totalAmount}>{calculateTotalPrice()}</p>
           </div>
           <button type="submit" className={styles.submitButton}>
             Finish Order

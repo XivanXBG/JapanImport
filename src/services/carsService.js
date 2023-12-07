@@ -53,7 +53,26 @@ export const loadCriteria = async () => {
   return data;
 };
 
+export const getOrdersByOwnerId = async (ownerId) => {
+  try {
+    // Reference to the "orders" collection
+    const ordersCollection = collection(db, 'orders');
 
+    // Create a query to get orders based on ownerId
+    const ordersQuery = query(ordersCollection, where('ownerId', '==', ownerId));
+
+    // Get the documents based on the query
+    const querySnapshot = await getDocs(ordersQuery);
+
+    // Extract the data from the documents
+    const orders = querySnapshot.docs.map((doc) => ({ id: doc.id, ...doc.data() }));
+
+    return orders;
+  } catch (error) {
+    console.error('Error getting orders:', error);
+    throw error; // Optionally rethrow the error
+  }
+};
 export const createOffer = async (offerData) => {
  
   const { photos, price, year, killometers, ...otherOfferData } = offerData;
