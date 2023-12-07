@@ -26,6 +26,9 @@ export const CartProvider = ({ children }) => {
   const removeFromCart = (order) => {
     setCart((state) => state.filter((x) => x.id !== order.id));
   };
+  const resetCart = () => {
+    setCart([]);
+  };
 
   const getCart = () => {
     return cart;
@@ -34,6 +37,7 @@ export const CartProvider = ({ children }) => {
     addToCart,
     removeFromCart,
     getCart,
+    resetCart
   };
 
   return (

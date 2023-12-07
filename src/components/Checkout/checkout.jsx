@@ -7,7 +7,7 @@ import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import { toastStyles } from "../toastStyle";
 const CheckoutPage = () => {
-  const { getCart, removeFromCart } = useContext(CartContext);
+  const { getCart, removeFromCart,resetCart } = useContext(CartContext);
   const { user } = useContext(AuthContext);
   const navigate = useNavigate();
   const [formData, setFormData] = useState({
@@ -32,7 +32,7 @@ const CheckoutPage = () => {
             return acc + Number(item.price) + travelCost;
         }, 0);
 
-        return `Total: $${total}`;
+        return `$${total}`;
     }
 };
 
@@ -51,6 +51,7 @@ const CheckoutPage = () => {
       return;
     }
     addNewOrder(data);
+    resetCart()
     navigate("/successfull");
   };
 
