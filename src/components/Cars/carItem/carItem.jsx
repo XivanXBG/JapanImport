@@ -25,10 +25,10 @@ const buyIcon = {
   right: "0",
   cursor: "pointer",
   fontSize: "2.5rem",
-}
+};
 export default function CarItem({ car, removeFavorite, removeFromState }) {
   const { user, isAuthenticated } = useContext(AuthContext);
-  const { addToCart} = useContext(CartContext);
+  const { addToCart } = useContext(CartContext);
   const [isOwner, setIsOwner] = useState(false);
 
   const favoriteHandler = () => {
@@ -45,7 +45,7 @@ export default function CarItem({ car, removeFavorite, removeFromState }) {
     }
   };
   const buyHandler = () => {
-    addToCart(car)
+    addToCart(car);
   };
   const removeHandler = () => {
     if (user) {
@@ -67,19 +67,24 @@ export default function CarItem({ car, removeFavorite, removeFromState }) {
       setIsOwner(true);
     }
   }, [user?.uid, car?.ownerId]);
-
+  if (!car) {
+    return null;
+  }
   return (
     <div style={Wrapper} className={styles.wrapper}>
       {isAuthenticated && !removeFavorite && !isOwner && (
         <>
-        <i
-          style={HeartIcon}
-          onClick={favoriteHandler}
-          className="fa-regular fa-heart"
-        ></i>
-        <i style={buyIcon} onClick={buyHandler} className="fa-solid fa-cart-shopping"></i>
+          <i
+            style={HeartIcon}
+            onClick={favoriteHandler}
+            className="fa-regular fa-heart"
+          ></i>
+          <i
+            style={buyIcon}
+            onClick={buyHandler}
+            className="fa-solid fa-cart-shopping"
+          ></i>
         </>
-        
       )}
       {removeFavorite && !isOwner && (
         <i
@@ -119,7 +124,6 @@ export default function CarItem({ car, removeFavorite, removeFromState }) {
             </div>
           </div>
         </div>
-       
       </div>
     </div>
   );

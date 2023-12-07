@@ -146,7 +146,7 @@ const RegisterPage = () => {
 
           <div className={styles.loginItems}>
             <img onClick={googleLogin} src="/images/google.png" alt="" />
-            <img onClick={yahooLogin} src="/images/facebook.png" alt="" />
+            <img onClick={yahooLogin} src="/images/yahoo.png" alt="" />
             <img onChange={githubLogin} src="/images/github.png" alt="" />
           </div>
         </div>

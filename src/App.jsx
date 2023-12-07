@@ -28,6 +28,7 @@ import CheckoutPage from "./components/Checkout/checkout";
 import Successfull from "./components/Succesfull/successfull";
 const MyOrders = lazy(()=>import('./components/MyOrders/myOrders'));
 const OrderDetails =lazy(()=>import('./components/OrderDetail/orderDetail'));
+import Spinner from "./components/Spinner/spinner";
 
 
 function App() {
@@ -43,8 +44,9 @@ function App() {
             }}
           >
             <Header />
+            
             <div style={{ flex: 1 }}>
-            <Suspense fallback={<h1>Loading...</h1>}>
+            <Suspense fallback={<Spinner />}>
             <Routes>
                 <Route element={<AuthGuard />}>
                   <Route path="/successfull" element={<Successfull/>}></Route>
