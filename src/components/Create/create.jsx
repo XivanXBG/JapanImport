@@ -30,6 +30,8 @@ export default function Create() {
   const navigate = useNavigate();
   const create = async (values) => {
     try {
+      setIsLoading(true);
+      console.log(isLoading);
       toast.dismiss();
 
       if (!isMaxPriceUnderOneMillion(values.price)) {
@@ -44,13 +46,11 @@ export default function Create() {
       if (!maxKillometers(values.killometers)) {
         return;
       }
-
+     
       const res = await createOffer(values);
 
       navigate("/cars");
-    } catch (error) {
-   
-    }
+    } catch (error) {}
   };
   const { values, onChange, onSubmit } = useForm(create, {
     [SearchFormKeys.Make]: "",
@@ -70,6 +70,7 @@ export default function Create() {
 
   const [cars, setCars] = useState([]);
   const [criteria, setCriteria] = useState([]);
+  const [isLoading, setIsLoading] = useState(false);
 
   useEffect(() => {
     loadCars().then((x) => setCars(x));
@@ -273,7 +274,7 @@ export default function Create() {
         <hr />
 
         <div className={styles.personalInfo}>
-          <h3>Personal Info:</h3>
+          <h3 className={styles.h3}>Personal Info:</h3>
           <div className={styles.mobileInput}>
             <label className={styles.label}>Mobile:</label>
             <input
@@ -305,7 +306,7 @@ export default function Create() {
           </div>
         </div>
         <div className={styles.btnWrapper}>
-          <button type="submit" className={styles.button}>
+          <button disabled={isLoading} type="submit" className={styles.button}>
             Submit
           </button>
         </div>
@@ -333,7 +334,6 @@ function isMaxYearCurrentYear(maxYear) {
   if (maxYear <= 2023) {
     return true;
   } else {
-    
     toast.error("Maximum year must be under 2024", toastStyles);
     return false;
   }
@@ -342,7 +342,6 @@ function isMinYear(minYear) {
   if (minYear >= 1980) {
     return true;
   } else {
-    
     toast.error("Minimun year must be over 1980", toastStyles);
     return false;
   }
