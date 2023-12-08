@@ -1,4 +1,4 @@
-import { loadCars,loadCriteria } from "../../../services/carsService";
+import { loadCars,loadCriteria } from "../../../services/offersService";
 import useForm from "../../../hooks/useForm";
 import { useEffect, useState } from "react";
 import styles from "./aside.module.css";

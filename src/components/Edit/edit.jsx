@@ -4,7 +4,7 @@ import {
   updateOffer,
   loadOfferWithPhoto,
   loadCriteria,
-} from "../../services/carsService";
+} from "../../services/offersService";
 import styles from "./edit.module.css";
 import { useNavigate } from "react-router-dom";
 import { useParams } from "react-router-dom";

@@ -1,5 +1,5 @@
 import React, { useState, useContext } from "react";
-import { addNewOrder } from "../../services/carsService";
+import { addNewOrder } from "../../services/ordersService";
 import CartContext from "../../contexts/cartContext";
 import styles from "./checkout.module.css"; // Import your CSS module
 import AuthContext from "../../contexts/authContext";

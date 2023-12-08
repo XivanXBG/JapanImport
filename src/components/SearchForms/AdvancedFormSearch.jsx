@@ -1,7 +1,7 @@
 import useForm from "../../hooks/useForm";
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { loadCars, loadCriteria } from "../../services/carsService";
+import { loadCars, loadCriteria } from "../../services/offersService";
 import { connect } from "react-redux";
 import { updateSearchCriteria } from "../../reducer/actions";
 import { toast } from "react-toastify";

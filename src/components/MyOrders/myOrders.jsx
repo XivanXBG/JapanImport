@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useParams,useNavigate } from "react-router-dom";
-import { getOrdersByOwnerId } from "../../services/carsService"; // Replace with your orders service
+import { getOrdersByOwnerId } from "../../services/ordersService"; // Replace with your orders service
 import styles from "./myOrders.module.css"; // Add your CSS module for styling
 
 const MyOrders = () => {
@@ -11,7 +11,14 @@ const MyOrders = () => {
   useEffect(() => {
     // Assuming you have a service to retrieve orders by ownerId
     getOrdersByOwnerId(userId)
-      .then((orders) => setOrders(orders))
+      .then((orders) => {
+        console.log(orders);
+        if(orders === undefined){
+          setOrders([]);
+        }else{
+          setOrders(orders)
+        }
+      })
       .catch((error) => console.error("Error fetching orders:", error));
   }, [userId]);
 
@@ -43,7 +50,7 @@ const MyOrders = () => {
           
         </div>
       ) : (
-        <p>No orders available.</p>
+        <h1>No orders available.</h1>
       )}
     </div>
   );

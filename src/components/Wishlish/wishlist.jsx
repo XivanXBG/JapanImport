@@ -3,7 +3,7 @@ import { useState } from "react";
 import { useContext } from "react";
 import AuthContext from "../../contexts/authContext";
 import CarItem from "../Cars/carItem/carItem";
-import { loadUserFavoritesFromFirestore } from "../../services/carsService";
+import { loadUserFavoritesFromFirestore } from "../../services/favoritesService";
 import styles from "./wishlist.module.css";
 
 export default function Wishlist() {
@@ -11,13 +11,15 @@ export default function Wishlist() {
   const [offers, setOffers] = useState([]);
 
   useEffect(() => {
-    loadUserFavoritesFromFirestore(user?.uid).then((x) => {
+    loadUserFavoritesFromFirestore(user.uid).then((x) => {
       setOffers(x);
+      console.log(x);
     });
-    console.log(offers);
+   
   }, []);
 
   const removeFromState = (id) => {
+    console.log(offers);
     setOffers((state) => state.filter((state) => state.id != id));
   };
   return (
@@ -28,7 +30,7 @@ export default function Wishlist() {
           <div className={styles.cardContainer}>
             {offers.map((car) => (
               <CarItem
-                key={car?.id}
+                key={car.id}
                 removeFromState={removeFromState}
                 removeFavorite={true}
                 car={car}

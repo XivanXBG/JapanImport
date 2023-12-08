@@ -6,7 +6,7 @@ import CartContext from "../../../contexts/cartContext";
 import {
   updateUserFavoritesInFirestore,
   removeFavoriteFromFirestore,
-} from "../../../services/carsService";
+} from "../../../services/favoritesService";
 
 const Wrapper = {
   position: "relative",

@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { connect } from "react-redux";
 import {useNavigate} from 'react-router-dom'
 import { updateSearchCriteria } from "../../reducer/actions";
-import { loadCars } from "../../services/carsService";
+import { loadCars } from "../../services/offersService";
 import "./car.css";
 
 const Car = ({customDispatch}) => {

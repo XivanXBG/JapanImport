@@ -4,7 +4,7 @@ import { useState, useEffect, useContext } from "react";
 import {
   loadOfferWithPhoto,
   deleteOfferById,
-} from "../../services/carsService";
+} from "../../services/offersService";
 import AuthContext from "../../contexts/authContext";
 import DeleteModal from "./deleteModal";
 import CartContext from "../../contexts/cartContext";

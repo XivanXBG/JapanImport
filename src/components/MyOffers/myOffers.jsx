@@ -1,7 +1,7 @@
 import { useEffect } from "react";
 import { useState } from "react";
 import { useParams } from "react-router-dom";
-import { loadOffersByOwnerId } from "../../services/carsService";
+import { loadOffersByOwnerId } from "../../services/offersService";
 import CarItem from "../Cars/carItem/carItem";
 import styles from "./myOffers.module.css";
 const MyOffers = ({ dispatch, searchCriteria }) => {

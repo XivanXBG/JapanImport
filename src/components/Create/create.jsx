@@ -4,7 +4,7 @@ import {
   loadCars,
   createOffer,
   loadCriteria,
-} from "../../services/carsService";
+} from "../../services/offersService";
 import styles from "./create.module.css";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";

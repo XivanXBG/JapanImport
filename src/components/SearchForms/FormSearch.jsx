@@ -4,7 +4,7 @@ import { useEffect, useState } from "react";
 import { connect } from "react-redux";
 import { updateSearchCriteria } from "../../reducer/actions";
 import { useNavigate } from "react-router-dom";
-import { loadCars } from "../../services/carsService";
+import { loadCars } from "../../services/offersService";
 import { toast } from "react-toastify";
 import { toastStyles } from "../toastStyle";
 
