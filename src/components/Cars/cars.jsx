@@ -20,14 +20,7 @@ const Cars = ({ searchCriteria }) => {
       setisLoaded(true);
     });
   }, [searchCriteria, selectedSortOption]);
-  useEffect(() => {
-    searchCriteria = {};
-    searchCarOffers(searchCriteria).then((x) => {
-      const sortedCars = sortCars(x, selectedSortOption);
-      setCars(sortedCars);
-      setisLoaded(true);
-    });
-  }, []);
+  
   const handleSortChange = (e) => {
     setSelectedSortOption(e.target.value);
   };
