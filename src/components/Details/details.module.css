@@ -16,9 +16,8 @@
   align-items: center;
   overflow-x: auto;
 
-  /* Light background color */
   background-color: grey;
-  border-top: 1px solid #ddd; /* Top border */
+  border-top: 1px solid #ddd;
   border-bottom: 1px solid #ddd;
 }
 p i {
@@ -70,9 +69,9 @@ p span {
   width: 100%;
 }
 .fullScreenPhoto {
-  width: 90vw; /* 100% of viewport width */
-  height: 90vh; /* 100% of viewport height */
-  object-fit: contain; /* Maintain aspect ratio and fit within the container */
+  width: 90vw;
+  height: 90vh;
+  object-fit: contain;
   cursor: pointer;
 }
 .fullScreenModal {
@@ -86,11 +85,11 @@ p span {
     0,
     0,
     0.8
-  ); /* Semi-transparent black overlay for better visibility */
+  ); 
   display: flex;
   align-items: center;
   justify-content: center;
-  z-index: 999; /* Ensure the modal appears on top of other elements */
+  z-index: 999; 
 }
 .detailsInfo {
   background-color: white;
@@ -111,13 +110,13 @@ p span {
 .details {
   display: flex;
   justify-content: space-between;
-  margin-bottom: 10px; /* Add margin bottom for separation */
+  margin-bottom: 10px;
 }
 
 .details > div {
   width: calc(
     33.33% - 10px
-  ); /* Set width for each detail, considering margin */
+  ); 
   position: relative;
 }
 

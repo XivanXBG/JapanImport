@@ -13,13 +13,13 @@ export default function Wishlist() {
   useEffect(() => {
     loadUserFavoritesFromFirestore(user.uid).then((x) => {
       setOffers(x);
-      console.log(x);
+
     });
    
   }, []);
 
   const removeFromState = (id) => {
-    console.log(offers);
+
     setOffers((state) => state.filter((state) => state.id != id));
   };
   return (

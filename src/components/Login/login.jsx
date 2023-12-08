@@ -20,21 +20,18 @@ const LoginPage = () => {
   const handleLogin = async (values) => {
     toast.dismiss();
     try {
-      const response = await loginHandler(values);
-      console.log(response);
-      // Clear all toasts on successful form submission
+     await loginHandler(values);
+
       toast.dismiss();
     } catch (error) {
       toast.error(parseFirebaseError(error.code),toastStyles)
-      console.log('asd');
+    
     }
   };
 
   const yahooLogin = async () => {
     try {
-      const response = await yahooHandler();
-      console.log(response);
-      // Clear all toasts on successful form submission
+      await yahooHandler();
       toast.dismiss();
     } catch (error) {
       toast.error(parseFirebaseError(error.code),toastStyles)
@@ -42,19 +39,17 @@ const LoginPage = () => {
   };
   const googleLogin = async () => {
     try {
-      const response = await googleHandler();
-      console.log(response);
-      // Clear all toasts on successful form submission
+     await googleHandler();
+     
       toast.dismiss();
     } catch (error) {
       toast.error(parseFirebaseError(error.code),toastStyles)
     }
   };
-  const githubLogin = async (values) => {
+  const githubLogin = async () => {
     try {
-      const response = await githubHandler();
-      console.log(response);
-      // Clear all toasts on successful form submission
+   await githubHandler();
+     
       toast.dismiss();
     } catch (error) {
       toast.error(parseFirebaseError(error.code),toastStyles)

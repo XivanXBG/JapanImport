@@ -8,17 +8,15 @@ const VerifyEmail = () => {
   const { user } = useContext(AuthContext);
 
   const containerStyle = {
-    /* Add your inline styles for the container here */
     textAlign: "center",
     marginTop: "50px",
     
   };
 
   const buttonStyle = {
-    /* Add your inline styles for the button here */
-     // Green color, you can customize
+
     cursor: "pointer",
-    // ... other styles
+
   };
  
 

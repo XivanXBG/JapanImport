@@ -58,18 +58,17 @@ const Aside = ({ dispatch, searchCriteria }) => {
         return;
       }
 
-      // Continue with the rest of the logic
       dispatch(updateSearchCriteria(values));
       
     } catch (error) {
-      // Handle other errors if needed
+  
     }
   };
   const [cars, setCars] = useState([]);
   const [criteria,setCriteria] = useState([]);
   useEffect(() => {
     loadCars().then((x) => setCars(x));
-    loadCriteria().then((x) => {setCriteria(x);console.log(x);});
+    loadCriteria().then((x) => {setCriteria(x)});
   }, []);
 
   let { values, resetForm, onChange, onSubmit } = useForm(submitHandler, {
@@ -290,7 +289,7 @@ function isMaxPriceUnderOneMillion(maxPrice) {
   if (maxPrice < 1000000) {
     return true;
   } else {
-    // Throw a toast error if maxPrice is not under 1000000
+  
     toast.error("Maximum price must be under 1000000", toastStyles);
     return false;
   }
@@ -302,7 +301,7 @@ function isMaxYearCurrentYear(maxYear) {
   if (maxYear <= 2023) {
     return true;
   } else {
-    // Throw a toast error if maxPrice is not under 1000000
+
     toast.error("Maximum year must be under 2024", toastStyles);
     return false;
   }
@@ -314,7 +313,7 @@ function isMinYear(minYear) {
   if (minYear >= 1980) {
     return true;
   } else {
-    // Throw a toast error if maxPrice is not under 1000000
+   
     toast.error("Minimun year must be over 1980", toastStyles);
     return false;
   }

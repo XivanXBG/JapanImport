@@ -1,4 +1,4 @@
-// Reviews.js
+
 import { useEffect, useState } from "react";
 import {
   loadReviews,

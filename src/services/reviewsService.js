@@ -17,13 +17,13 @@ export const addReviewToFirestore = async (reviewData) => {
     const docSnapshot = await getDoc(docRef);
     const createdReview = { id: docSnapshot.id, ...docSnapshot.data() };
 
-    console.log("Review added to Firestore successfully!");
+
     
-    // Return the created review data
+    
     return createdReview;
   } catch (error) {
     console.error("Error adding review to Firestore:", error.message);
-    throw error; // Re-throw the error to handle it in the calling code if needed
+    throw error; 
   }
 };
 export const removeReviewById = async (reviewId) => {
@@ -33,7 +33,7 @@ export const removeReviewById = async (reviewId) => {
 
     await deleteDoc(reviewDocRef);
 
-    console.log(`Review with ID ${reviewId} removed from Firestore successfully!`);
+  
   } catch (error) {
     console.error("Error removing review from Firestore:", error.message);
   }

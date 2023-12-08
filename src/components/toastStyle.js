@@ -8,8 +8,8 @@ export const toastStyles = {
   pauseOnHover: true,
   draggable: false,
   style: {
-    backgroundColor: "red", // Customize the background color
+    backgroundColor: "red",
     color: "white",
-    top: "150px"  // Customize the text color
+    top: "150px"
   },
 };

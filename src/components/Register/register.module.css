@@ -32,7 +32,7 @@
     margin: 0px;
 }
 
-/* Labels */
+
 
 .label {
     display: block;
@@ -42,7 +42,6 @@
 }
 
 
-/* Input fields */
 
 .inputs {
     width: 100%;
@@ -53,7 +52,6 @@
 }
 
 
-/* Register button */
 
 .submitBtn {
     background: radial-gradient( circle, rgba(198, 1, 1, 1) 0%, rgba(138, 0, 0, 1) 100%);

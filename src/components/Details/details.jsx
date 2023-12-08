@@ -27,7 +27,7 @@ export default function Details() {
     });
   }, [offerId]);
   useEffect(() => {
-    console.log(user);
+  
     if (offer.ownerId === user?.uid) {
       setIsOwner(true);
     }

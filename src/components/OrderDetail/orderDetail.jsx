@@ -23,12 +23,10 @@ export default function OrderDetails() {
   }, []);
   const navigate = useNavigate();
   const handleDeleteOrder = () => {
-    // Show the confirm order cancel modal
     setShowConfirmModal(true);
   };
 
   const handleCancelDelete = () => {
-    // Hide the confirm order cancel modal
     setShowConfirmModal(false);
   };
   return (

@@ -35,10 +35,10 @@ export default function CarItem({ car, removeFavorite, removeFromState }) {
     if (user) {
       updateUserFavoritesInFirestore(user?.uid, car?.id)
         .then(() => {
-          console.log("Favorite added successfully!");
+        
         })
         .catch((error) => {
-          console.error("Error adding favorite:", error);
+          
         });
     } else {
       console.error("User not authenticated");
@@ -51,7 +51,7 @@ export default function CarItem({ car, removeFavorite, removeFromState }) {
     if (user) {
       removeFavoriteFromFirestore(user.uid, car.id)
         .then(() => {
-          console.log("Favorite removed successfully!");
+          
           removeFromState(car.id);
         })
         .catch((error) => {

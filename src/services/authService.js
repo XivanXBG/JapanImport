@@ -21,7 +21,7 @@ export const login = async (email, password) => {
       password
     );
     const user = userCredential.user;
-    console.log("Signed in", user);
+    
   } catch (err) {
     throw err;
   }
@@ -36,16 +36,13 @@ export const register = async (email, password, username) => {
     );
     const user = userCredential.user;
 
-    // Set display name
     await updateProfile(user, { displayName: username });
 
-    console.log("User registered with display name:", user.displayName);
+    
 
-    // Send email verification
     await sendEmailVerification(user);
-    console.log("Verification email sent successfully.");
+   
 
-    console.log("Registered in", user);
   } catch (err) {
     throw err;
   }
@@ -54,7 +51,7 @@ export const register = async (email, password, username) => {
 export const logout = async () => {
   try {
     await auth.signOut();
-    console.log("User signed out");
+    
   } catch (error) {
     console.error("Error signing out:", error.message);
     throw new Error("Error signing out. Please try again.");
@@ -68,7 +65,7 @@ export const getCurrentUserInfo = async () => {
         auth,
         (user) => {
           if (user) {
-            // User is authenticated, resolve with user info
+          
             resolve({
               uid: user.uid,
               email: user.email,
@@ -76,15 +73,15 @@ export const getCurrentUserInfo = async () => {
               photoURL: user.photoURL,
             });
           } else {
-            // User is not authenticated, resolve with null
+            
             resolve(null);
           }
 
-          // Unsubscribe to avoid memory leaks
+        
           unsubscribe();
         },
         (error) => {
-          // Reject with the error if there is an issue
+       
           reject(error);
         }
       );
@@ -111,19 +108,17 @@ export const updateAuthProfilePicture = async (file) => {
     const user = auth.currentUser;
 
     if (user && file) {
-      // Upload the file to Firebase Storage
+
       const storagePath = `profilePictures/${user.uid}`;
       const photoURL = await uploadProfilePicture(file, storagePath);
 
-      // Update the user's profile with the new photoURL
       await updateProfile(user, { photoURL });
 
-      // Fetch the updated user data from Firestore
       const userDocRef = doc(db, "users", user.uid);
       const userDocSnap = await getDoc(userDocRef);
       const updatedUser = userDocSnap.data();
 
-      console.log("Updated user profile:", updatedUser);
+     
       return photoURL;
     } else {
       console.error("No authenticated user or file found.");
@@ -139,7 +134,7 @@ export const googleSignIn = async () => {
     const provider = new GoogleAuthProvider();
     const result = await signInWithPopup(auth, provider);
     const user = result.user;
-    console.log("Google login successful:", user);
+   
   } catch (error) {
     console.error("Google login error:", error.message);
     throw new Error("Google login error. Please try again.");
@@ -151,7 +146,7 @@ export const githubSignIn = async () => {
     const provider = new GithubAuthProvider();
     const result = await signInWithPopup(auth, provider);
     const user = result.user;
-    console.log("GitHub login successful:", user);
+    
   } catch (error) {
     console.error("GitHub login error:", error.message);
     throw new Error("GitHub login error. Please try again.");
@@ -163,7 +158,7 @@ export const yahooSignIn = async () => {
     const provider = new OAuthProvider("yahoo.com");
     const result = await signInWithPopup(auth, provider);
     const user = result.user;
-    console.log("Yahoo login successful:", user);
+
   } catch (error) {
     console.error("Yahoo login error:", error.message);
     throw new Error("Yahoo login error. Please try again.");

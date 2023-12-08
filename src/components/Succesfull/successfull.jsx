@@ -1,9 +1,9 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import styles from "./successfull.module.css" // Create a CSS module for styling
+import styles from "./successfull.module.css"
 
 const Successfull = () => {
-  console.log('assucc');
+  
   return (
     <div className={styles.container}>
       <h1>Succesful order</h1>

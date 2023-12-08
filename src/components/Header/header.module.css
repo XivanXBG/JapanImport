@@ -89,7 +89,6 @@ svg {
     border-radius: 5px;
     border: 1px solid white;
     color: white;
-    /* Make the border fully opaque on hover */
 }
 
 .selector select {

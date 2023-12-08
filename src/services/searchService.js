@@ -4,11 +4,11 @@ import { db } from "../utils/firebase.ts";
 export const searchCarOffers = async (searchCriteria) => {
   const offersCollection = collection(db, "offers");
 
-  // Start with a base query
+ 
   let baseQuery = query(offersCollection);
 
-console.log(searchCriteria);
-  // Apply filters based on search criteria
+
+
   if (searchCriteria?.make) {
     baseQuery = query(baseQuery, where("make", "==", searchCriteria.make));
   }
@@ -51,7 +51,7 @@ console.log(searchCriteria);
   }
 
   if (searchCriteria?.ownerId) {
-    console.log(searchCriteria?.ownerId);
+   
     baseQuery = query(
       baseQuery,
       where("ownerId", "==", searchCriteria.ownerId)
@@ -62,7 +62,7 @@ console.log(searchCriteria);
   try {
     const baseQuerySnapshot = await getDocs(baseQuery);
 
-    // Extract the data from the base query snapshot
+   
     const baseOffers = baseQuerySnapshot.docs.map((doc) => ({
       id: doc.id,
       ...doc.data(),
@@ -71,7 +71,7 @@ console.log(searchCriteria);
     const yearOffers = await executeYearQuery(searchCriteria);
     const kilometerOffers = await executeKilometerQuery(searchCriteria);
 
-    // Find the common cars in all sets (intersection)
+
     const filteredOffers = baseOffers
       .filter((baseOffer) =>
         priceOffers.some((priceOffer) => priceOffer.id === baseOffer.id)
@@ -96,20 +96,20 @@ const executePriceQuery = async (searchCriteria) => {
   let priceQuery = query(collection(db, "offers"));
 
   if (searchCriteria?.minPrice && searchCriteria?.maxPrice) {
-    // Both minPrice and maxPrice provided
+    
     priceQuery = query(
       priceQuery,
       where("price", ">=", Number(searchCriteria.minPrice)),
       where("price", "<=", Number(searchCriteria.maxPrice))
     );
   } else if (searchCriteria?.minPrice) {
-    // Only minPrice provided
+    
     priceQuery = query(
       priceQuery,
       where("price", ">=", Number(searchCriteria.minPrice))
     );
   } else if (searchCriteria?.maxPrice) {
-    // Only maxPrice provided
+   
     priceQuery = query(
       priceQuery,
       where("price", "<=", Number(searchCriteria.maxPrice))
@@ -128,20 +128,20 @@ const executeYearQuery = async (searchCriteria) => {
   let yearQuery = query(collection(db, "offers"));
 
   if (searchCriteria?.minYear && searchCriteria?.maxYear) {
-    // Both minYear and maxYear provided
+    
     yearQuery = query(
       yearQuery,
       where("year", ">=", Number(searchCriteria.minYear)),
       where("year", "<=", Number(searchCriteria.maxYear))
     );
   } else if (searchCriteria?.minYear) {
-    // Only minYear provided
+    
     yearQuery = query(
       yearQuery,
       where("year", ">=", Number(searchCriteria.minYear))
     );
   } else if (searchCriteria?.maxYear) {
-    // Only maxYear provided
+    
     yearQuery = query(
       yearQuery,
       where("year", ">=", Number(searchCriteria.maxYear))

@@ -38,3 +38,34 @@
 .sort p{
   margin: 0px;
 }
+
+
+.pageButton {
+  background-color: #69abf1;
+  color: #fff;
+  border: none;
+  padding: 0.5rem 1rem;
+  cursor: pointer;
+  margin: 0.2rem;
+  border-radius: 4px;
+  transition: background-color 0.3s;
+}
+
+.pageButton:hover {
+  background-color: #0056b3;
+}
+
+.activePage {
+  background-color: #0056b3;
+  color: #fff;
+}
+.pagBtn{
+  margin-top: 30px;
+  padding: 0.5rem 1rem;
+  width: 100px;
+}
+.pagBtn:hover{
+  cursor: pointer;
+  color: white;
+  background-color: #0056b3;
+}

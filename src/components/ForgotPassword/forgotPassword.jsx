@@ -17,7 +17,7 @@ const ForgotPassword = () => {
     height: "40px",
     width: "120px",
   };
-  console.log(email);
+
   const handleResendEmail = () => {
     sendPasswordResetEmail(auth,email)
       .then(() => {

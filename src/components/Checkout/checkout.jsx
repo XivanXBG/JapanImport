@@ -1,7 +1,7 @@
 import React, { useState, useContext } from "react";
 import { addNewOrder } from "../../services/ordersService";
 import CartContext from "../../contexts/cartContext";
-import styles from "./checkout.module.css"; // Import your CSS module
+import styles from "./checkout.module.css";
 import AuthContext from "../../contexts/authContext";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
@@ -25,7 +25,6 @@ const CheckoutPage = () => {
     if (formData?.location === '') {
         return 'Select shipping location first to see!';
     } else {
-        // Use template literals to include text and total in the string
         const total = cart.reduce((acc, item) => {
             const isAirLocation = formData?.location && formData?.location.toUpperCase().includes('AIR');
             const travelCost = isAirLocation ? 10000 : 5000;
@@ -85,7 +84,7 @@ const CheckoutPage = () => {
                     alignItems: "flex-start",
                   }}
                 >
-                  &#10006; {/* "X" character */}
+                  &#10006;
                 </div>
               </div>
             ))}
@@ -144,7 +143,6 @@ const CheckoutPage = () => {
               <option value="varnaPORT">Varna port</option>
               <option value="varnaAIR">Varna airport</option>
               <option value="rusePORT">Ruse port</option>
-              {/* Add more options as needed */}
             </select>
           </div>
           <div className={styles.totalPrice}>

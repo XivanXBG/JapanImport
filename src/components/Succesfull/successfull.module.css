@@ -5,7 +5,7 @@
 }
 
 .carImage {
-  width: 35%; /* Adjust the size as needed */
+  width: 35%;
   margin-top: 20px;
 
 }
@@ -14,7 +14,7 @@
   display: inline-block;
   padding: 10px 20px;
   margin-top: 20px;
-  background-color: #4caf50; /* Green color, you can customize */
+  background-color: #4caf50;
   color: white;
   text-decoration: none;
   border-radius: 5px;
@@ -22,7 +22,7 @@
 }
 
 .redirectButton:hover {
-  background-color: #45a049; /* Darker green on hover, you can customize */
+  background-color: #45a049; 
 }
 p{
   font-size: 20px;

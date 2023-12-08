@@ -24,26 +24,26 @@ const RegisterPage = () => {
    
     if (!isPasswordMatch) {
       
-      return; // Prevent form submission if passwords don't match
+      return;
     }
     
     try {
       
-      const response = await registerHandler(values);
-      console.log(response);
-      // Clear all toasts on successful form submission
+      await registerHandler(values);
+
+     
       toast.dismiss();
     } catch (error) {
       toast.error(parseFirebaseError(error.code), toastStyles);
-      console.log('asd');
+      
     }
   };
 
   const yahooLogin = async () => {
     try {
-      const response = await yahooHandler();
-      console.log(response);
-      // Clear all toasts on successful form submission
+      await yahooHandler();
+    
+      
       toast.dismiss();
     } catch (error) {
       toast.error(parseFirebaseError(error.code), toastStyles);
@@ -51,9 +51,9 @@ const RegisterPage = () => {
   };
   const googleLogin = async () => {
     try {
-      const response = await googleHandler();
-      console.log(response);
-      // Clear all toasts on successful form submission
+      await googleHandler();
+      
+    
       toast.dismiss();
     } catch (error) {
       toast.error(parseFirebaseError(error.code), toastStyles);
@@ -61,9 +61,9 @@ const RegisterPage = () => {
   };
   const githubLogin = async (values) => {
     try {
-      const response = await githubHandler();
-      console.log(response);
-      // Clear all toasts on successful form submission
+      await githubHandler();
+      
+     
       toast.dismiss();
     } catch (error) {
       toast.error(parseFirebaseError(error.code), toastStyles);
@@ -159,7 +159,7 @@ export default RegisterPage;
 const validatePasswordMatch = (values) => {
   const { password, rePassword } = values;
   if (password !== rePassword) {
-    // Use toast.error to display an error message
+
     toast.error("Passwords do not match", toastStyles);
    
     return false;

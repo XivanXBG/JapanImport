@@ -34,12 +34,11 @@ const FormSearch = ({ dispatch }) => {
       if(!isMinYear(values.minYear)){
         return
       }
-  
-      // Continue with the rest of the logic
+
       dispatch(updateSearchCriteria(values));
       navigate("/cars");
     } catch (error) {
-      // Handle other errors if needed
+
     }
   };
   const { values, onChange, onSubmit } = useForm(submitHandler, {
@@ -165,7 +164,6 @@ function isMaxPriceUnderOneMillion(maxPrice) {
   if (maxPrice < 1000000) {
     return true;
   } else {
-    // Throw a toast error if maxPrice is not under 1000000
     toast.error("Maximum price must be under 1000000", toastStyles);
     return false;
   }
@@ -177,7 +175,7 @@ function isMaxYearCurrentYear(maxYear) {
   if (maxYear <= 2023) {
     return true;
   } else {
-    // Throw a toast error if maxPrice is not under 1000000
+
     toast.error("Maximum year must be under 2024", toastStyles);
     return false;
   }
@@ -189,7 +187,7 @@ function isMinYear(minYear) {
   if (minYear >= 1980) {
     return true;
   } else {
-    // Throw a toast error if maxPrice is not under 1000000
+
     toast.error("Minimun year must be over 1980", toastStyles);
     return false;
   }

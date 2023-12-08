@@ -12,12 +12,10 @@
     width: 100vw;
     height: 100vh;
     background-color: rgba( 0, 0, 0, 0.8);
-    /* Semi-transparent black overlay for better visibility */
     display: flex;
     align-items: center;
     justify-content: center;
     z-index: 999;
-    /* Ensure the modal appears on top of other elements */
 }
 .btn{
   cursor: pointer;

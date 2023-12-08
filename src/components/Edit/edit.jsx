@@ -103,21 +103,21 @@ export default function Edit() {
       toast.dismiss();
 
       if (!isMaxPriceUnderOneMillion(value.price)) {
-        console.log(mas1);
+        
         return;
       }
       if (!isMaxYearCurrentYear(value.year)) {
-        console.log(mas2);
+      
 
         return;
       }
       if (!isMinYear(value.year)) {
-        console.log(mas3);
+       
 
         return;
       }
       if (!maxKillometers(value.killometers)) {
-        console.log(mas4);
+      
 
         return;
       }
@@ -125,7 +125,7 @@ export default function Edit() {
       const res = await updateOffer(offerId, value);
       navigate(`/cars/${offerId}`);
     } catch (error) {
-      // Handle other errors if needed
+  
     }
   };
 
@@ -369,7 +369,7 @@ function isMaxPriceUnderOneMillion(maxPrice) {
   if (maxPrice < 1000000) {
     return true;
   } else {
-    // Throw a toast error if maxPrice is not under 1000000
+
     toast.error("Maximum price must be under 1000000", toastStyles);
     return false;
   }
@@ -386,7 +386,7 @@ function isMaxYearCurrentYear(maxYear) {
   if (maxYear <= 2023) {
     return true;
   } else {
-    // Throw a toast error if maxPrice is not under 1000000
+
     toast.error("Maximum year must be under 2024", toastStyles);
     return false;
   }
@@ -395,7 +395,7 @@ function isMinYear(minYear) {
   if (minYear >= 1980) {
     return true;
   } else {
-    // Throw a toast error if maxPrice is not under 1000000
+
     toast.error("Minimun year must be over 1980", toastStyles);
     return false;
   }

@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useParams,useNavigate } from "react-router-dom";
-import { getOrdersByOwnerId } from "../../services/ordersService"; // Replace with your orders service
-import styles from "./myOrders.module.css"; // Add your CSS module for styling
+import { getOrdersByOwnerId } from "../../services/ordersService";
+import styles from "./myOrders.module.css";
 
 const MyOrders = () => {
   const { userId } = useParams();
@@ -9,10 +9,9 @@ const MyOrders = () => {
   const [orders, setOrders] = useState([]);
 
   useEffect(() => {
-    // Assuming you have a service to retrieve orders by ownerId
     getOrdersByOwnerId(userId)
       .then((orders) => {
-        console.log(orders);
+       
         if(orders === undefined){
           setOrders([]);
         }else{
@@ -41,7 +40,7 @@ const MyOrders = () => {
           {orders.map((order) => (
             <div onClick={()=>navigate(`/orders/${order.id}`)} key={order.id} className={styles.orderCard}>
               <h3>Order ID: {order.id}</h3>
-              {/* Display other order details as needed */}
+             
               <p className={styles.location}>Location: {order.location}</p>
               <p>{getDeliveryTime(order.location)}</p>
             </div>

@@ -14,12 +14,12 @@ const Home = ({dispatch}) => {
 
 
 
-    // Array of image URLs for the background
+   
     const backgroundImages = [
         'url(https://assets.bwbx.io/images/users/iqjWHBFdfxIU/iUmkMBelSPPU/v1/-1x-1.jpg)',
         'url(https://www.nippon.com/en/ncommon/contents/japan-topics/2470496/2470496.jpg)',
         'url(https://images.squarespace-cdn.com/content/v1/57825361440243db4a4b7830/1595331815543-2MA2FLF8ZNCC9AVRCFS3/showa-racing-bosozoku-kaido-racer-japanese-cars-tuning-tokyo-car-culture9.jpg)',
-        // Add more image URLs as needed
+
     ];
 
     useEffect(() => {
@@ -29,10 +29,8 @@ const Home = ({dispatch}) => {
             setBackgroundImage(randomImage);
         };
 
-        // Change background every 10 seconds
         const intervalId = setInterval(changeBackground, 10000);
 
-        // Initial background change
         changeBackground();
 
 

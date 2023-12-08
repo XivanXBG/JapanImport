@@ -4,7 +4,7 @@ import CartContext from "../../contexts/cartContext";
 
 export default function CartItem({ offer }) {
   const navigate = useNavigate();
-  console.log('hello');
+
   const { removeFromCart } = useContext(CartContext);
   const mainContainerStyle = {
     display: "flex",
@@ -49,7 +49,7 @@ export default function CartItem({ offer }) {
           onClick={() => removeFromCart(offer)}
           style={{ cursor: "pointer" }}
         >
-          &#10006; {/* "X" character */}
+          &#10006;
         </div>
       </div>
     </>

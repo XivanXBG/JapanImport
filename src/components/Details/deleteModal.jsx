@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import styles from '../OrderDetail/orderDetails.module.css'
 const DeleteModal = ({ isOpen, onCancel, onConfirm }) => {
   return (

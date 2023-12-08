@@ -28,7 +28,7 @@ const Profile = () => {
     const file = event.target.files[0];
 
     const url = await updateAuthProfilePicture(file);
-    console.log(url);
+   
     setUserData((state)=>{
       return {
         ...state,
@@ -49,7 +49,6 @@ const Profile = () => {
             />
           </label>
           <p>click to change</p>
-          {/* Hidden file input for selecting a new profile picture */}
           <input
             id="profilePictureInput"
             type="file"

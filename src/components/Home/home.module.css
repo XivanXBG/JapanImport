@@ -5,10 +5,8 @@
     justify-content: center;
     align-items: center;
     background-color: #383838;
-    /* Set text color to white for better visibility */
     font-family: Arial, sans-serif;
     overflow: hidden;
-    /* Prevent scrollbars due to changing background */
 }
 
 .background {
@@ -33,8 +31,6 @@
     align-items: center;
     gap: 20px;
     flex-wrap: wrap;
-    /* Allow the items to wrap to the next row */
     max-width: 700px;
     margin-bottom: 30px;
-    /* Set a maximum width for the container */
 }

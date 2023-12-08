@@ -12,7 +12,7 @@ export const parseFirebaseError = (errorCode) => {
       return "Invalid email address. Please enter a valid email.";
     case "auth/weak-password":
       return "Weak password. Please choose a stronger password.";
-    // Add more cases for other Firebase error codes as needed
+
     default:
       return "An error occurred. Please try again.";
   }

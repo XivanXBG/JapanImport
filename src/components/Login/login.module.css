@@ -3,7 +3,6 @@
     margin: 0px;
     background-repeat: no-repeat;
     background-size: cover;
-    /* Adjust as needed */
     background-position: bottom;
     margin-bottom: 0px;
     display: flex;
@@ -46,7 +45,7 @@
 .redirect{
     font-size: 12px;
 }
-/* Labels */
+
 
 .label {
     display: block;
@@ -55,8 +54,6 @@
     color: white;
 }
 
-
-/* Input fields */
 
 .inputs {
     width: 100%;

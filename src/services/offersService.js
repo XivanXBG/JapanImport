@@ -41,7 +41,7 @@ export const createOffer = async (offerData) => {
  
   const { photos, price, year, killometers, ...otherOfferData } = offerData;
 
-  // Convert to numbers
+
   offerData.price = Number(price);
   offerData.year = Number(year);
   offerData.killometers = Number(killometers);
@@ -53,7 +53,7 @@ export const createOffer = async (offerData) => {
     price: Number(offerData.price),
     year: Number(offerData.year),
     killometers: Number(offerData.killometers),
-    photos: [], // Initialize photos as an empty array
+    photos: []
   });
 
   const newOfferId = newOfferDoc.id;
@@ -68,11 +68,11 @@ export const createOffer = async (offerData) => {
     })
   );
 
-  // Update the offer document with the photo URLs
+
   const offerDocRef = doc(db, "offers", newOfferId);
   await updateDoc(offerDocRef, { photos: uploadedPhotos });
 
-  console.log("Offer added with id:", newOfferId);
+ 
 
   return newOfferId;
 };
@@ -88,12 +88,12 @@ export const updateOffer = async (offerId, updatedOfferData) => {
       ...otherOfferData
     } = updatedOfferData;
 
-    // Convert to numbers
+ 
     updatedOfferData.price = Number(price);
     updatedOfferData.year = Number(year);
     updatedOfferData.killometers = Number(killometers);
 
-    // Update other fields of the offer
+   
     await updateDoc(offerDocRef, {
       ...otherOfferData,
       price: Number(updatedOfferData.price),
@@ -101,25 +101,25 @@ export const updateOffer = async (offerId, updatedOfferData) => {
       killometers: Number(updatedOfferData.killometers),
     });
 
-    // If there are new photos, append them to the existing ones
+
     if (newPhotos && newPhotos.length > 0) {
       const storagePhotosRef = storageRef(storage, `offers/${offerId}/photos`);
 
-      // Fetch the existing photos
+     
       const existingPhotos = (await getDoc(offerDocRef)).data().photos || [];
 
-      // Combine existing photos with new photos
+     
       const allPhotos = [...existingPhotos, ...newPhotos];
 
-      // Upload all photos
+   
       const uploadedPhotos = await Promise.all(
         allPhotos.map(async (photo, index) => {
           if (typeof photo === "string") {
-            // This is an existing photo URL, no need to re-upload
+          
             return photo;
           }
 
-          // This is a new photo, upload it
+         
           const photoRef = storageRef(storagePhotosRef, `${index + 1}.jpg`);
           await uploadBytes(photoRef, photo);
           const photoURL = await getDownloadURL(photoRef);
@@ -127,11 +127,10 @@ export const updateOffer = async (offerId, updatedOfferData) => {
         })
       );
 
-      // Update the offer document with the new photo URLs
       await updateDoc(offerDocRef, { photos: uploadedPhotos });
     }
 
-    console.log("Offer updated successfully!");
+   
   } catch (error) {
     console.error("Error updating offer:", error.message);
     throw error;
@@ -143,7 +142,7 @@ export const deleteOfferById = async (id) => {
     const offerDocRef = doc(db, "offers", id);
     await deleteDoc(offerDocRef);
 
-    console.log(`Offer with ID ${id} deleted successfully.`);
+  
   } catch (error) {
     console.error("Error deleting offer:", error.message);
     throw error;
@@ -172,15 +171,14 @@ export const loadOffersByOwnerId = async (ownerId) => {
       where("ownerId", "==", ownerId)
     );
 
-    // Execute the query and get the documents
     const querySnapshot = await getDocs(offersQuery);
 
-    // Extract the data from the querySnapshot
+ 
     const offers = querySnapshot.docs.map((doc) => ({
       id: doc.id,
       ...doc.data(),
     }));
-    console.log(offers);
+   
     return offers;
   } catch (error) {
     console.error("Error loading offers by ownerId:", error.message);

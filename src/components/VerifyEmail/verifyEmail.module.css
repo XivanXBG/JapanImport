@@ -1,4 +1,4 @@
-/* VerifyEmail.module.css */
+
 .verifyEmailContainer {
   text-align: center;
   background-color: #f4f4f4;
@@ -12,7 +12,7 @@
   padding: 10px;
   border-radius: 10px;
   height: 50px;
-  width: auto; /* Green color, you can customize */
+  width: auto;
 }
 
 .resendLink:hover {
