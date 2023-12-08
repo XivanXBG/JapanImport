@@ -306,8 +306,8 @@ export default function Create() {
           </div>
         </div>
         <div className={styles.btnWrapper}>
-          <button disabled={isLoading} type="submit" className={styles.button}>
-            Submit
+        <button disabled={isLoading} type="submit" className={styles.button}>
+            {isLoading ? 'Submitting...' : 'Submit'}
           </button>
         </div>
       </form>
