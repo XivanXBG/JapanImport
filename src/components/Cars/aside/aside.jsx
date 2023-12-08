@@ -5,7 +5,7 @@ import styles from "./aside.module.css";
 import { connect } from "react-redux";
 import {
   updateSearchCriteria,
-  resetSearchCriteria,
+ 
 } from "../../../reducer/actions";
 import { toast } from "react-toastify";
 import { toastStyles } from "../../../components/toastStyle";
@@ -86,7 +86,7 @@ const Aside = ({ dispatch, searchCriteria }) => {
     [SearchFormKeys.Loc]: searchCriteria.loc,
   });
   const resetHandler = () => {
-    resetSearchCriteria(initialValues);
+  
     resetForm(initialValues);
   };
   return (
