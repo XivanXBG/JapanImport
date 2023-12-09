@@ -8,6 +8,9 @@
   width: 600px;
   height: auto;
 }
+.h2{
+  color: white;
+}
 .wrapper {
   background-image: url('/images/background.jpg');
   margin: 0px;

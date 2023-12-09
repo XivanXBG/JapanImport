@@ -15,6 +15,7 @@ const Cars = ({ searchCriteria }) => {
 
   useEffect(() => {
     searchCarOffers(searchCriteria).then((x) => {
+      setPageNumber(1);
       const sortedCars = sortCars(x, selectedSortOption);
       setCars(sortedCars);
       setisLoaded(true);

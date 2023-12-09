@@ -87,7 +87,7 @@ export default function Create() {
   return (
     <div className={styles.wrapper}>
       <form onSubmit={onSubmit} className={styles.form}>
-        <h3>Car Information</h3>
+        <h2 className={styles.h2}>Car Information</h2>
         <hr />
         <div className={styles.row}>
           <div>
