@@ -141,10 +141,10 @@ const executeYearQuery = async (searchCriteria) => {
       where("year", ">=", Number(searchCriteria.minYear))
     );
   } else if (searchCriteria?.maxYear) {
-    
+ 
     yearQuery = query(
       yearQuery,
-      where("year", ">=", Number(searchCriteria.maxYear))
+      where("year", "<=", Number(searchCriteria.maxYear))
     );
   }
 
