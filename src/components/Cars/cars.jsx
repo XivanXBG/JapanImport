@@ -21,7 +21,7 @@ const Cars = ({ searchCriteria }) => {
       setisLoaded(true);
     });
   }, [searchCriteria, selectedSortOption]);
-  
+
   const handleSortChange = (e) => {
     setSelectedSortOption(e.target.value);
   };
@@ -47,7 +47,7 @@ const Cars = ({ searchCriteria }) => {
   const handleCarsPerPageChange = (e) => {
     const newCarsPerPage = parseInt(e.target.value, 10);
     setCarsPerPage(newCarsPerPage);
-    setPageNumber(1); 
+    setPageNumber(1);
   };
   return (
     <>
@@ -61,6 +61,9 @@ const Cars = ({ searchCriteria }) => {
               <div className={styles.sort}>
                 <p htmlFor="sort">Sort by:</p>
                 <select onChange={handleSortChange} name="sort" id="">
+                  <option value="">
+                    Default
+                  </option>
                   <option value="priceAC">Price ascending</option>
                   <option value="priceDC">Price descending</option>
                   <option value="name">Name</option>
@@ -96,7 +99,11 @@ const Cars = ({ searchCriteria }) => {
                 </div>
               )}
               <div className={styles.pagination}>
-                <button className={styles.pagBtn} onClick={handlePrevPage} disabled={pageNumber === 1}>
+                <button
+                  className={styles.pagBtn}
+                  onClick={handlePrevPage}
+                  disabled={pageNumber === 1}
+                >
                   Previous
                 </button>
                 {Array.from({

@@ -145,7 +145,7 @@ export default function Details() {
             <div className={styles.description}>
               <p>{offer.description}</p>
             </div>
-            {isOwner && (
+            {(isOwner && isAuthenticated) && (
               <div className={styles.ownerButtons}>
                 <button
                   type="submit"
