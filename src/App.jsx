@@ -10,7 +10,7 @@ import Home from "./components/Home/home";
 import RegisterPage from "./components/Register/register";
 import LoginPage from "./components/Login/login";
 import Logout from "./components/Logout/logout";
-import Create from "./components/Create/Create";
+import Create from "./components/Create/create"
 const Cars = lazy(()=>import('./components/Cars/cars'));
 const Details = lazy(()=>import('./components/Details/details'));
 import Profile from "./components/Profile/profile";
