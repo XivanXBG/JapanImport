@@ -138,7 +138,7 @@ export default function Edit() {
       {isLoaded && (
         <div className={styles.wrapper}>
           <form onSubmit={edit} className={styles.form}>
-            <h3>Car Information</h3>
+            <h3 style={{color:'white'}}>Car Information</h3>
             <hr />
             <div className={styles.row}>
               <div>
@@ -316,14 +316,14 @@ export default function Edit() {
                   multiple
                   onChange={onChange}
                   className={styles.moreInfo}
-                  required
+                  
                 />
               </div>
             </div>
             <hr />
 
             <div className={styles.personalInfo}>
-              <h3>Personal Info:</h3>
+              <h3 style={{color:'white'}}>Personal Info:</h3>
               <div className={styles.mobileInput}>
                 <label className={styles.label}>Mobile:</label>
                 <input
